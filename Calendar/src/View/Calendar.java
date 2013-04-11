@@ -1,9 +1,5 @@
 package View;
 
-/**
- *
- * @author Kristian
- */
 public class Calendar {
 
     /**
