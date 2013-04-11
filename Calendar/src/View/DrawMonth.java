@@ -7,12 +7,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DrawMonth implements Drawable {
-	SimpleDateFormat month = new SimpleDateFormat("MMMM");
-	  Date date = new Date();
+    private SimpleDateFormat month = new SimpleDateFormat("MMMM");
+    private Date date = new Date();
 	
-	  public void setDate(Date date) {
-	    this.date = date;
-	  }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public void drawString(Graphics g) {
     	 g.setColor(Color.red);

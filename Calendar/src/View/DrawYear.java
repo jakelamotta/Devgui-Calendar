@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import java.awt.Color;
@@ -12,12 +8,12 @@ import java.util.Date;
 
 public class DrawYear implements Drawable {
 	
-	SimpleDateFormat year = new SimpleDateFormat("yyyy"); 
-	  Date date = new Date();
+    private SimpleDateFormat year = new SimpleDateFormat("yyyy"); 
+    private Date date = new Date();
 
-	  public void setDate(Date date) {
-	    this.date = date;
-	  }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public void drawString(Graphics g) {
     	 g.setColor(Color.white);

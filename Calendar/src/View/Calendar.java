@@ -14,14 +14,15 @@ import javax.swing.JPanel;
 
 public class Calendar extends JPanel  {
 	
-  SimpleDateFormat month = new SimpleDateFormat("MMMM");
-  SimpleDateFormat year = new SimpleDateFormat("yyyy");
-  SimpleDateFormat day = new SimpleDateFormat("d");
-  Date date = new Date();
-  List<Drawable> Calendars = new ArrayList<Drawable>();
+  private SimpleDateFormat month = new SimpleDateFormat("MMMM");
+  private SimpleDateFormat year = new SimpleDateFormat("yyyy");
+  private SimpleDateFormat day = new SimpleDateFormat("d");
+  private Date date = new Date();
+  private List<Drawable> Calendars = new ArrayList<Drawable>();
+  
   public void addDrawable(Drawable d){
 	    Calendars.add(d);
-	}
+  }
 
 	
 
