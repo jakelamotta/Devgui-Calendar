@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,6 +20,10 @@ public class Calendar extends JPanel  {
   private SimpleDateFormat day = new SimpleDateFormat("d");
   private Date date = new Date();
   private List<Drawable> Calendars = new ArrayList<Drawable>();
+  
+  public void Calendar(){
+      setPreferredSize(new Dimension(300,280));
+  }
   
   public void addDrawable(Drawable d){
 	    Calendars.add(d);
@@ -40,8 +45,10 @@ public class Calendar extends JPanel  {
   
   
   public void paintComponent(Graphics g) {
-    ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-    g.fillRect(0, 0, getWidth(), getHeight());
+      
+    Graphics temp = g.create();  
+    ((Graphics2D) temp).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+    temp.fillRect(0, 0, getWidth(), getHeight());
     //g.setColor(Color.red);
     //g.drawString(month.format(date), 34, 36);
     //g.setColor(Color.white);
@@ -54,7 +61,7 @@ public class Calendar extends JPanel  {
         }
         }
     for (Drawable d: Calendars) {
-        d.drawString(g);
+        d.drawString(temp);
     }
     
    // Calendar today = Calendar.getInstance();
@@ -75,11 +82,15 @@ public class Calendar extends JPanel  {
 
   public static void main(String[] args) {
     JFrame frame = new JFrame();
-    frame.setPreferredSize(new Dimension(300, 280));
+    frame.setPreferredSize(new Dimension(600, 280));
 
     Calendar ch = new Calendar();
     ch.setDate(new Date());
-    frame.getContentPane().add(ch);
+    
+    DayCard card = new DayCard();
+    
+    frame.getContentPane().add(ch, BorderLayout.CENTER);
+    frame.getContentPane().add(card, BorderLayout.EAST);
     frame.setUndecorated(true);
 
     frame.pack();

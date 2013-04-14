@@ -3,10 +3,12 @@ package View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 
 /**
  * @author Kristian
@@ -18,6 +20,9 @@ public class DayCard extends JPanel implements Runnable{
     
     public DayCard(){
         setPreferredSize(new Dimension(300,280));
+        this.setBorder(new BevelBorder(BevelBorder.RAISED));
+        Thread thread = new Thread(this);
+        thread.start();
         
     }
     
@@ -25,29 +30,16 @@ public class DayCard extends JPanel implements Runnable{
     public void paintComponent(Graphics g){        
         Graphics temp = g.create();
         temp.fillRect(0, 0, 300, 280);
-        //temp.dispose();
-        
-        //temp = g.create();
-        temp.setColor(Color.BLUE);
+        temp.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
         temp.fillOval(x, y, 4, 7);
-                
+        
+        GregorianCalendar cal = new GregorianCalendar();
+        Drawable d = new DrawDay(cal.getTime().getDay(),2);
+        temp.setColor(Color.white);
+        d.drawString(temp);
         temp.dispose();
     }
     
-    public static void main(String[] args){
-        DayCard card = new DayCard();
-        JFrame frame = new JFrame();
-        frame.setUndecorated(true);
-        
-        Thread thread = new Thread(card);
-        thread.start();
-        
-        frame.getContentPane().add(card);
-        
-        frame.pack();
-        frame.setVisible(true);
-    }
-
     @Override
     public void run() {
         while(true){
