@@ -1,24 +1,37 @@
 package View;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 
 public class CalculateDate {
-	private static Date date = new Date();
-	 
-	public void setDate(Date date) {
+	private Date date = new Date();
+        private  Calendar today = Calendar.getInstance();
+	private static Calendar cal = Calendar.getInstance();
+        //private static int dayaccount =0;
+	private void setDate(Date date) {
             this.date = date;
         }
 	
-        public static Date setCalendar()
-	{
-            Calendar today = Calendar.getInstance();
+        
+        public void setCalendar()
+	{   
             today.setTime(date);
-            Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             cal.set(Calendar.DATE, 1);
             cal.add(Calendar.DATE, -cal.get(Calendar.DAY_OF_WEEK) + 1);
-            return date;
+            //cal.add(Calendar.DATE, +dayaccount);dayaccount++; 
+            //return cal.getTime();
         }
+        
+        public Date gettime()
+        {
+        return cal.getTime();
+        }
+        public void upgradeCalendar()
+        {
+        cal.add(Calendar.DATE, +1);
+        }        
+        
 }

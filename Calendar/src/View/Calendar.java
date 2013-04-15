@@ -20,6 +20,7 @@ public class Calendar extends JPanel  {
   private SimpleDateFormat day = new SimpleDateFormat("d");
   private Date date = new Date();
   private List<Drawable> Calendars = new ArrayList<Drawable>();
+  private List<Drawable> DrawForDay = new ArrayList<Drawable>();
   
   public void Calendar(){
       setPreferredSize(new Dimension(300,280));
@@ -28,7 +29,9 @@ public class Calendar extends JPanel  {
   public void addDrawable(Drawable d){
 	    Calendars.add(d);
   }
-
+public void addDrawableForDay(Drawable d){
+	    DrawForDay.add(d);
+  }
 	
 
 //Drawable[] calendars = new Drawable[] {
@@ -57,13 +60,19 @@ public class Calendar extends JPanel  {
     addDrawable(new DrawYear());
     for (int week = 0; week < 6; week++) {
         for (int d = 0; d < 7; d++) {
-        	addDrawable(new DrawDay(d,week));
+        	addDrawableForDay(new DrawDay(d,week));
         }
         }
+    
     for (Drawable d: Calendars) {
         d.drawString(temp);
     }
-    
+     for (Drawable d: DrawForDay) {
+        d.drawString(temp);
+    }
+     
+    Calendars.clear();
+    DrawForDay.clear();
    // Calendar today = Calendar.getInstance();
     //today.setTime(date);
     //Calendar cal = Calendar.getInstance();

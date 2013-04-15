@@ -34,7 +34,7 @@ public class DayCard extends JPanel implements Runnable{
         temp.fillOval(x, y, 4, 7);
         
         GregorianCalendar cal = new GregorianCalendar();
-        Drawable d = new DrawDay(cal.getTime().getDay(),2);
+        Drawable d = new Testfordaycard();
         temp.setColor(Color.white);
         d.drawString(temp);
         temp.dispose();
