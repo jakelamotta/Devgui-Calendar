@@ -12,15 +12,15 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+// test the pushing
 public class Calendar extends JPanel  {
 	
   private SimpleDateFormat month = new SimpleDateFormat("MMMM");
   private SimpleDateFormat year = new SimpleDateFormat("yyyy");
   private SimpleDateFormat day = new SimpleDateFormat("d");
   private Date date = new Date();
-  private List<Drawable> Calendars = new ArrayList<Drawable>();
-  private List<Drawable> DrawForDay = new ArrayList<Drawable>();
+  public List<Drawable> Calendars = new ArrayList<Drawable>();
+  public List<Drawable> DrawForDay = new ArrayList<Drawable>();
   
   public void Calendar(){
       setPreferredSize(new Dimension(300,280));
@@ -29,7 +29,8 @@ public class Calendar extends JPanel  {
   public void addDrawable(Drawable d){
 	    Calendars.add(d);
   }
-public void addDrawableForDay(Drawable d){
+  
+  public void addDrawableForDay(Drawable d){
 	    DrawForDay.add(d);
   }
 	
@@ -58,9 +59,11 @@ public void addDrawableForDay(Drawable d){
     //g.drawString(year.format(date), 235, 36);
     addDrawable(new DrawMonth());
     addDrawable(new DrawYear());
+    addDrawable(new DrawWeek());
     for (int week = 0; week < 6; week++) {
         for (int d = 0; d < 7; d++) {
         	addDrawableForDay(new DrawDay(d,week));
+                //Listener L=new Listener(d,week);
         }
         }
     
@@ -100,7 +103,7 @@ public void addDrawableForDay(Drawable d){
     
     frame.getContentPane().add(ch, BorderLayout.CENTER);
     frame.getContentPane().add(card, BorderLayout.EAST);
-    frame.setUndecorated(true);
+    //frame.setUndecorated(true);
 
     frame.pack();
     frame.setVisible(true);
