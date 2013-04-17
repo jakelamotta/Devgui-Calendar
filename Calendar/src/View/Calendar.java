@@ -23,7 +23,7 @@ public class Calendar extends JPanel  {
   public List<Drawable> DrawForDay = new ArrayList<Drawable>();
   
   public void Calendar(){
-      setPreferredSize(new Dimension(300,280));
+      setPreferredSize(new Dimension(380,400));
   }
   
   public void addDrawable(Drawable d){
@@ -57,8 +57,9 @@ public class Calendar extends JPanel  {
     //g.drawString(month.format(date), 34, 36);
     //g.setColor(Color.white);
     //g.drawString(year.format(date), 235, 36);
+   
+    addDrawable(new DrawYear());  
     addDrawable(new DrawMonth());
-    addDrawable(new DrawYear());
     addDrawable(new DrawWeek());
     for (int week = 0; week < 6; week++) {
         for (int d = 0; d < 7; d++) {
@@ -94,7 +95,7 @@ public class Calendar extends JPanel  {
 
   public static void main(String[] args) {
     JFrame frame = new JFrame();
-    frame.setPreferredSize(new Dimension(600, 280));
+    frame.setPreferredSize(new Dimension(800, 400));
 
     Calendar ch = new Calendar();
     ch.setDate(new Date());

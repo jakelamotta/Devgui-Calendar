@@ -15,8 +15,7 @@ public class DrawMonth implements Drawable {
     }
 
     public void drawString(Graphics g) {
-    	 g.setColor(Color.red);
-    	    g.drawString(month.format(date), 34, 36);
+    	    g.drawString(month.format(date), 150, 45);
     }
 	
 }

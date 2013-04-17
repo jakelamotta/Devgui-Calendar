@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.text.SimpleDateFormat;
@@ -16,8 +17,12 @@ public class DrawYear implements Drawable {
     }
 
     public void drawString(Graphics g) {
-    	 g.setColor(Color.white);
-    	    g.drawString(year.format(date), 235, 36);
+        Font Ayear=new Font("Century Gothic",Font.PLAIN,50);
+    	 g.setColor(Color.gray); 
+         //String YEAR= year.format(date);
+         g.setFont(Ayear);
+    	    g.drawString(year.format(date), 5, 45);
+           
     }
 	
 }
