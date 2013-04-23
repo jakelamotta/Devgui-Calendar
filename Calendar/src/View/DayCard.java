@@ -31,7 +31,7 @@ public class DayCard extends JPanel implements Runnable{
     public DayCard(){
         weather = new WeatherAPI();
         weather.setWeather(new GregorianCalendar());
-        setPreferredSize(new Dimension(300,280));
+        setPreferredSize(new Dimension(300,400));
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
         Thread thread = new Thread(this);
         thread.start();
@@ -46,15 +46,15 @@ public class DayCard extends JPanel implements Runnable{
             paintRain(temp);
         }
         if(weather.isSunny()){
-            paintSun(temp);
+            //paintSun(temp);
         }
         if(weather.isWindy()){
-            paintWind(temp);
+            //paintWind(temp);
         }
         
         
         temp.setColor(Color.white);
-        temp.drawString(String.valueOf(this.weather.getAvgTemp()), 30, 30);
+        temp.drawString("Temperature in " + weather.getCity() + ": " + String.valueOf(this.weather.getAvgTemp()) + "C", 30, 30);
         
         //Drawable d = new Testfordaycard();
         
@@ -90,7 +90,7 @@ public class DayCard extends JPanel implements Runnable{
     private void paintWind(Graphics g) {
         g.fillRect(0, 0, 300, 280);
         g.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
-        g.fillOval(y, x, 7, 4);
+        g.fillOval(x, y, 7, 4);
     }
     
     private void paintRain(Graphics g){

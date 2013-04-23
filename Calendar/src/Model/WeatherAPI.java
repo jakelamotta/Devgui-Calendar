@@ -117,7 +117,9 @@ public class WeatherAPI {
     
     public boolean isWindy(){
         return this.windy;
+        
     }
+    
     
     public boolean isSunny(){
         return this.sunny;
@@ -129,6 +131,10 @@ public class WeatherAPI {
     
     public boolean isSnowy(){
         return this.snowy;
+    }
+
+    public String getCity() {
+        return this.weatherStation.getCity();
     }
     
 }
