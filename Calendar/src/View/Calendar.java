@@ -91,10 +91,12 @@ public class Calendar extends JPanel  {
        // cal.add(Calendar.DATE, +1);
       //}
     //}
+    temp.dispose();
   }
 
   public static void main(String[] args) {
     JFrame frame = new JFrame();
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setPreferredSize(new Dimension(800, 400));
 
     Calendar ch = new Calendar();
