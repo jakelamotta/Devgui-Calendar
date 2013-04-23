@@ -34,11 +34,21 @@ public class WeatherAPI {
     private boolean snowy;
     private double avgTemp;
     
+    /**
+     * Default constructor, initializes the reader and sets the hardcoded 
+     * weatherStation
+     */
     public WeatherAPI(){
         reader = new HttpDataReaderService();
         reader.setWeatherStation(weatherStation);
     }
     
+    /**
+     * Sets the reader object's weather date so the correct weather will
+     * get retrieved. Also sets all the weather instances to their values
+     * accordingly
+     * @param date 
+     */
     public void setWeather(GregorianCalendar date){
         reader.setWeatherDate(date.getTime());
         setRain();
