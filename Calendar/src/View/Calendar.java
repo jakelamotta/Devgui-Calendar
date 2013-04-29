@@ -9,11 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 // test the pushing
-public class Calendar extends JPanel  {
+public class Calendar extends JPanel implements Runnable {
 	
   private SimpleDateFormat month = new SimpleDateFormat("MMMM");
   private SimpleDateFormat year = new SimpleDateFormat("yyyy");
@@ -21,9 +23,11 @@ public class Calendar extends JPanel  {
   private Date date = new Date();
   public List<Drawable> Calendars = new ArrayList<Drawable>();
   public List<Drawable> DrawForDay = new ArrayList<Drawable>();
-  
-  public void Calendar(){
+  public static List<Drawable> Selected = new ArrayList<Drawable>();
+  public  Calendar(){
       setPreferredSize(new Dimension(380,400));
+      Thread thread = new Thread(this);
+        thread.start();
   }
   
   public void addDrawable(Drawable d){
@@ -61,12 +65,13 @@ public class Calendar extends JPanel  {
     addDrawable(new DrawYear());  
     addDrawable(new DrawMonth());
     addDrawable(new DrawWeek());
-    for (int week = 0; week < 6; week++) {
-        for (int d = 0; d < 7; d++) {
+    for (int week = 1; week < 7; week++) {
+        for (int d = 1; d < 8; d++) {
         	addDrawableForDay(new DrawDay(d,week));
                 //Listener L=new Listener(d,week);
         }
         }
+    this.addMouseListener(new DayMouseListener());
     
     for (Drawable d: Calendars) {
         d.drawString(temp);
@@ -74,7 +79,9 @@ public class Calendar extends JPanel  {
      for (Drawable d: DrawForDay) {
         d.drawString(temp);
     }
-     
+      for (Drawable d: Selected) {
+        d.drawString(temp);
+    }
     Calendars.clear();
     DrawForDay.clear();
    // Calendar today = Calendar.getInstance();
@@ -93,6 +100,20 @@ public class Calendar extends JPanel  {
     //}
     temp.dispose();
   }
+  public void run() {
+        while(true){
+            
+            this.repaint();
+            
+            
+            
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
   public static void main(String[] args) {
     JFrame frame = new JFrame();

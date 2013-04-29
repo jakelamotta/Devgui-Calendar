@@ -24,5 +24,6 @@ public class DrawYear implements Drawable {
     	    g.drawString(year.format(date), 5, 45);
            
     }
-	
+
+   
 }

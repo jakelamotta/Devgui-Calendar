@@ -17,5 +17,7 @@ public class DrawMonth implements Drawable {
     public void drawString(Graphics g) {
     	    g.drawString(month.format(date), 150, 45);
     }
+
+    
 	
 }

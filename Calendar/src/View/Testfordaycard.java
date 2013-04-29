@@ -18,5 +18,7 @@ public class Testfordaycard implements Drawable {
     	 g.setColor(Color.red);
     	    g.drawString(day.format(date), 34, 36);
     }
+
+  
 	
 }

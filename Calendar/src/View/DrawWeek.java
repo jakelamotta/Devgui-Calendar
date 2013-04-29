@@ -30,5 +30,6 @@ public class DrawWeek implements Drawable {
             g.drawString("Fri", 275,65); 
             g.drawString("Sat", 320,65); 
     }
-	
+
+    
 }

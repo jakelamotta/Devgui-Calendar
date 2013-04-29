@@ -12,19 +12,25 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.awt.event.MouseAdapter;
+import View.DayMouseListener;
+import java.awt.Point;
 public class DrawDay implements Drawable {
+    private String present;
     private int d;
     private int week;    
     private SimpleDateFormat day = new SimpleDateFormat("d");
     private Date date = new Date();
     CalculateDate calculatedate=new CalculateDate();
+   
+    
     public DrawDay(int d,int week){
             this.d=d;
             this.week=week;
+            
      calculatedate.setCalendar();
     }
-	 
+    
     public void setDate(Date date) {
 	    this.date = date;
     }
@@ -36,22 +42,34 @@ public class DrawDay implements Drawable {
         
     	//newlines
  
-        if(day.format(calculatedate.gettime()).equals(day.format(date))){
-            g2.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
-            g2.fillRoundRect(d * 45 + 41, week * 45 + 76, 40, 40,10,10);
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.75f));
-         calculatedate.upgradeCalendar();
-        }
-        else{
+        //if(day.format(calculatedate.gettime()).equals(day.format(date))){
+            //g2.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
+            //g2.fillRoundRect((d-1) * 45 + 41, (week-1) * 45 + 76, 40, 40,10,10);
+            //g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.75f));
+         //
+        //}
+        //else{
         g2.setColor(Color.darkGray);
-        g2.fillRoundRect(d * 45 + 41, week * 45 + 76, 40, 40,10,10);
+        g2.fillRoundRect((d-1) * 45 + 41, (week-1) * 45 + 76, 40, 40,10,10);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.75f));
         
-        calculatedate.upgradeCalendar();
-    }
+        //calculatedate.upgradeCalendar();
+    //}
           Font Bday=new Font("Century Gothic",Font.PLAIN,12);
         g.setColor(Color.white); 
         g.setFont(Bday);
-             g.drawString(day.format(calculatedate.gettime()), d * 45 + 46 + 4, week * 45 + 81 + 20);
-}
+        present=day.format(calculatedate.gettime());
+             g.drawString(present, (d-1) * 45 + 46 + 4, (week-1) * 45 + 81 + 20);
+        calculatedate.upgradeCalendar();
+    }
+
+    
+     
+ 
+    /**
+     *
+     * @param P
+     * @return
+     */
+  
 }
