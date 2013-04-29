@@ -12,9 +12,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.awt.event.MouseAdapter;
-import View.DayMouseListener;
-import java.awt.Point;
+
 public class DrawDay implements Drawable {
     private String present;
     private int d;
@@ -49,9 +47,10 @@ public class DrawDay implements Drawable {
          //
         //}
         //else{
+        
         g2.setColor(Color.darkGray);
         g2.fillRoundRect((d-1) * 45 + 41, (week-1) * 45 + 76, 40, 40,10,10);
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.75f));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN,0.75f));
         
         //calculatedate.upgradeCalendar();
     //}

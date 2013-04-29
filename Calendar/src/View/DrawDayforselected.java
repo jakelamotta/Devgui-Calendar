@@ -41,11 +41,11 @@ public class DrawDayforselected implements Drawable {
     //@Override
     public void drawString(Graphics g) {
     
-       Graphics2D g2 = (Graphics2D) g.create();
-        
-       g2.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
-       g2.fillRoundRect((d-1) * 45 + 41, (week-1)* 45 + 76, 40, 40,10,10);
-       g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.75f));
+      Graphics2D g2 = (Graphics2D) g.create();  
+      g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.60f));
+      g2.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
+      g2.fillRoundRect((d-1) * 45 + 41, (week-1)* 45 + 76, 40, 40,10,10);
+      
        //for (int i = 1; i < week; i++) {
         //for (int j = 1; j < d; j++) {
         	//upgradeCalendar();

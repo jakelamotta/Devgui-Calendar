@@ -49,7 +49,7 @@ if((288.5-22.5<x)&&(x<288.5+22.5)){
 if((333.5-22.5<x)&&(x<333.5+22.5)){
                  d=7; 
                  getypoint(y);}
-    }
+}
      public void getypoint(float y){
 if((98.5-22.5<y)&&(y<98.5+22.5)){
                  week=1;Calendar.Selected.clear();
@@ -85,8 +85,7 @@ if((323.5-22.5<y)&&(y<323.5+22.5)){
 	    Calendar.Selected.add(d);
       }    
     public void mouseClicked(MouseEvent e) {
-    //float centerX=(float)((d-1) * 45 + 41+22.5);  
-    //float centerY=(float)((week-1) * 45+76+22.5);  
+
     
       	     if (e.getButton() == MouseEvent.BUTTON1) {
       	     if (e.getClickCount() == 2) {

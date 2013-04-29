@@ -1,22 +1,34 @@
 package View;
 
+import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 // test the pushing
+ 
+  
 public class Calendar extends JPanel implements Runnable {
-	
+  	
   private SimpleDateFormat month = new SimpleDateFormat("MMMM");
   private SimpleDateFormat year = new SimpleDateFormat("yyyy");
   private SimpleDateFormat day = new SimpleDateFormat("d");
@@ -24,11 +36,14 @@ public class Calendar extends JPanel implements Runnable {
   public List<Drawable> Calendars = new ArrayList<Drawable>();
   public List<Drawable> DrawForDay = new ArrayList<Drawable>();
   public static List<Drawable> Selected = new ArrayList<Drawable>();
+ 
   public  Calendar(){
+      
       setPreferredSize(new Dimension(380,400));
       Thread thread = new Thread(this);
         thread.start();
   }
+
   
   public void addDrawable(Drawable d){
 	    Calendars.add(d);
@@ -54,14 +69,17 @@ public class Calendar extends JPanel implements Runnable {
   
   public void paintComponent(Graphics g) {
       
-    Graphics temp = g.create();  
+   Graphics2D temp = (Graphics2D) g.create();
     ((Graphics2D) temp).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+    //temp.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));
+    
     temp.fillRect(0, 0, getWidth(), getHeight());
+    
     //g.setColor(Color.red);
     //g.drawString(month.format(date), 34, 36);
     //g.setColor(Color.white);
     //g.drawString(year.format(date), 235, 36);
-   
+  
     addDrawable(new DrawYear());  
     addDrawable(new DrawMonth());
     addDrawable(new DrawWeek());
@@ -72,7 +90,7 @@ public class Calendar extends JPanel implements Runnable {
         }
         }
     this.addMouseListener(new DayMouseListener());
-    
+   // temp.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));
     for (Drawable d: Calendars) {
         d.drawString(temp);
     }
@@ -115,22 +133,6 @@ public class Calendar extends JPanel implements Runnable {
         }
     }
 
-  public static void main(String[] args) {
-    JFrame frame = new JFrame();
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setPreferredSize(new Dimension(800, 400));
-
-    Calendar ch = new Calendar();
-    ch.setDate(new Date());
-    
-    DayCard card = new DayCard();
-    
-    frame.getContentPane().add(ch, BorderLayout.CENTER);
-    frame.getContentPane().add(card, BorderLayout.EAST);
-    //frame.setUndecorated(true);
-
-    frame.pack();
-    frame.setVisible(true);
-  }
+ 
 }
 
