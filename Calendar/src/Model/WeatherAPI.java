@@ -1,9 +1,16 @@
 package Model;
 
+import Enums.Weather;
 import de.mbenning.weather.wunderground.api.domain.WeatherStation;
 import de.mbenning.weather.wunderground.api.domain.WeatherStations;
 import de.mbenning.weather.wunderground.impl.services.HttpDataReaderService;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * API for getting weather from a specified weatherstation
@@ -28,10 +35,6 @@ public class WeatherAPI {
     private final WeatherStation weatherStation = WeatherStations.ALL.get("INORDRHE72");
     private double maxTemp;
     private double minTemp;
-    private boolean rainy;
-    private boolean windy;
-    private boolean sunny;
-    private boolean snowy;
     private double avgTemp;
     
     /**
@@ -51,32 +54,54 @@ public class WeatherAPI {
      */
     public void setWeather(GregorianCalendar date){
         reader.setWeatherDate(date.getTime());
-        setRain();
-        setWind();
         setMaxTemp();
         setMinTemp();
         setAvgTemp();
-        setSnow();
     }  
     
     public static void main(String[] args){
         WeatherAPI api = new WeatherAPI();
         api.setWeather(new GregorianCalendar());
+        try {
+            System.out.println(api.getWeatherCode(new GregorianCalendar()));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private int getWeatherCode(GregorianCalendar date) throws MalformedURLException, IOException{
+        RSSReader reader = new RSSReader("http://weather.yahooapis.com/forecastrss?w=2502264");
+        ArrayList<String> list = reader.readRSS();
+        
+        return parseList(list);        
+    }
+    
+    private int parseList(ArrayList<String> list) {
+        Iterator iterator = list.iterator();
+        String line;
+        int code = 0;
+        
+        while(iterator.hasNext()){
+            line = iterator.next().toString();
+            if(line.contains("code=")){
+                String[] temp;
+                temp = line.split("code=");
+                line = temp[1];
+                char pos1 = line.charAt(1);
+                char pos2 = line.charAt(2);
+                code = Character.digit(pos1, 10)*10+(Character.digit(pos2, 10));
+                break;
+            }
+        }
+        return code;
     }
     
     /**********************************************************
      ********* Getters and setters ****************************
      **********************************************************/
-    
-    private void setWind(){
-        if(reader.maxTemperature().getWindSpeedKmh() > 5){
-            this.windy = true;
-        }
-        else{
-            this.windy = false;
-        }
-    }
-    
+       
     private void setMaxTemp(){
         this.maxTemp = reader.maxTemperature().getTemperature();
     }
@@ -89,23 +114,6 @@ public class WeatherAPI {
         this.avgTemp = (maxTemp+minTemp)/2;
     }
         
-    private void setRain(){
-        if(reader.maxTemperature().getRainRateHourlyMm() > 40){
-            this.rainy = true;
-        }
-        else{
-            this.rainy = false;
-        }
-    }
-    
-    private void setSnow(){
-        if(this.reader.maxTemperature().getTemperature() < 0 && isRainy()){
-            this.snowy = true;
-        }
-        else{
-            this.snowy = false;
-        }
-    }
     
     public double getAvgTemp(){
         return this.avgTemp;
@@ -114,27 +122,29 @@ public class WeatherAPI {
     public double getMinTemp(){
         return this.minTemp;
     }
-    
-    public boolean isWindy(){
-        return this.windy;
-        
-    }
-    
-    
-    public boolean isSunny(){
-        return this.sunny;
-    }
-    
-    public boolean isRainy(){
-        return this.rainy;
-    }
-    
-    public boolean isSnowy(){
-        return this.snowy;
-    }
 
     public String getCity() {
         return this.weatherStation.getCity();
     }
+    
+    public Weather getWeather(int code){
+        
+        switch(code){
+            default:
+                return Weather.UNKNOWN;
+            case 1:
+                return Weather.CLOUDY;
+            case 2:
+                return Weather.RAINY;
+            case 3:
+                return Weather.SNOWY;
+            case 4:
+                return Weather.SUNNY;
+        }              
+    }
+
+    
+
+    
     
 }

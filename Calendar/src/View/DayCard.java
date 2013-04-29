@@ -42,15 +42,6 @@ public class DayCard extends JPanel implements Runnable{
     public void paintComponent(Graphics g){        
         Graphics temp = g.create();
         
-        if(weather.isRainy()){
-            paintRain(temp);
-        }
-        if(weather.isSunny()){
-            //paintSun(temp);
-        }
-        if(weather.isWindy()){
-            //paintWind(temp);
-        }
         
         
         temp.setColor(Color.white);
