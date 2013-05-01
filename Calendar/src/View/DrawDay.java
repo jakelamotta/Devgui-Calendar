@@ -50,7 +50,7 @@ public class DrawDay implements Drawable {
         
         g2.setColor(Color.darkGray);
         g2.fillRoundRect((d-1) * 45 + 41, (week-1) * 45 + 76, 40, 40,10,10);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN,0.75f));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN,0.05f));
         
         //calculatedate.upgradeCalendar();
     //}
