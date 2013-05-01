@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
@@ -42,10 +43,12 @@ public class Frame extends JFrame{
     JMenuItem btn;
    public Frame()
    { 
-      
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setPreferredSize(new Dimension(800, 400));      
-    btn=new JMenuItem("transparents");
+    
+      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+      this.setPreferredSize(new Dimension(800, 400));      
+    
+      btn=new JMenuItem("Transparency");
     btn.addActionListener(new ActionListener() {
 
           @Override
@@ -54,6 +57,7 @@ public class Frame extends JFrame{
           }
        });
     this.menuBar = new JMenuBar();      
+    
     this.Menu=new JMenu("Setting"); 
     this.Menu.add(btn);
     this.menuBar.add(Menu); 
@@ -64,8 +68,8 @@ public class Frame extends JFrame{
    
    public void setOpacity(){
   JDialog dialog;
-        dialog = new JDialog(this,"transparency",true);
-        dialog.setSize(270,100);
+  dialog = new JDialog(this,"Transparency",true);
+  dialog.setSize(270,100);
   dialog.setResizable(false);
   Dimension thisSize=this.getSize();
   Point thisPoint=this.getLocation();
@@ -75,8 +79,8 @@ public class Frame extends JFrame{
   
   slider.addChangeListener(new ChangeListener(){
           @Override
-          public void stateChanged(ChangeEvent ce) {
-              slider();
+   public void stateChanged(ChangeEvent ce) {
+      slider();
           }
   });
   JPanel upPanel=new JPanel(new FlowLayout());
@@ -101,10 +105,10 @@ public void slider(){
 
 
 public static void main(String[] args) {
-    Frame frame = new Frame();
-    Calendar ch = new Calendar();
-    ch.setDate(new Date());
-    DayCard card = new DayCard();
+ Frame frame = new Frame();
+ Calendar ch = new Calendar();
+ ch.setDate(new Date());
+ DayCard card = new DayCard();
  frame.getContentPane().add(ch, BorderLayout.CENTER);
  frame.getContentPane().add(card, BorderLayout.EAST);
     //frame.setUndecorated(true);
