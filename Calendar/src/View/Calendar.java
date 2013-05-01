@@ -36,7 +36,7 @@ public class Calendar extends JPanel implements Runnable {
   public List<Drawable> Calendars = new ArrayList<Drawable>();
   public List<Drawable> DrawForDay = new ArrayList<Drawable>();
   public static List<Drawable> Selected = new ArrayList<Drawable>();
- 
+  public static List<Drawable> Selected2 = new ArrayList<Drawable>();
   public  Calendar(){
       
       setPreferredSize(new Dimension(380,400));
@@ -90,7 +90,8 @@ public class Calendar extends JPanel implements Runnable {
         }
         }
     this.addMouseListener(new DayMouseListener());
-   // temp.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));
+   this.addMouseMotionListener(new Daymousemovelistener());
+     // temp.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));
     for (Drawable d: Calendars) {
         d.drawString(temp);
     }
@@ -98,6 +99,9 @@ public class Calendar extends JPanel implements Runnable {
         d.drawString(temp);
     }
       for (Drawable d: Selected) {
+        d.drawString(temp);
+    }
+       for (Drawable d: Selected2) {
         d.drawString(temp);
     }
     Calendars.clear();

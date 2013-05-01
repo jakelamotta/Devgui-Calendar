@@ -4,22 +4,15 @@
  */
 package View;
 
-import java.awt.event.MouseEvent;
-import View.Calendar;
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
-import javax.swing.JPanel;
-import View.Calendar;
-import java.awt.AlphaComposite;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.geom.Point2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
 /**
  *
  * @author bigbigguoguo
  */
-public class DayMouseListener extends MouseAdapter {
+public class Daymousemovelistener extends MouseMotionAdapter {
     
     private int d;
     private int week;
@@ -52,51 +45,43 @@ if((333.5-22.5<x)&&(x<333.5+22.5)){
 }
      public void getypoint(float y){
 if((98.5-22.5<y)&&(y<98.5+22.5)){
-                 week=1;
-                 Calendar.Selected.clear();
-                 Calendar.Selected2.clear();
- addDrawableForselected(new DrawDayforselected(d,week));
+                 week=1;Calendar.Selected2.clear();
+ addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((143.5-22.5<y)&&(y<143.5+22.5)){
-                 week=2;
-                 Calendar.Selected.clear();
-                 Calendar.Selected2.clear();
- addDrawableForselected(new DrawDayforselected(d,week));
+                 week=2;Calendar.Selected2.clear(); 
+ addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((188.5-22.5<y)&&(y<188.5+22.5)){
                  week=3;
-                 Calendar.Selected.clear();
                  Calendar.Selected2.clear();
- addDrawableForselected(new DrawDayforselected(d,week));
+ addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((233.5-22.5<y)&&(y<233.5+22.5)){
                  week=4;
-                 Calendar.Selected.clear();
                  Calendar.Selected2.clear();
- addDrawableForselected(new DrawDayforselected(d,week));
+ addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((278.5-22.5<y)&&(y<278.5+22.5)){
                  week=5;
-                 Calendar.Selected.clear();
                  Calendar.Selected2.clear();
- addDrawableForselected(new DrawDayforselected(d,week));
+ addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((323.5-22.5<y)&&(y<323.5+22.5)){
                  week=6;
-                 Calendar.Selected.clear();
                  Calendar.Selected2.clear();
- addDrawableForselected(new DrawDayforselected(d,week));
+ addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 
     }
-      public void addDrawableForselected(Drawable d){
-	    Calendar.Selected.add(d);
+      public void addDrawableForselected2(Drawable d){
+	    Calendar.Selected2.add(d);
       }    
-    public void mouseClicked(MouseEvent e) {
+    public void mouseMoved(MouseEvent e) {
 
     
-      	     if (e.getButton() == MouseEvent.BUTTON1) {
-      	     if (e.getClickCount() == 2) {
+      	     //if (e.getButton() == MouseEvent.BUTTON1) {
+      	     //if (e.getClickCount() == 2) {
              float x=e.getX();
              float y=e.getY();
              getxpoint( x, y);
@@ -113,6 +98,5 @@ if((323.5-22.5<y)&&(y<323.5+22.5)){
                      //Calendar.Calendars.add(0,new(DrawMonth(Color.getColor(gray))));
                  }
             }
-}
-}
-
+//}
+//}

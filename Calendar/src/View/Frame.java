@@ -47,7 +47,7 @@ public class Frame extends JFrame{
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
       this.setPreferredSize(new Dimension(800, 400));      
-    
+      //this.setUndecorated(true);
       btn=new JMenuItem("Transparency");
     btn.addActionListener(new ActionListener() {
 
@@ -111,9 +111,9 @@ public static void main(String[] args) {
  DayCard card = new DayCard();
  frame.getContentPane().add(ch, BorderLayout.CENTER);
  frame.getContentPane().add(card, BorderLayout.EAST);
-    //frame.setUndecorated(true);
+//frame.setUndecorated(true);
 
 frame.pack();
- frame.setVisible(true);     
+frame.setVisible(true);     
 }
 }
