@@ -36,4 +36,8 @@ public class RSSReader {
         return rssData;
     }
     
+    public void setURLAddress(String url) throws MalformedURLException{
+        this.urlAddress = new URL(url);
+    }
+    
 }
