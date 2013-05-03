@@ -37,18 +37,23 @@ import javax.swing.event.ChangeListener;
  * @author bigbigguoguo
  */
 public class Frame extends JFrame{
-    JSlider slider =new JSlider(0,9,0);
-    JMenuBar menuBar;
-    JMenu Menu;
+    JSlider slider =new JSlider(0,7,0);
+    JMenuBar menuBar = new JMenuBar();;
+    JMenu fileMenu = new JMenu("File");
+    JMenu editMenu = new JMenu("Edit");
+    JMenu setMenu = new JMenu("Setting");
     JMenuItem btn;
+    
    public Frame()
    { 
     
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
-      this.setPreferredSize(new Dimension(800, 400));      
-      //this.setUndecorated(true);
-      btn=new JMenuItem("Transparency");
+      this.setPreferredSize(new Dimension(800, 400));     
+      
+      //this.setUndecorated(true); //to be fixed?
+      
+      btn=new JMenuItem("Window Transparency");
     btn.addActionListener(new ActionListener() {
 
           @Override
@@ -56,11 +61,15 @@ public class Frame extends JFrame{
             setOpacity();
           }
        });
-    this.menuBar = new JMenuBar();      
+
     
-    this.Menu=new JMenu("Setting"); 
-    this.Menu.add(btn);
-    this.menuBar.add(Menu); 
+   
+    this.editMenu.add(new JMenuItem("Undo"));
+    this.editMenu.add(new JMenuItem("Redo"));
+    this.setMenu.add(btn);
+    this.menuBar.add(fileMenu);
+    this.menuBar.add(editMenu);
+    this.menuBar.add(setMenu);
     this.setJMenuBar(this.menuBar);
     this.setVisible(true);     
    }
@@ -68,8 +77,8 @@ public class Frame extends JFrame{
    
    public void setOpacity(){
   JDialog dialog;
-  dialog = new JDialog(this,"Transparency",true);
-  dialog.setSize(270,100);
+  dialog = new JDialog(this,"Adjust Transparency",true);
+  dialog.setSize(270,60);
   dialog.setResizable(false);
   Dimension thisSize=this.getSize();
   Point thisPoint=this.getLocation();

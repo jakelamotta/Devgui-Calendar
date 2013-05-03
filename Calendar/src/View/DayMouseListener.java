@@ -96,7 +96,7 @@ if((323.5-22.5<y)&&(y<323.5+22.5)){
 
     
       	     if (e.getButton() == MouseEvent.BUTTON1) {
-      	     if (e.getClickCount() == 2) {
+      	     if (e.getClickCount() == 1) {
              float x=e.getX();
              float y=e.getY();
              getxpoint( x, y);

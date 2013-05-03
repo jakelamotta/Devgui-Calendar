@@ -16,10 +16,6 @@ public class Daymousemovelistener extends MouseMotionAdapter {
     
     private int d;
     private int week;
-    //float leftX=(float)((d-2) * 45 + 41);  
-    //float upY=(float)((week-2) * 45);  
-    //float rightX=(float)((d) * 45 + 41);  
-    //float downY=(float)((week) * 45);  
     public void getxpoint(float x,float y){
 if((63.5-22.5<x)&&(x<63.5+22.5)){
                  d=1;
@@ -79,24 +75,9 @@ if((323.5-22.5<y)&&(y<323.5+22.5)){
       }    
     public void mouseMoved(MouseEvent e) {
 
-    
-      	     //if (e.getButton() == MouseEvent.BUTTON1) {
-      	     //if (e.getClickCount() == 2) {
              float x=e.getX();
              float y=e.getY();
              getxpoint( x, y);
-                  //float distance=(x-centerX)*(x-centerX)+(y-centerY)*(y-centerY);
-             //System.out.println("work");
-                 
                 
-                 
-                 //(x-centerX)*(x-centerX)+(y-centerY)*(y-centerY);
-               //P.setLocation(e.getX(),e.getY());(x-centerX)*(x-centerX)+(y-centerY)*(y-centerY);
-            //week * 29 + 81 + 20
-             
-      	    	
-                     //Calendar.Calendars.add(0,new(DrawMonth(Color.getColor(gray))));
                  }
             }
-//}
-//}
