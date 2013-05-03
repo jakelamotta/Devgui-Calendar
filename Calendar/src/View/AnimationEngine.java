@@ -1,6 +1,11 @@
 package View;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 /**
  * Animation engine class, each instance of the engine defines a animation. 
@@ -8,31 +13,26 @@ import javax.swing.JComponent;
  */
 public class AnimationEngine implements Runnable{
     
-    private JComponent component;
+    private JPanel panel;
     private final int sleepTime = 100;
 
-    public AnimationEngine(JComponent comp){
-        this.component = comp;
+    public AnimationEngine(JPanel comp){
+        this.panel = comp;
     }
     
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    private void drawRaindrop(){
-        
-    }
-    
-    private void drawSun(){
-        
-    }
-    
-    private void drawCloud(){
-    }
-    
-    private void drawSnowflake(){
+        while(true){
+            
+            this.panel.repaint();
+            
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
 }
