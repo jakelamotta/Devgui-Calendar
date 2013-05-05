@@ -14,16 +14,6 @@ import java.util.logging.Logger;
 
 /**
  * API for getting weather from a specified weatherstation
- * 
- * Not done:
- * 
- * Currently hardcoded but I will fix this so its dynamic via some sort
- * of IP-check if its possible.
- *  * 
- * Right now I did it so that you can have windy and sunny at the same time
- * rather than working with mutually exclusive enums, I think this is a better
- * idea but I am open for suggestions.
- * 
  * @author Kristian
  */
 public class WeatherAPI {
