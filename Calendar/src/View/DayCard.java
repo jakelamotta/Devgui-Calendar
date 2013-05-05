@@ -1,5 +1,6 @@
 package View;
 
+import Enums.Weather;
 import Model.WeatherAPI;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +8,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,19 +32,39 @@ import javax.swing.border.BevelBorder;
  */
 public class DayCard extends JPanel{
     
-    private int x = 280;
-    private int y = 0;
+    private int pic = 0;
     private WeatherAPI weather;
     private AnimationEngine engine;
+    private ArrayList<AnimationEngine> engines;
+    private Weather current;
+    private GregorianCalendar date;
     
     public DayCard(){
+        this(new GregorianCalendar());
+    }
+    
+    public DayCard(GregorianCalendar cal){
+        this.date = cal;
         weather = new WeatherAPI();
         weather.setWeather(new GregorianCalendar());
         setPreferredSize(new Dimension(300,400));
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
-        this.engine = new AnimationEngine(this);
-        Thread thread = new Thread(engine);
-        thread.start();        
+        this.engines = new ArrayList();
+        this.current = weather.getWeather(0);
+        addEngine(new AnimationEngine(this));
+        startEngines();
+    }
+    
+    private void startEngines(){
+        Iterator iterator = this.engines.iterator();
+        AnimationEngine temp;
+        Thread thread;
+        
+        while(iterator.hasNext()){
+            temp = (AnimationEngine)iterator.next();
+            thread = new Thread(temp);
+            thread.start();            
+        }
     }
     
     @Override
@@ -51,11 +75,8 @@ public class DayCard extends JPanel{
         temp.setColor(Color.white);
         temp.drawString("Temperature in " + weather.getCity() + ": " + String.valueOf(this.weather.getAvgTemp()) + "C", 30, 30);
         
-        try {
-            paintSun(temp,y);
-        } catch (IOException ex) {
-            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        paintRain(temp,pic);
+        
         
         //Drawable d = new Testfordaycard();
         
@@ -80,24 +101,49 @@ public class DayCard extends JPanel{
         
         g.drawImage(img,250,20,30,30,null);
         
-        y = (y-1)*(y-1);
+        pic = (pic-1)*(pic-1);
     }
 
     public void paintCloud(Graphics g) {
-        g.fillRect(0, 0, 300, 280);
-        g.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
-        g.fillOval(x, y, 7, 4);
+        BufferedImage img = null;
+        
+        try{
+            img = ImageIO.read(new File("./resources/clody.png"));
+        }
+        catch(IOException e){
+            System.out.println(e.toString());
+        }
+        
+        g.drawImage(img,250,20,30,30,null);
     }
     
-    public void paintRain(Graphics g){
+    public void paintRain(Graphics g, int i){
         BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File("./resources/raindrop.jpg"));
-        }       
-        catch (IOException e) {
-            System.out.println("error!!");
+        
+        try{
+        if(i==0){
+            img = ImageIO.read(new File("./resources/rainpng.png"));
         }
-        g.drawImage(img,x-15, y, 30, 30,null);
+        else if(i==1){
+            img = ImageIO.read(new File("./resources/rainpng2.jpg"));
+        }
+        else if(i==2){
+            img = ImageIO.read(new File("./resources/rainpng3.jpg"));
+        }
+        
+        }
+        catch(IOException e){
+            System.out.println(e.toString());
+        }
+        
+        g.drawImage(img,250,20,30,30,null);
+        
+        if(pic == 2){
+            pic = 0;
+        }
+        else{
+            pic += 1;
+        }
     }
     
     public void paintSnow(Graphics g){
@@ -107,6 +153,23 @@ public class DayCard extends JPanel{
         }       
         catch (IOException e) {
         }
-        g.drawImage(img,x-15, y, 30, 30,null);
+        g.drawImage(img,280, pic, 30, 30,null);
+    }
+    
+    private void addEngine(AnimationEngine eng){
+        this.engines.add(eng);
+    }
+    
+    public void setDate(GregorianCalendar cal){
+        this.date = cal;
+    }
+    
+    public GregorianCalendar getDate(GregorianCalendar cal){
+        return this.date;
+        
+    }
+    
+    public void updateWeather(){
+        this.current = this.weather.getWeather(0);
     }
 }

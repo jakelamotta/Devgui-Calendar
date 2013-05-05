@@ -36,6 +36,7 @@ public class WeatherAPI {
     private double maxTemp;
     private double minTemp;
     private double avgTemp;
+    private String weatherURLAddress = "http://weather.yahooapis.com/forecastrss?w=2502264";
     
     /**
      * Default constructor, initializes the reader and sets the hardcoded 
@@ -54,14 +55,15 @@ public class WeatherAPI {
      */
     public void setWeather(GregorianCalendar date){
         reader.setWeatherDate(date.getTime());
-        setMaxTemp();
-        setMinTemp();
+        //setMaxTemp();
+        //setMinTemp();
         setAvgTemp();
     }  
     
     public static void main(String[] args){
         WeatherAPI api = new WeatherAPI();
         api.setWeather(new GregorianCalendar());
+        
         try {
             System.out.println(api.getWeatherCode(new GregorianCalendar()));
         } catch (MalformedURLException ex) {
@@ -69,10 +71,12 @@ public class WeatherAPI {
         } catch (IOException ex) {
             Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        System.out.println(api.getCity());
     }
     
     private int getWeatherCode(GregorianCalendar date) throws MalformedURLException, IOException{
-        RSSReader reader = new RSSReader("http://weather.yahooapis.com/forecastrss?w=2502264");
+        RSSReader reader = new RSSReader(weatherURLAddress);
         ArrayList<String> list = reader.readRSS();
         
         return parseList(list);        
@@ -128,23 +132,19 @@ public class WeatherAPI {
     }
     
     public Weather getWeather(int code){
-        
+               
         switch(code){
             default:
                 return Weather.UNKNOWN;
-            case 1:
+            case 28:
                 return Weather.CLOUDY;
-            case 2:
+            case 11:
                 return Weather.RAINY;
-            case 3:
+            case 16:
                 return Weather.SNOWY;
-            case 4:
+            case 32:
                 return Weather.SUNNY;
         }              
     }
-
-    
-
-    
     
 }
