@@ -40,18 +40,24 @@ public class DayCard extends JPanel{
     private Weather current;
     private GregorianCalendar date;
     
-    public DayCard() throws MalformedURLException, IOException{
+    public DayCard(){
         this(new GregorianCalendar());
     }
     
-    public DayCard(GregorianCalendar cal) throws MalformedURLException, IOException{
+    public DayCard(GregorianCalendar cal){
         this.date = cal;
         weather = new WeatherAPI();
         weather.setWeather(new GregorianCalendar());
         setPreferredSize(new Dimension(300,400));
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
         this.engines = new ArrayList();
-        this.current = weather.getWeather(this.date);
+        try {
+            this.current = weather.getWeather(this.date);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         addEngine(new AnimationEngine(this));
         startEngines();
     }

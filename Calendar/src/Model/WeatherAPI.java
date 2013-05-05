@@ -116,7 +116,7 @@ public class WeatherAPI {
         
         while(iterator.hasNext()){
             line = iterator.next().toString();
-            if(line.contains("code=")){
+            if(line.contains("low=")){
                 String[] temp;
                 String temp2;
                 
@@ -141,8 +141,6 @@ public class WeatherAPI {
             
             
         }
-        
-        System.out.println(temperatures.size());
         return temperatures;
     }
     
