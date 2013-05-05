@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -39,18 +40,18 @@ public class DayCard extends JPanel{
     private Weather current;
     private GregorianCalendar date;
     
-    public DayCard(){
+    public DayCard() throws MalformedURLException, IOException{
         this(new GregorianCalendar());
     }
     
-    public DayCard(GregorianCalendar cal){
+    public DayCard(GregorianCalendar cal) throws MalformedURLException, IOException{
         this.date = cal;
         weather = new WeatherAPI();
         weather.setWeather(new GregorianCalendar());
         setPreferredSize(new Dimension(300,400));
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
         this.engines = new ArrayList();
-        this.current = weather.getWeather(0);
+        this.current = weather.getWeather(this.date);
         addEngine(new AnimationEngine(this));
         startEngines();
     }
@@ -73,9 +74,29 @@ public class DayCard extends JPanel{
         
         
         temp.setColor(Color.white);
-        temp.drawString("Temperature in " + weather.getCity() + ": " + String.valueOf(this.weather.getAvgTemp()) + "C", 30, 30);
+        try {
+            temp.drawString("Temperature in Uppsala: " + String.valueOf(this.weather.getAvgTemp(date)) + "C", 30, 30);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        paintRain(temp,pic);
+        
+        if(this.current == Weather.CLOUDY){
+            paintCloud(temp);
+        }
+        else if(this.current == Weather.RAINY){
+        
+            paintRain(temp,pic);
+        }
+        else if(this.current == Weather.SUNNY){
+            try {
+                paintSun(temp,pic);
+            } catch (IOException ex) {
+                Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
         
         //Drawable d = new Testfordaycard();
@@ -170,6 +191,12 @@ public class DayCard extends JPanel{
     }
     
     public void updateWeather(){
-        this.current = this.weather.getWeather(0);
+        try {
+            this.current = this.weather.getWeather(date);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

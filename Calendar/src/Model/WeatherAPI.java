@@ -19,10 +19,7 @@ import java.util.logging.Logger;
  * 
  * Currently hardcoded but I will fix this so its dynamic via some sort
  * of IP-check if its possible.
- * 
- * Actually determining what constitutes as rain, windy and snowy needs
- * to be calibrated
- * 
+ *  * 
  * Right now I did it so that you can have windy and sunny at the same time
  * rather than working with mutually exclusive enums, I think this is a better
  * idea but I am open for suggestions.
@@ -36,7 +33,7 @@ public class WeatherAPI {
     private double maxTemp;
     private double minTemp;
     private double avgTemp;
-    private String weatherURLAddress = "http://weather.yahooapis.com/forecastrss?w=2502264";
+    private String weatherURLAddress = "http://weather.yahooapis.com/forecastrss?w=908572";
     
     /**
      * Default constructor, initializes the reader and sets the hardcoded 
@@ -60,69 +57,135 @@ public class WeatherAPI {
         setAvgTemp();
     }  
     
+    
+    /**
+     * For testing the api only, SHOULD BE REMOVED FOR FINAL VERSION!!!!!
+     * @param args 
+     */
     public static void main(String[] args){
         WeatherAPI api = new WeatherAPI();
         api.setWeather(new GregorianCalendar());
         
         try {
-            System.out.println(api.getWeatherCode(new GregorianCalendar()));
-        } catch (MalformedURLException ex) {
+            System.out.println(api.getWeatherCode());
+        } 
+        catch(MalformedURLException ex) {
             Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } 
+        catch(IOException ex) {
             Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         System.out.println(api.getCity());
     }
     
-    private int getWeatherCode(GregorianCalendar date) throws MalformedURLException, IOException{
+    /**
+     * Function that reads the rss-feed and returns a list of raw, unparsed, data
+     */
+    private ArrayList<Integer> getWeatherCode() throws MalformedURLException, IOException{
         RSSReader reader = new RSSReader(weatherURLAddress);
         ArrayList<String> list = reader.readRSS();
         
         return parseList(list);        
     }
     
-    private int parseList(ArrayList<String> list) {
+    public int getAvgTemp(GregorianCalendar cal) throws MalformedURLException, IOException{
+        RSSReader reader = new RSSReader(weatherURLAddress);
+        ArrayList<String> list = reader.readRSS();
+        
+        if(Utilities.isSpecficDay(cal, 0)){
+            this.avgTemp = getTemperature(list).get(1);
+        }
+        else if(Utilities.isSpecficDay(cal,1)){
+            this.avgTemp = getTemperature(list).get(2);
+        }       
+        
+        return (int)this.avgTemp; 
+    }
+    
+    
+    public ArrayList<Integer> getTemperature(ArrayList<String> list){
         Iterator iterator = list.iterator();
         String line;
-        int code = 0;
+        ArrayList<Integer> temperatures = new ArrayList();  
+        int low;
+        int high;
+        int avg;
+        char pos1;
+        char pos2;
         
         while(iterator.hasNext()){
             line = iterator.next().toString();
             if(line.contains("code=")){
                 String[] temp;
-                temp = line.split("code=");
-                line = temp[1];
-                char pos1 = line.charAt(1);
-                char pos2 = line.charAt(2);
-                code = Character.digit(pos1, 10)*10+(Character.digit(pos2, 10));
-                break;
+                String temp2;
+                
+                temp = line.split("low=");
+                temp2 = temp[1];
+                
+                pos1 = temp2.charAt(1);
+                pos2 = temp2.charAt(2);
+                low = Character.digit(pos1, 10)*10+Character.digit(pos2, 10);
+                
+                temp = line.split("high=");
+                temp2 = temp[1];
+                
+                pos1 = temp2.charAt(1);
+                pos2 = temp2.charAt(2);
+                high = Character.digit(pos1, 10)*10+Character.digit(pos2, 10);
+                
+                avg = (low+high)/2;
+                
+                temperatures.add(Utilities.fahrenheitToCelcius(avg));
             }
+            
+            
         }
-        return code;
+        
+        System.out.println(temperatures.size());
+        return temperatures;
+    }
+    
+    /**
+     * Parse the data thats been retrieved from the RSS-feed of yahoo weather
+     * page. Return this as an arraylist of weather codes.
+     * @param list List of source code from the rss-feed
+     * @return List of codes for given days
+     */
+    private ArrayList<Integer> parseList(ArrayList<String> list) {
+        Iterator iterator = list.iterator();
+        String line;
+        ArrayList<Integer> codes = new ArrayList();  
+        
+        while(iterator.hasNext()){
+            line = iterator.next().toString();
+            if(line.contains("code=")){
+                String[] temp;
+                String temp2;
+                
+                temp = line.split("code=");
+                temp2 = temp[1];
+                
+                char pos1 = temp2.charAt(1);
+                char pos2 = temp2.charAt(2);
+                
+                codes.add(Character.digit(pos1, 10)*10+(Character.digit(pos2, 10)));
+            }
+            
+            
+        }
+        return codes;
     }
     
     /**********************************************************
      ********* Getters and setters ****************************
      **********************************************************/
-       
-    private void setMaxTemp(){
-        this.maxTemp = reader.maxTemperature().getTemperature();
-    }
-    
-    private void setMinTemp(){
-        this.minTemp = reader.minTemperature().getTemperature();
-    }
-    
+        
     private void setAvgTemp(){
         this.avgTemp = (maxTemp+minTemp)/2;
     }
         
-    
-    public double getAvgTemp(){
-        return this.avgTemp;
-    }
-    
+        
     public double getMinTemp(){
         return this.minTemp;
     }
@@ -131,8 +194,28 @@ public class WeatherAPI {
         return this.weatherStation.getCity();
     }
     
-    public Weather getWeather(int code){
-               
+    /**
+     * Function that gets the weather for the specified day, given
+     * the rss feed used presently only today's and tomorrow's weather
+     * can be retrieved.
+     * @param cal Date to retrieve weather for
+     * @return Weather description as weather enum value
+     * @throws MalformedURLException
+     * @throws IOException 
+     */
+    public Weather getWeather(GregorianCalendar cal) throws MalformedURLException, IOException{
+        int code;
+        
+        if(Utilities.isSpecficDay(cal,1)){
+            code = getWeatherCode().get(2);
+        }
+        else if(Utilities.isSpecficDay(cal, 0)){
+            code = getWeatherCode().get(1);
+        }
+        else{
+            code = -1;
+        }
+        
         switch(code){
             default:
                 return Weather.UNKNOWN;
@@ -140,10 +223,16 @@ public class WeatherAPI {
                 return Weather.CLOUDY;
             case 11:
                 return Weather.RAINY;
+            case 12:
+                return Weather.RAINY;
+            case 13:
+                return Weather.SNOWY;
             case 16:
                 return Weather.SNOWY;
-            case 32:
+            case 31:
                 return Weather.SUNNY;
+            case 32:
+                return Weather.SUNNY;    
         }              
     }
     

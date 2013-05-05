@@ -51,5 +51,16 @@ public class Utilities {
                 return isSpecficDay(toBeCompared,0);
                 
         }
-    }    
+    }
+    
+    /**
+     * Converts the input value (fahrenheit) to corresponding celcius value
+     * @param fah
+     * @return Celcius value of the corresponding input value
+     */
+    protected static int fahrenheitToCelcius(int fah){  
+        int celcius = (int)(((double)fah-(double)32)/1.8);
+        return celcius;
+    }
 }
+
