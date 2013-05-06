@@ -16,6 +16,8 @@ import java.awt.MenuItem;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -43,6 +45,7 @@ public class Frame extends JFrame{
     JMenu editMenu = new JMenu("Edit");
     JMenu setMenu = new JMenu("Setting");
     JMenuItem btn;
+    JMenuItem close;
     
    public Frame()
    { 
@@ -51,7 +54,7 @@ public class Frame extends JFrame{
     
       this.setPreferredSize(new Dimension(800, 400));     
       
-      //this.setUndecorated(true); //to be fixed?
+      this.setUndecorated(true);
       
       btn=new JMenuItem("Window Transparency");
     btn.addActionListener(new ActionListener() {
@@ -64,17 +67,29 @@ public class Frame extends JFrame{
 
     
    
+    close = new JMenuItem("Exit");
+    close.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			System.exit(0);
+		}
+	});
+    
     this.editMenu.add(new JMenuItem("Undo"));
     this.editMenu.add(new JMenuItem("Redo"));
     this.setMenu.add(btn);
     this.menuBar.add(fileMenu);
+    this.fileMenu.add(close);
     this.menuBar.add(editMenu);
     this.menuBar.add(setMenu);
     this.setJMenuBar(this.menuBar);
     this.setVisible(true);     
    }
      
-   
+   /**
+    * Adjust Transparency
+    */
    public void setOpacity(){
   JDialog dialog;
   dialog = new JDialog(this,"Adjust Transparency",true);
@@ -120,7 +135,7 @@ public static void main(String[] args) {
  DayCard card = new DayCard();
  frame.getContentPane().add(ch, BorderLayout.CENTER);
  frame.getContentPane().add(card, BorderLayout.EAST);
-//frame.setUndecorated(true);
+ //fframe.setUndecorated(true);
 
 frame.pack();
 frame.setVisible(true);     
