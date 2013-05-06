@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -68,11 +67,8 @@ public class DayCard extends JPanel{
         } catch (IOException ex) {
             Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            this.weather.setAvgTemp(date);
-        } catch (IOException ex) {
-            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        setTemperature();
         
         //Adds and starts the animation engines
         addEngine(new AnimationEngine(this));
@@ -138,10 +134,10 @@ public class DayCard extends JPanel{
         
         try{
         if(i==0){
-            img = ImageIO.read(new File("./resources/sun.jpg"));
+            img = ImageIO.read(new File("Calendar/resources/sun.jpg"));
         }
         else if(i==1){
-            img = ImageIO.read(new File("./resources/sun2.jpg"));
+            img = ImageIO.read(new File("Calendar/resources/sun2.jpg"));
         }
         
         }
@@ -160,7 +156,7 @@ public class DayCard extends JPanel{
         BufferedImage img = null;
         
         try{
-            img = ImageIO.read(new File("./resources/clody.png"));
+            img = ImageIO.read(new File("Calendar/resources/clody.png"));
         }
         catch(IOException e){
             System.out.println(e.toString());
@@ -179,13 +175,13 @@ public class DayCard extends JPanel{
         
         try{
         if(i==0){
-            img = ImageIO.read(new File("./resources/rainpng.png"));
+            img = ImageIO.read(new File("Calendar/resources/rainpng.png"));
         }
         else if(i==1){
-            img = ImageIO.read(new File("./resources/rainpng2.jpg"));
+            img = ImageIO.read(new File("Calendar/resources/rainpng2.jpg"));
         }
         else if(i==2){
-            img = ImageIO.read(new File("./resources/rainpng3.jpg"));
+            img = ImageIO.read(new File("Calendar/resources/rainpng3.jpg"));
         }
         
         }
@@ -212,7 +208,7 @@ public class DayCard extends JPanel{
     public void paintSnow(Graphics g){
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("./resources/snow.jpg"));
+            img = ImageIO.read(new File("Calendar/resources/snow.jpg"));
         }       
         catch (IOException e) {
         }
@@ -230,7 +226,11 @@ public class DayCard extends JPanel{
     /**
      * Function that updates the current weather
      */
-    public void updateWeather(){
+    /**********************************************************
+     ********* Getters and setters ****************************
+     **********************************************************/
+    
+    public void setWeather(){
         try {
             this.current = this.weather.getWeather(date);
         } catch (MalformedURLException ex) {
@@ -240,10 +240,6 @@ public class DayCard extends JPanel{
         }
     }
     
-    /**********************************************************
-     ********* Getters and setters ****************************
-     **********************************************************/
-    
     public void setDate(GregorianCalendar cal){
         this.date = cal;
     }
@@ -251,5 +247,13 @@ public class DayCard extends JPanel{
     public GregorianCalendar getDate(GregorianCalendar cal){
         return this.date;
         
+    }
+
+    private void setTemperature() {
+        try {
+            this.weather.setAvgTemp(date);
+        } catch (IOException ex) {
+            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
