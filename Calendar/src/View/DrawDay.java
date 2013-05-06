@@ -39,7 +39,7 @@ public class DrawDay implements Drawable {
     
     	Graphics2D g2 = (Graphics2D) g.create();
         
-    	//newlines
+    	
  
         //if(day.format(calculatedate.gettime()).equals(day.format(date))){
             //g2.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
@@ -62,14 +62,4 @@ public class DrawDay implements Drawable {
              g.drawString(present, (d-1) * 45 + 46 + 4, (week-1) * 45 + 81 + 20);
         calculatedate.upgradeCalendar();
     }
-
-    
-     
- 
-    /**
-     *
-     * @param P
-     * @return
-     */
-  
 }

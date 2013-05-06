@@ -6,6 +6,7 @@ import Model.WeatherAPI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -135,10 +136,11 @@ public class DayCard extends JPanel{
         
         try{
         if(i==0){
-            img = ImageIO.read(new File("Calendar/resources/sun.jpg"));
+            //img = ImageIO(this.getClass().getResource("addtask.jpg"));
+            img = ImageIO.read(this.getClass().getResource("sun.jpg"));
         }
         else if(i==1){
-            img = ImageIO.read(new File("Calendar/resources/sun2.jpg"));
+            img = ImageIO.read(this.getClass().getResource("sun2.jpg"));
         }
         
         }
