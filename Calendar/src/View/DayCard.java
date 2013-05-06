@@ -1,5 +1,6 @@
 package View;
 
+import Controller.AnimationEngine;
 import Enums.Weather;
 import Model.WeatherAPI;
 import java.awt.Color;

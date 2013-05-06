@@ -1,5 +1,6 @@
-package View;
+package Controller;
 
+import View.DayCard;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.logging.Level;

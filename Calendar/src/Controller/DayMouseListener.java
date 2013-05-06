@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package View;
+package Controller;
 
 import java.awt.event.MouseEvent;
 import View.Calendar;
@@ -10,6 +10,9 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.JPanel;
 import View.Calendar;
+import View.Calendar;
+import View.DrawDayforselected;
+import View.Drawable;
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
