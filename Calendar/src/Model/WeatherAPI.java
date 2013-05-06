@@ -227,15 +227,8 @@ public class WeatherAPI {
         }              
     }
     
-    /**
-     * Function that gets the temperatures from the rss-document provided and
-     * given the input date
-     * @param cal Date to get temperature for
-     * @return Average temparture for the given day
-     * @throws MalformedURLException
-     * @throws IOException 
-     */
-    public int getAvgTemp(GregorianCalendar cal) throws MalformedURLException, IOException{
+    
+    public void setAvgTemp(GregorianCalendar cal) throws IOException{
         //Check weather date is today or tomrrow to determine
         //which data to provide
         if(Utilities.isSpecficDay(cal, 0)){
@@ -243,8 +236,10 @@ public class WeatherAPI {
         }
         else if(Utilities.isSpecficDay(cal,1)){
             this.avgTemp = getTemperatures(getRSSDocument()).get(2);
-        }       
-        
+        }
+    }
+    
+    public int getAvgTemp(){
         return (int)this.avgTemp; 
     }    
     

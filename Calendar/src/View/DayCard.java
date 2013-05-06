@@ -68,6 +68,11 @@ public class DayCard extends JPanel{
         } catch (IOException ex) {
             Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            this.weather.setAvgTemp(date);
+        } catch (IOException ex) {
+            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         //Adds and starts the animation engines
         addEngine(new AnimationEngine(this));
@@ -101,13 +106,7 @@ public class DayCard extends JPanel{
                 
         temp.setColor(Color.white);
         
-        try {
-            temp.drawString("Temperature in Uppsala: " + String.valueOf(this.weather.getAvgTemp(date)) + "C", 30, 30);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        temp.drawString("Temperature in Uppsala: " + String.valueOf(this.weather.getAvgTemp()) + "C", 30, 30);
         
         //Draw animation according to current weather.
         if(this.current == Weather.CLOUDY){

@@ -1,4 +1,4 @@
-package View;
+package Model;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,7 +10,8 @@ public class CalculateDate {
         private  Calendar today = Calendar.getInstance();
 	private static Calendar cal = Calendar.getInstance();
         //private static int dayaccount =0;
-	private void setDate(Date date) {
+	
+        private void setDate(Date date) {
             this.date = date;
         }
 	
@@ -27,11 +28,11 @@ public class CalculateDate {
         
         public Date gettime()
         {
-        return cal.getTime();
+            return cal.getTime();
         }
         public void upgradeCalendar()
         {
-        cal.add(Calendar.DATE, +1);
+            cal.add(Calendar.DATE, +1);
         }        
         
 }
