@@ -87,7 +87,9 @@ public class Frame extends JFrame{
     this.setVisible(true);     
    }
      
-   
+   /**
+    * Adjust Transparency
+    */
    public void setOpacity(){
   JDialog dialog;
   dialog = new JDialog(this,"Adjust Transparency",true);
