@@ -35,22 +35,32 @@ public class DayCard extends JPanel{
     
     private int pic = 0;
     private WeatherAPI weather;
-    private AnimationEngine engine;
     private ArrayList<AnimationEngine> engines;
     private Weather current;
     private GregorianCalendar date;
     
+    /**
+     * Default constructor, created with todays date as date.
+     */
     public DayCard(){
         this(new GregorianCalendar());
     }
     
+    /**
+     * Constructor with one parameter, create the day card corresponding to
+     * a specific date.
+     * @param cal 
+     */
     public DayCard(GregorianCalendar cal){
+        //Initialize all variables
         this.date = cal;
         weather = new WeatherAPI();
         weather.setWeather(new GregorianCalendar());
         setPreferredSize(new Dimension(300,400));
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
         this.engines = new ArrayList();
+        
+        //attempt to get weather information
         try {
             this.current = weather.getWeather(this.date);
         } catch (MalformedURLException ex) {
@@ -58,10 +68,17 @@ public class DayCard extends JPanel{
         } catch (IOException ex) {
             Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //Adds and starts the animation engines
         addEngine(new AnimationEngine(this));
         startEngines();
     }
     
+    
+    /**
+     * Function that iterates over the animation engines in the list
+     * and starts these. Each engine runs as its own thread.
+     */
     private void startEngines(){
         Iterator iterator = this.engines.iterator();
         AnimationEngine temp;
@@ -74,12 +91,16 @@ public class DayCard extends JPanel{
         }
     }
     
+    /**
+     * Overriden paintcomponent function, when called the animations are updated
+     * @param g 
+     */
     @Override
     public void paintComponent(Graphics g){        
         Graphics temp = g.create();      
-        
-        
+                
         temp.setColor(Color.white);
+        
         try {
             temp.drawString("Temperature in Uppsala: " + String.valueOf(this.weather.getAvgTemp(date)) + "C", 30, 30);
         } catch (MalformedURLException ex) {
@@ -88,7 +109,7 @@ public class DayCard extends JPanel{
             Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+        //Draw animation according to current weather.
         if(this.current == Weather.CLOUDY){
             paintCloud(temp);
         }
@@ -104,12 +125,15 @@ public class DayCard extends JPanel{
             }
         }
         
-        
-        //Drawable d = new Testfordaycard();
-        
         temp.dispose();
     }
 
+    /**
+     * Paints sun representing sunny weather.
+     * @param g Graphics object to be used
+     * @param i Which of the image to be used
+     * @throws IOException 
+     */
     public void paintSun(Graphics g, int i) throws IOException {
         BufferedImage img = null;
         
@@ -128,6 +152,8 @@ public class DayCard extends JPanel{
         
         g.drawImage(img,250,20,30,30,null);
         
+        //Update choice of images (switching between 0 and 1, animation shifts 
+        //between two pictures to create a shining sun
         pic = (pic-1)*(pic-1);
     }
 
@@ -144,6 +170,11 @@ public class DayCard extends JPanel{
         g.drawImage(img,250,20,30,30,null);
     }
     
+    /**
+     * Function that draw a rain animation
+     * @param g Graphics object to be used.
+     * @param i i is the number used to choose between pictures to draw
+     */
     public void paintRain(Graphics g, int i){
         BufferedImage img = null;
         
@@ -165,6 +196,8 @@ public class DayCard extends JPanel{
         
         g.drawImage(img,250,20,30,30,null);
         
+        //Update choice of images (switching between 0,1 and 2, animation shifts 
+        //between three pictures to create a rain animation
         if(pic == 2){
             pic = 0;
         }
@@ -173,6 +206,10 @@ public class DayCard extends JPanel{
         }
     }
     
+    /**
+     * Function that draw a snow animation
+     * @param g Graphics object to be used.
+     */
     public void paintSnow(Graphics g){
         BufferedImage img = null;
         try {
@@ -183,19 +220,17 @@ public class DayCard extends JPanel{
         g.drawImage(img,280, pic, 30, 30,null);
     }
     
+    /**
+     * Adds an animationengine to the list of engines
+     * @param eng 
+     */
     private void addEngine(AnimationEngine eng){
         this.engines.add(eng);
     }
     
-    public void setDate(GregorianCalendar cal){
-        this.date = cal;
-    }
-    
-    public GregorianCalendar getDate(GregorianCalendar cal){
-        return this.date;
-        
-    }
-    
+    /**
+     * Function that updates the current weather
+     */
     public void updateWeather(){
         try {
             this.current = this.weather.getWeather(date);
@@ -204,5 +239,18 @@ public class DayCard extends JPanel{
         } catch (IOException ex) {
             Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    /**********************************************************
+     ********* Getters and setters ****************************
+     **********************************************************/
+    
+    public void setDate(GregorianCalendar cal){
+        this.date = cal;
+    }
+    
+    public GregorianCalendar getDate(GregorianCalendar cal){
+        return this.date;
+        
     }
 }

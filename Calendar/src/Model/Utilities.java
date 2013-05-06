@@ -20,6 +20,7 @@ public class Utilities {
      */
     protected static boolean isSpecficDay(GregorianCalendar toBeCompared, int offset){
         
+        //Last day of the year is a special case
         if(todaysDate.get(GregorianCalendar.DAY_OF_YEAR) == 365){
             return (offset == toBeCompared.get(GregorianCalendar.DAY_OF_YEAR) && todaysDate.getTime().getYear() == toBeCompared.getTime().getYear());
         }

@@ -30,23 +30,12 @@ public class WeatherAPI {
      * weatherStation
      */
     public WeatherAPI(){
+        //reader object to read weather information
         reader = new HttpDataReaderService();
+        
+        //station to read data from
         reader.setWeatherStation(weatherStation);
     }
-    
-    /**
-     * Sets the reader object's weather date so the correct weather will
-     * get retrieved. Also sets all the weather instances to their values
-     * accordingly
-     * @param date 
-     */
-    public void setWeather(GregorianCalendar date){
-        reader.setWeatherDate(date.getTime());
-        //setMaxTemp();
-        //setMinTemp();
-        setAvgTemp();
-    }  
-    
     
     /**
      * For testing the api only, SHOULD BE REMOVED FOR FINAL VERSION!!!!!
@@ -70,31 +59,38 @@ public class WeatherAPI {
     }
     
     /**
-     * Function that reads the rss-feed and returns a list of raw, unparsed, data
+     * Function that parse the data of a rss-document and return the weathercodes
+     * for that document
      */
     private ArrayList<Integer> getWeatherCode() throws MalformedURLException, IOException{
-        RSSReader reader = new RSSReader(weatherURLAddress);
-        ArrayList<String> list = reader.readRSS();
-        
-        return parseList(list);        
+        return parseList(getRSSDocument());        
     }
     
-    public int getAvgTemp(GregorianCalendar cal) throws MalformedURLException, IOException{
-        RSSReader reader = new RSSReader(weatherURLAddress);
-        ArrayList<String> list = reader.readRSS();
+    /**
+     * Function that retrieves a rss-document from the address specified by
+     * the field weatherURLAddress
+     * @return an RSS-document in the form of an arraylist
+     * @throws IOException 
+     */
+    private ArrayList<String> getRSSDocument() throws IOException{
+        RSSReader rssreader = null;
         
-        if(Utilities.isSpecficDay(cal, 0)){
-            this.avgTemp = getTemperature(list).get(1);
+        try {
+            rssreader = new RSSReader(weatherURLAddress);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(WeatherAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        else if(Utilities.isSpecficDay(cal,1)){
-            this.avgTemp = getTemperature(list).get(2);
-        }       
         
-        return (int)this.avgTemp; 
+        return rssreader.readRSS();
     }
     
-    
-    public ArrayList<Integer> getTemperature(ArrayList<String> list){
+    /**
+     * Function that returns a list of temperatures available in the rss document
+     * provided as input
+     * @param list Arraylist to parse
+     * @return List of integers (temperatures)
+     */
+    public ArrayList<Integer> getTemperatures(ArrayList<String> list){
         Iterator iterator = list.iterator();
         String line;
         ArrayList<Integer> temperatures = new ArrayList();  
@@ -104,6 +100,8 @@ public class WeatherAPI {
         char pos1;
         char pos2;
         
+        //Iterate over the elements in the list, where "low=" exists the number
+        //after this string is converted to an integer.
         while(iterator.hasNext()){
             line = iterator.next().toString();
             if(line.contains("low=")){
@@ -145,6 +143,8 @@ public class WeatherAPI {
         String line;
         ArrayList<Integer> codes = new ArrayList();  
         
+        //Iterate over the elements in the list, where "code=" exists the number
+        //after this string is converted to an integer.
         while(iterator.hasNext()){
             line = iterator.next().toString();
             if(line.contains("code=")){
@@ -194,6 +194,8 @@ public class WeatherAPI {
     public Weather getWeather(GregorianCalendar cal) throws MalformedURLException, IOException{
         int code;
         
+        //Check weather date is today or tomrrow to determine
+        //which data to provide
         if(Utilities.isSpecficDay(cal,1)){
             code = getWeatherCode().get(2);
         }
@@ -201,6 +203,7 @@ public class WeatherAPI {
             code = getWeatherCode().get(1);
         }
         else{
+            //If neither weather cant be retrieved
             code = -1;
         }
         
@@ -224,4 +227,35 @@ public class WeatherAPI {
         }              
     }
     
+    /**
+     * Function that gets the temperatures from the rss-document provided and
+     * given the input date
+     * @param cal Date to get temperature for
+     * @return Average temparture for the given day
+     * @throws MalformedURLException
+     * @throws IOException 
+     */
+    public int getAvgTemp(GregorianCalendar cal) throws MalformedURLException, IOException{
+        //Check weather date is today or tomrrow to determine
+        //which data to provide
+        if(Utilities.isSpecficDay(cal, 0)){
+            this.avgTemp = getTemperatures(getRSSDocument()).get(1);
+        }
+        else if(Utilities.isSpecficDay(cal,1)){
+            this.avgTemp = getTemperatures(getRSSDocument()).get(2);
+        }       
+        
+        return (int)this.avgTemp; 
+    }    
+    
+    /**
+     * Sets the reader object's weather date so the correct weather will
+     * get retrieved. Also sets all the weather instances to their values
+     * accordingly
+     * @param date 
+     */
+    public void setWeather(GregorianCalendar date){
+        reader.setWeatherDate(date.getTime());
+        setAvgTemp();
+    } 
 }
