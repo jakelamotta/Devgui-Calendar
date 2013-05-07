@@ -135,10 +135,10 @@ public class DayCard extends JPanel{
         BufferedImage img = null;
         
         try{
-        if(i==0){
-            //img = ImageIO(this.getClass().getResource("addtask.jpg"));
-            img = ImageIO.read(this.getClass().getResource("sun.jpg"));
-        }
+            if(i==0){
+                //img = ImageIO(this.getClass().getResource("addtask.jpg"));
+                img = ImageIO.read(this.getClass().getResource("sun.jpg"));
+            }
         else if(i==1){
             img = ImageIO.read(this.getClass().getResource("sun2.jpg"));
         }
@@ -159,7 +159,7 @@ public class DayCard extends JPanel{
         BufferedImage img = null;
         
         try{
-            img = ImageIO.read(new File("Calendar/resources/clody.png"));
+            img = ImageIO.read(this.getClass().getResource("clody.png"));
         }
         catch(IOException e){
             System.out.println(e.toString());
@@ -178,13 +178,13 @@ public class DayCard extends JPanel{
         
         try{
         if(i==0){
-            img = ImageIO.read(new File("Calendar/resources/rainpng.png"));
+            img = ImageIO.read(this.getClass().getResource("rainpng.png"));
         }
         else if(i==1){
-            img = ImageIO.read(new File("Calendar/resources/rainpng2.jpg"));
+            img = ImageIO.read(this.getClass().getResource("rainpng2.png"));
         }
         else if(i==2){
-            img = ImageIO.read(new File("Calendar/resources/rainpng3.jpg"));
+            img = ImageIO.read(this.getClass().getResource("rainpng3.png"));
         }
         
         }
@@ -211,7 +211,7 @@ public class DayCard extends JPanel{
     public void paintSnow(Graphics g){
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("Calendar/resources/snow.jpg"));
+            img = ImageIO.read(this.getClass().getResource("snow.jpg"));
         }       
         catch (IOException e) {
         }
