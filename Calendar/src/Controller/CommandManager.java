@@ -2,7 +2,7 @@ package Controller;
 
 import java.util.ArrayList;
 
-import View.Frame;
+import Application.CalendarApp;
 
 /**
  * The invoker class that controls the Command methods
@@ -18,7 +18,12 @@ public class CommandManager {
 		commandList = new ArrayList<Command>();
 		index=-1;
 	}
-	 
+	
+	/**
+	 * This method adds the new Command to the commandList
+	 * and sets the menu items for undo and redo correctly
+	 * @param c the new command
+	 */
 	public void executeCommand(Command c) {
 		if(index<(commandList.size()-1)){
 			for(int i=commandList.size()-1-index; i>0; i--){
@@ -28,40 +33,60 @@ public class CommandManager {
 		index++;
 		commandList.add(index, c);
 		c.execute();
-		Frame.setUndo(true);
-		Frame.setRedo(false);
+		CalendarApp.getFrame().setUndo(true);
+		CalendarApp.getFrame().setRedo(false);
 	}
 	
+	/**
+	 * This method checks if undo can be done
+	 * if index is not smaller than 0,
+	 * which means that if the List is not empty,
+	 * then it means there is a Command that can be unexecuted
+	 * @return true or false depending on availability
+	 */
 	public boolean isUndoAvailable() {
 		return !(index<0);	
 	}
 
+	/**
+	 * This method undo the previously executed command
+	 * and enables the redo menu item
+	 */
 	public void unexecuteCommand() {
-		Frame.setRedo(true);
+		CalendarApp.getFrame().setRedo(true);
 		commandList.get(index).unexecute();
 		index--;		
 		if(isUndoAvailable()){
-			Frame.setUndo(true);			
+			CalendarApp.getFrame().setUndo(true);			
 		}
 		else{
-			Frame.setUndo(false);
+			CalendarApp.getFrame().setUndo(false);
 		}		
 	}
 
+	/**
+	 * This method checks if redo can be done,
+	 * if index position is smaller than the size of the List,
+	 * then redo is possible
+	 * @return true or false depending on availability
+	 */
 	public boolean isRedoAvailable() {
 		return index<(commandList.size()-1);
 	}
 
+	/**
+	 * This method redo the undone event
+	 */
 	public void reexecuteCommand() {		
-		Frame.setUndo(true);
+		CalendarApp.getFrame().setUndo(true);
 		index++;
 		commandList.get(index).reexecute();
 		
 		if(isRedoAvailable()){
-			Frame.setRedo(true);
+			CalendarApp.getFrame().setRedo(true);
 		}
 		else{
-			Frame.setRedo(false);
+			CalendarApp.getFrame().setRedo(false);
 		}
 	}
 }

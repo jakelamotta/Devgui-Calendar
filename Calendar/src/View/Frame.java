@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -29,8 +30,8 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import Controller.AddEventAction;
-import Controller.CommandManager;
+import Application.CalendarApp;
+import Controller.ShowAddEventUIAction;
 
 /**
  *
@@ -40,29 +41,27 @@ import Controller.CommandManager;
 public class Frame extends JFrame{
     private Calendar ch;
     private DayCard card;
-	private JSlider slider =new JSlider(0,7,0);
+	private JSlider slider;
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem addEventItem;
     private JMenuItem close;
     private JMenu editMenu;
-    private static JMenuItem undo;
-    private static JMenuItem redo;
+    private JMenuItem undo;
+    private JMenuItem redo;
     private JMenu setMenu;
     private JMenuItem btn;
-    
     private JButton addEventButton;
-    
-    private static CommandManager invoker;
-    private static EventPanel eventPanel;
+    private EventPanel eventPanel;
     
    public Frame()
    { 
-	   invoker = new CommandManager();
 	   eventPanel = new EventPanel();
 	   ch = new Calendar();
 	   ch.setDate(new Date());
 	   card = new DayCard();
+	   slider = new JSlider(0,7,0);
+	   
 	   getContentPane().setLayout(new GridBagLayout());
 	   
 	   GridBagConstraints c = new GridBagConstraints();
@@ -80,7 +79,8 @@ public class Frame extends JFrame{
 	   c.gridy = 1;
 	   c.weightx = 0;
 	   c.weighty = 0;
-	   Action addEvent = new AddEventAction("Add Event");
+	   
+	   Action addEvent = new ShowAddEventUIAction("Add Event");
 	   addEventButton = new JButton(addEvent);
 	   getContentPane().add(addEventButton, c);
 	   
@@ -97,7 +97,7 @@ public class Frame extends JFrame{
 	   menuBar = new JMenuBar();
 	   fileMenu = new JMenu("File");
 	   
-	   addEventItem = new JMenuItem(new AddEventAction("Add new event"));
+	   addEventItem = new JMenuItem(addEvent);
 	   
 	   close = new JMenuItem("Exit");
 	   close.addActionListener(new ActionListener() {
@@ -129,7 +129,7 @@ public class Frame extends JFrame{
 		
 		   @Override
 		   public void actionPerformed(ActionEvent arg0) {
-			   invoker.unexecuteCommand();
+			   CalendarApp.getInvoker().unexecuteCommand();
 			
 		   }
 	   });
@@ -142,7 +142,7 @@ public class Frame extends JFrame{
 		
 		   @Override
 		   public void actionPerformed(ActionEvent e) {
-			   invoker.reexecuteCommand();
+			   CalendarApp.getInvoker().reexecuteCommand();
 		   }
 	   });
 	   
@@ -199,23 +199,15 @@ public class Frame extends JFrame{
    		else{JOptionPane.showMessageDialog(this,"not support");}
    	}
   
-   	public static EventPanel getEventPanel() {
+   	public EventPanel getEventPanel() {
    		return eventPanel;
    	}
 
-   	public static void setUndo(boolean state){
+   	public void setUndo(boolean state){
    		undo.setEnabled(state); 
    	}
  
-   	public static void setRedo(boolean state){
+   	public void setRedo(boolean state){
    		redo.setEnabled(state);  
-   	}
- 
-   	public static CommandManager getInvoker(){
-   		return invoker;
-   	}
-
-   	public static void main(String[] args) {
-   		Frame frame = new Frame();     
    	}
 }

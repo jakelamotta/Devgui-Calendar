@@ -1,10 +1,10 @@
 package Controller;
 
+import Application.CalendarApp;
 import Model.EventTable;
-import View.Frame;
 
 /**
- * The concrete command that implements Command interface
+ * The concrete command that handles addition of a new event
  * @author Deha
  *
  */
@@ -14,23 +14,31 @@ public class AddNewEventCommand implements Command {
 	
 	/**
 	 * Constructor
-	 * @param n
+	 * @param n the new event that will be added
 	 */
 	public AddNewEventCommand(EventTable n) {
 		newEvent = n;
 	}
 
-//Command interface's methods are overridden to enable undo/redo functionality
+	/**
+	 * Adds the new event to the table
+	 */
 	@Override
 	public void execute() {
-		 Frame.getEventPanel().addEventToTable(newEvent);
+		CalendarApp.getFrame().getEventPanel().addEventToTable(newEvent);
 	}
 
+	/**
+	 * Removes the added event from the table
+	 */
 	@Override
 	public void unexecute() {
-		Frame.getEventPanel().getModel().removeRow(Frame.getEventPanel().getModel().getRowCount()-1);
+		CalendarApp.getFrame().getEventPanel().getModel().removeRow(CalendarApp.getFrame().getEventPanel().getModel().getRowCount()-1);
 	}
 
+	/**
+	 * Adds the removed event back to the table
+	 */
 	@Override
 	public void reexecute() {
 		execute();

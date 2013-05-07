@@ -1,20 +1,21 @@
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import Controller.AddNewEventCommand;
-import Model.EventTable;
+import Controller.AddEventAction;
 
 /**
  * The GUI that appears when the Add event button is pressed.
@@ -25,7 +26,16 @@ import Model.EventTable;
 public class AddEventGUI extends JFrame
 {
 	private static final long serialVersionUID = -6918601926489258608L;
-
+	
+	private JTextField eventField;
+	private JTextField dateField;
+	private JTextField categoryField;
+	private JSlider priority;
+	private JPanel mainPanel;
+	private JPanel editPanel;
+	private JPanel buttonPanel;
+	private JButton addEventButton;
+	
 	
 	/**
 	 * The constructor that is run when the "Add event button" is pressed.
@@ -34,11 +44,11 @@ public class AddEventGUI extends JFrame
 	 * to create a new task, and add it to the JTable/xml in the EventPanel.
 	 */
 	public AddEventGUI(){
-		JTextField eventField = new JTextField(20);
-		JTextField dateField = new JTextField(20);
-		JTextField categoryField = new JTextField(10);
+		eventField = new JTextField(20);
+		dateField = new JTextField(20);
+		categoryField = new JTextField(10);
 		
-		JSlider priority = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+		priority = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
 	
 		priority.setBackground(new Color(0, 255, 0));
 		priority.setMinorTickSpacing(25);
@@ -51,7 +61,7 @@ public class AddEventGUI extends JFrame
 			}
 		});
 		
-		JPanel editPanel = new JPanel();
+		editPanel = new JPanel();
 		
 		editPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -90,34 +100,39 @@ public class AddEventGUI extends JFrame
 		editPanel.add(prio,c);
 		c.gridx = 1;
 		editPanel.add(priority, c);
+
+		buttonPanel = new JPanel(new GridBagLayout());
+		Action addEvent = new AddEventAction("Add Event", this);
+		addEventButton = new JButton(addEvent);
+		c.fill = (GridBagConstraints.HORIZONTAL);
+		c.gridx = 1;
+		c.gridy = 0;
+		buttonPanel.add(addEventButton,c);
 		
-		String[] options = {"OK","Cancel"};
-		
-		int result = JOptionPane.showOptionDialog(null, editPanel, "Add Event",
-		 								JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
-		
-		//A new event is added to the Table of Events in EventPanel
-		if (result == JOptionPane.OK_OPTION) {
-				//check if the task name is provided
-				 if (eventField.getText().equals(""))
-					{
-						 JOptionPane.showMessageDialog(this,
-					               "Enter an event name.");
-						 new AddEventGUI();
-					}
-				 else
-				 {
-				//adds the event to the table 
-				 EventTable t = new EventTable(new Boolean(false) ,new Boolean(false),eventField.getText(),
-						 					dateField.getText(),categoryField.getText(),  
-											priority.getValue(),  "Edit", "Delete");
-				
-				 AddNewEventCommand addNewEventCommand = new AddNewEventCommand(t);
-				Frame.getInvoker().executeCommand(addNewEventCommand );
-				 } 
-		
-		}
-	}
+		mainPanel = new JPanel(new BorderLayout());
+		mainPanel.add(editPanel,BorderLayout.CENTER);
+		mainPanel.add(buttonPanel,BorderLayout.SOUTH);
 	
+		setSize(330,150);
+		setResizable(false);
+		setContentPane(mainPanel);
+		setVisible(true);
+	}
+
+	public JTextField getEventField() {
+		return eventField;
+	}
+
+	public JTextField getDateField() {
+		return dateField;
+	}
+
+	public JTextField getCategoryField() {
+		return categoryField;
+	}
+
+	public JSlider getPriority() {
+		return priority;
+	}	
 
 }
