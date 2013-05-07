@@ -2,6 +2,7 @@ package Model;
 
 /**
  * The Event class where the attributes of an Event can be saved to an XML file by using XMLHandler.java
+ * (will be developed more...)
  * @author Deha
  * 
  */

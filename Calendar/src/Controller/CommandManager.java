@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import View.Frame;
 
+/**
+ * The invoker class that controls the Command methods
+ * @author Deha
+ *
+ */
 public class CommandManager {
 
 	private ArrayList<Command> commandList;

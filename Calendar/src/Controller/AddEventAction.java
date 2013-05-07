@@ -6,7 +6,7 @@ import javax.swing.Action;
 import View.AddEventGUI;
 
 /**
- * The Action that instantiates the AddTaskGUI
+ * The Action that instantiates the AddEventGUI
  * @author Deha
  *
  */

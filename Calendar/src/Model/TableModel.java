@@ -125,10 +125,10 @@ public class TableModel extends AbstractTableModel {
 	    }
 	 
 	 /**
-	 * Gets collects the relevant properties of a task from a row in the table,
-	 * creates a Task object with the collected properties and returns it.
+	 * Gets collects the relevant properties of a event from a row in the table,
+	 * creates a Event object with the collected properties and returns it.
 	 * @param row the row being queried
-	 * @return The Task of the specified row.
+	 * @return The Event of the specified row.
 	 */
 	 
 	 public Event getTaskFromRow(int row) {

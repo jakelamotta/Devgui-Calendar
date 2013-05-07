@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 import Model.Event;
 
 /**
- * The Task class creates a JPanel to be added to the 
- * list of tasks in the TaskPanel class.
+ * The Event class creates a JPanel to be added to the 
+ * list of events in the EventPanel class.
  * @author Deha
  *
  */
@@ -32,7 +32,7 @@ public class EventGUI extends JPanel {
 	
 	/**
 	 * The constructor that calls createPanel. 
-	 * @param task The Task is to be added to the JList of Tasks
+	 * @param task The Event is to be added to the JList of Tasks
 	 */
 	public EventGUI(Event event) {
 		createPanel(event);

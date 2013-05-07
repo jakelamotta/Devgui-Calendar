@@ -17,7 +17,7 @@ import Model.TableModel;
 * like edit, delete, change to done/pending state
 * 
 * 
-* Current State: edit and delete will be added
+* Current State: edit and delete will be added, to be improved...
 * @author Deha
 * 
 */
@@ -89,6 +89,10 @@ public class EventPanel extends JPanel {
 		return this.model;
 	}
 	
+	/**
+	 * Adds the new event to the table
+	 * @param t
+	 */
 	public void addEventToTable(EventTable t) {
 		this.model.addRow(new Object[]{new Boolean(false), new Boolean(false),
 						  t.getEventName(), t.getEventDueDate(), 
@@ -96,6 +100,10 @@ public class EventPanel extends JPanel {
 						  "Edit", "Delete"});
 	}
 
+	/**
+	 * Getter method for the model of the table
+	 * @return model the model of the table
+	 */
 	public TableModel getModel() {
 		return model;
 	}

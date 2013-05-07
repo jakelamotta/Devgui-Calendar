@@ -17,7 +17,7 @@ import Controller.AddNewEventCommand;
 import Model.EventTable;
 
 /**
- * The GUI that appears when the Add task button is pressed.
+ * The GUI that appears when the Add event button is pressed.
  * @author Deha
  *
  */
@@ -28,13 +28,13 @@ public class AddEventGUI extends JFrame
 
 	
 	/**
-	 * The constructor that is run when the "Add task button" is pressed.
+	 * The constructor that is run when the "Add event button" is pressed.
 	 * It sets up a JPanel with JTextField to get data about a new task.
 	 * When "OK" is pressed the data in the text fields are fetched and used
-	 * to create a new task, and add it to the JTable/xml in the TaskPanel.
+	 * to create a new task, and add it to the JTable/xml in the EventPanel.
 	 */
 	public AddEventGUI(){
-		JTextField taskField = new JTextField(20);
+		JTextField eventField = new JTextField(20);
 		JTextField dateField = new JTextField(20);
 		JTextField categoryField = new JTextField(10);
 		
@@ -65,7 +65,7 @@ public class AddEventGUI extends JFrame
 		name.setHorizontalAlignment(JLabel.RIGHT);
 		editPanel.add(name,c);
 		c.gridx = 1;
-		editPanel.add(taskField, c);
+		editPanel.add(eventField, c);
 		
 		c.gridx = 0;
 		c.gridy = 2;
@@ -96,21 +96,19 @@ public class AddEventGUI extends JFrame
 		int result = JOptionPane.showOptionDialog(null, editPanel, "Add Event",
 		 								JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
 		
-		//A new task is added to the Table of Tasks in TaskPanel
+		//A new event is added to the Table of Events in EventPanel
 		if (result == JOptionPane.OK_OPTION) {
 				//check if the task name is provided
-				 if (taskField.getText().equals(""))
+				 if (eventField.getText().equals(""))
 					{
-						 //JOptionPane.showMessageDialog(
-					               //Main.getView().getTaskPanel().table, TaskomaticResourceBundle.getLanguageResourceBundle().getString("WarningMessage"),
-					                //"Warning",
-					                //JOptionPane.WARNING_MESSAGE);
+						 JOptionPane.showMessageDialog(this,
+					               "Enter an event name.");
 						 new AddEventGUI();
 					}
 				 else
 				 {
 				//adds the event to the table 
-				 EventTable t = new EventTable(new Boolean(false) ,new Boolean(false),taskField.getText(),
+				 EventTable t = new EventTable(new Boolean(false) ,new Boolean(false),eventField.getText(),
 						 					dateField.getText(),categoryField.getText(),  
 											priority.getValue(),  "Edit", "Delete");
 				

@@ -2,6 +2,7 @@ package Model;
 
 /**
  * The TaskTable class where the attributes of a Task can be saved to an XML file.
+ * (will be developed more...)
  * @author Deha
  * 
  */
@@ -32,13 +33,13 @@ public class EventTable {
 	}
 	
 	/**
-	 * Initiate the TaskTable
-	 * @param done pending or done task element button
-	 * @param check check mark for the task
-	 * @param taskName the name of Task
-	 * @param taskDueDate the due date of Task
-	 * @param taskCategory the category of Task
-	 * @param taskPriority the priority of Task
+	 * Initiate the EventTable
+	 * @param done pending or done event element button
+	 * @param check check mark for the event
+	 * @param eventName the name of Event
+	 * @param eventDueDate the due date of Event
+	 * @param eventCategory the category of Event
+	 * @param eventPriority the priority of Event
 	 * @param button1 edit button
 	 * @param button2 delete button
 	 */
@@ -88,16 +89,16 @@ public class EventTable {
 	}
 	
 	/**
-	 * Getter method for Task name
-	 * @return taskName the name of the task
+	 * Getter method for Event name
+	 * @return taskName the name of the event
 	 */
 	public String getEventName() {
 		return eventName;
 	}
 
 	/**
-	 * Setter method for Task name
-	 * @param taskName the name of the task
+	 * Setter method for Event name
+	 * @param taskName the name of the event
 	 */
 	public void setEventName(String taskName) {
 		if (taskName.equals(""))  {
@@ -107,16 +108,16 @@ public class EventTable {
 	}
 
 	/**
-	 * Getter method for Task due date
-	 * @return taskDueDate the due date of Task
+	 * Getter method for Event due date
+	 * @return taskDueDate the due date of Event
 	 */
 	public String getEventDueDate() {
 		return eventDueDate;
 	}
 
 	/**
-	 * Setter method for Task due date
-	 * @param taskDueDate the due date of Task
+	 * Setter method for Event due date
+	 * @param taskDueDate the due date of Event
 	 */
 	public void setEventDueDate(String taskDueDate) {
 		if (taskDueDate.equals(""))  {
@@ -126,16 +127,16 @@ public class EventTable {
 	}
 
 	/**
-	 * Getter method for Task Category
-	 * @return taskCategory the category of Task
+	 * Getter method for Event Category
+	 * @return taskCategory the category of Event
 	 */
 	public String getEventCategory() {
 		return eventCategory;
 	}
 
 	/**
-	 * Setter method for Task category
-	 * @param taskCategory the category of Task
+	 * Setter method for Event category
+	 * @param taskCategory the category of Event
 	 */
 	public void setEventCategory(String taskCategory) {
 		if (taskCategory.equals(""))  {
@@ -145,16 +146,16 @@ public class EventTable {
 	}
 
 	/**
-	 * Getter method for Task priority
-	 * @return taskPriority the priority of Task
+	 * Getter method for Event priority
+	 * @return taskPriority the priority of Event
 	 */
 	public int getEventPriority() {
 		return eventPriority;
 	}
 
 	/**
-	 * Setter method for Task priority
-	 * @param taskPriority the priority of Task
+	 * Setter method for Event priority
+	 * @param taskPriority the priority of Event
 	 */
 	public void setEventPriority(int taskPriority) {
 		this.eventPriority = taskPriority;
