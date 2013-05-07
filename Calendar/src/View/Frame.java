@@ -5,22 +5,17 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Menu;
-import java.awt.MenuBar;
-import java.awt.MenuItem;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Date;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -34,110 +29,193 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Controller.AddEventAction;
+import Controller.CommandManager;
+
 /**
  *
  * @author bigbigguoguo
+ * @author Deha
  */
 public class Frame extends JFrame{
-    JSlider slider =new JSlider(0,7,0);
-    JMenuBar menuBar = new JMenuBar();;
-    JMenu fileMenu = new JMenu("File");
-    JMenu editMenu = new JMenu("Edit");
-    JMenu setMenu = new JMenu("Setting");
-    JMenuItem btn;
-    JMenuItem close;
+    private Calendar ch;
+    private DayCard card;
+	private JSlider slider =new JSlider(0,7,0);
+    private JMenuBar menuBar;
+    private JMenu fileMenu;
+    private JMenuItem addEventItem;
+    private JMenuItem close;
+    private JMenu editMenu;
+    private static JMenuItem undo;
+    private static JMenuItem redo;
+    private JMenu setMenu;
+    private JMenuItem btn;
+    
+    private JButton addEventButton;
+    
+    private static CommandManager invoker;
+    private static EventPanel eventPanel;
     
    public Frame()
    { 
-    
-      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
-      this.setPreferredSize(new Dimension(800, 400));     
+	   invoker = new CommandManager();
+	   eventPanel = new EventPanel();
+	   ch = new Calendar();
+	   ch.setDate(new Date());
+	   card = new DayCard();
+	   getContentPane().setLayout(new GridBagLayout());
+	   
+	   GridBagConstraints c = new GridBagConstraints();
+	   c.fill = GridBagConstraints.BOTH;
+	   c.weightx = 2;
+	   c.weighty = 2;
+	   c.gridx = 0;
+	   c.gridy = 0;	   
+	   getContentPane().add(ch, c);
+	   
+	   c.gridx = 1;
+	   getContentPane().add(card, c);
+	   
+	   c.gridx = 0;
+	   c.gridy = 1;
+	   c.weightx = 0;
+	   c.weighty = 0;
+	   Action addEvent = new AddEventAction("Add Event");
+	   addEventButton = new JButton(addEvent);
+	   getContentPane().add(addEventButton, c);
+	   
+	   c.weightx = 1;
+	   c.weighty = 1;
+	   c.gridwidth = 2;
+	   c.gridy = 2;
+	   getContentPane().add(eventPanel, c); 
+	   this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   this.setPreferredSize(new Dimension(900, 600));     
+	   this.setUndecorated(true);
       
-      this.setUndecorated(true);
-      
-      btn=new JMenuItem("Window Transparency");
-    btn.addActionListener(new ActionListener() {
-
-          @Override
-          public void actionPerformed(ActionEvent ae) {
-            setOpacity();
-          }
-       });
-
-    
-   
-    close = new JMenuItem("Exit");
-    close.addActionListener(new ActionListener() {
+	   //********** Menu **********
+	   menuBar = new JMenuBar();
+	   fileMenu = new JMenu("File");
+	   
+	   addEventItem = new JMenuItem(new AddEventAction("Add new event"));
+	   
+	   close = new JMenuItem("Exit");
+	   close.addActionListener(new ActionListener() {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			System.exit(0);
 		}
-	});
-    
-    this.editMenu.add(new JMenuItem("Undo"));
-    this.editMenu.add(new JMenuItem("Redo"));
-    this.setMenu.add(btn);
-    this.menuBar.add(fileMenu);
-    this.fileMenu.add(close);
-    this.menuBar.add(editMenu);
-    this.menuBar.add(setMenu);
-    this.setJMenuBar(this.menuBar);
-    this.setVisible(true);     
-   }
-     
-   /**
-    * Adjust Transparency
-    */
-   public void setOpacity(){
-  JDialog dialog;
-  dialog = new JDialog(this,"Adjust Transparency",true);
-  dialog.setSize(270,60);
-  dialog.setResizable(false);
-  Dimension thisSize=this.getSize();
-  Point thisPoint=this.getLocation();
-  Dimension diaSize=dialog.getSize();
-  dialog.setLocation(50,50);
-  JLabel label=new JLabel();
-  
-  slider.addChangeListener(new ChangeListener(){
+	   });
+	   
+	   setMenu = new JMenu("Settings");
+      
+	   btn=new JMenuItem("Window Transparency");
+	   btn.addActionListener(new ActionListener() {
+
           @Override
-   public void stateChanged(ChangeEvent ce) {
-      slider();
+          public void actionPerformed(ActionEvent ae) {
+            setOpacity();
           }
-  });
-  JPanel upPanel=new JPanel(new FlowLayout());
-  upPanel.add(label);
-  upPanel.add(slider);
-  dialog.add(upPanel,BorderLayout.CENTER);
-  dialog.setVisible(true);
-  }
+       	});
    
-   
-   
-public void slider(){
-  double value=slider.getValue()/10.0;
-  if(
-  com.sun.awt.AWTUtilities.isWindowOpaque(this)){
-  com.sun.awt.AWTUtilities.setWindowOpacity(this, (float)(1-value));
-  slider.setCursor(new Cursor(Cursor.HAND_CURSOR));
- }
-  else{JOptionPane.showMessageDialog(this,"not support");}
-     }
+	   editMenu = new JMenu("Edit");
+	
+	   //Undo
+	   undo = new JMenuItem("Undo");
+	   undo.setEnabled(false);
+	
+	   undo.addActionListener(new ActionListener() {
+		
+		   @Override
+		   public void actionPerformed(ActionEvent arg0) {
+			   invoker.unexecuteCommand();
+			
+		   }
+	   });
+	
+      //Redo
+	   redo = new JMenuItem("Redo");
+	   redo.setEnabled(false);
+	
+	   redo.addActionListener(new ActionListener() {
+		
+		   @Override
+		   public void actionPerformed(ActionEvent e) {
+			   invoker.reexecuteCommand();
+		   }
+	   });
+	   
+	   this.fileMenu.add(addEventItem);
+	   this.fileMenu.add(close);
+	   this.menuBar.add(fileMenu);
+      
+	   editMenu.add(undo);
+	   editMenu.add(redo);
+	   menuBar.add(editMenu);
+      
+	   this.setMenu.add(btn);
+	   this.menuBar.add(setMenu);
+      
+	   this.setJMenuBar(this.menuBar);
+      
+	   this.setVisible(true);    
+	   this.pack();
+   	}
+     
+   	/**
+ 	* Adjust Transparency
+ 	*/
+   	public void setOpacity(){
+	   JDialog dialog;
+	   dialog = new JDialog(this,"Adjust Transparency",true);
+	   dialog.setSize(270,60);
+	   dialog.setResizable(false);
+	   Dimension thisSize=this.getSize();
+	   Point thisPoint=this.getLocation();
+	   Dimension diaSize=dialog.getSize();
+	   dialog.setLocation(50,50);
+	   JLabel label=new JLabel();
   
+	   slider.addChangeListener(new ChangeListener(){
+          @Override
+          public void stateChanged(ChangeEvent ce) {
+        	  slider();
+          }
+	   });
+	   JPanel upPanel=new JPanel(new FlowLayout());
+	   upPanel.add(label);
+	   upPanel.add(slider);
+	   dialog.add(upPanel,BorderLayout.CENTER);
+	   dialog.setVisible(true);
+   	}
+    
+   	public void slider(){
+   		double value=slider.getValue()/10.0;
+   		if(com.sun.awt.AWTUtilities.isWindowOpaque(this)){
+   			com.sun.awt.AWTUtilities.setWindowOpacity(this, (float)(1-value));
+   			slider.setCursor(new Cursor(Cursor.HAND_CURSOR));
+   		}
+   		else{JOptionPane.showMessageDialog(this,"not support");}
+   	}
+  
+   	public static EventPanel getEventPanel() {
+   		return eventPanel;
+   	}
 
+   	public static void setUndo(boolean state){
+   		undo.setEnabled(state); 
+   	}
+ 
+   	public static void setRedo(boolean state){
+   		redo.setEnabled(state);  
+   	}
+ 
+   	public static CommandManager getInvoker(){
+   		return invoker;
+   	}
 
-public static void main(String[] args) {
- Frame frame = new Frame();
- Calendar ch = new Calendar();
- ch.setDate(new Date());
- DayCard card = new DayCard();
- frame.getContentPane().add(ch, BorderLayout.CENTER);
- frame.getContentPane().add(card, BorderLayout.EAST);
- //fframe.setUndecorated(true);
-
-frame.pack();
-frame.setVisible(true);     
-}
+   	public static void main(String[] args) {
+   		Frame frame = new Frame();     
+   	}
 }
