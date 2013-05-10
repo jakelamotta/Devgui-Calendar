@@ -97,10 +97,13 @@ public class DayCard extends JPanel{
      * @param g 
      */
     @Override
-    public void paintComponent(Graphics g){        
+    public void paintComponent(Graphics g){ 
+    	
+    	super.paintComponent(g);
+    	
         Graphics temp = g.create();      
                 
-        temp.setColor(Color.white);
+        temp.setColor(Color.black);
         
         temp.drawString("Temperature in Uppsala: " + String.valueOf(this.weather.getAvgTemp()) + "C", 30, 30);
         
