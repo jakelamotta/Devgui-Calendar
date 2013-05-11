@@ -32,9 +32,8 @@ import javax.swing.border.BevelBorder;
  */
 public class DayCard extends JPanel{
     
-    private int pic = 0;
     private WeatherAPI weather;
-    private ArrayList<AnimationEngine> engines;
+    private AnimationEngine engine;
     private Weather current;
     private GregorianCalendar date;
     
@@ -57,7 +56,7 @@ public class DayCard extends JPanel{
         weather.setWeather(new GregorianCalendar());
         setPreferredSize(new Dimension(300,400));
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
-        this.engines = new ArrayList();
+        this.engine = new AnimationEngine(this);
         
         //attempt to get weather information
         try {
@@ -70,26 +69,14 @@ public class DayCard extends JPanel{
         
         setTemperature();
         
-        //Adds and starts the animation engines
-        addEngine(new AnimationEngine(this));
-        startEngines();
+        startEngine(engine);
     }
     
     
-    /**
-     * Function that iterates over the animation engines in the list
-     * and starts these. Each engine runs as its own thread.
-     */
-    private void startEngines(){
-        Iterator iterator = this.engines.iterator();
-        AnimationEngine temp;
-        Thread thread;
+    private void startEngine(AnimationEngine engine){
+        Thread thread = new Thread(engine);
+        thread.start();            
         
-        while(iterator.hasNext()){
-            temp = (AnimationEngine)iterator.next();
-            thread = new Thread(temp);
-            thread.start();            
-        }
     }
     
     /**
@@ -104,129 +91,11 @@ public class DayCard extends JPanel{
         
         temp.drawString("Temperature in Uppsala: " + String.valueOf(this.weather.getAvgTemp()) + "C", 30, 30);
         
-        //Draw animation according to current weather.
-        if(this.current == Weather.CLOUDY){
-            paintCloud(temp);
-        }
-        else if(this.current == Weather.RAINY){
-        
-            paintRain(temp,pic);
-        }
-        else if(this.current == Weather.SUNNY){
-            try {
-                paintSun(temp,pic);
-            } catch (IOException ex) {
-                Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        this.engine.drawWeatherAnimation(temp,this.current);
         
         temp.dispose();
     }
-
-    /**
-     * Paints sun representing sunny weather.
-     * @param g Graphics object to be used
-     * @param i Which of the image to be used
-     * @throws IOException 
-     */
-    public void paintSun(Graphics g, int i) throws IOException {
-        BufferedImage img = null;
-        
-        try{
-            if(i==0){
-                //img = ImageIO(this.getClass().getResource("addtask.jpg"));
-                img = ImageIO.read(this.getClass().getResource("sun.jpg"));
-            }
-        else if(i==1){
-            img = ImageIO.read(this.getClass().getResource("sun2.jpg"));
-        }
-        
-        }
-        catch(IOException e){
-            System.out.println(e.toString());
-        }
-        
-        g.drawImage(img,250,20,30,30,null);
-        
-        //Update choice of images (switching between 0 and 1, animation shifts 
-        //between two pictures to create a shining sun
-        pic = (pic-1)*(pic-1);
-    }
-
-    public void paintCloud(Graphics g) {
-        BufferedImage img = null;
-        
-        try{
-            img = ImageIO.read(this.getClass().getResource("clody.png"));
-        }
-        catch(IOException e){
-            System.out.println(e.toString());
-        }
-        
-        g.drawImage(img,250,20,30,30,null);
-    }
     
-    /**
-     * Function that draw a rain animation
-     * @param g Graphics object to be used.
-     * @param i i is the number used to choose between pictures to draw
-     */
-    public void paintRain(Graphics g, int i){
-        BufferedImage img = null;
-        
-        try{
-        if(i==0){
-            img = ImageIO.read(this.getClass().getResource("rainpng.png"));
-        }
-        else if(i==1){
-            img = ImageIO.read(this.getClass().getResource("rainpng2.png"));
-        }
-        else if(i==2){
-            img = ImageIO.read(this.getClass().getResource("rainpng3.png"));
-        }
-        
-        }
-        catch(IOException e){
-            System.out.println(e.toString());
-        }
-        
-        g.drawImage(img,250,20,30,30,null);
-        
-        //Update choice of images (switching between 0,1 and 2, animation shifts 
-        //between three pictures to create a rain animation
-        if(pic == 2){
-            pic = 0;
-        }
-        else{
-            pic += 1;
-        }
-    }
-    
-    /**
-     * Function that draw a snow animation
-     * @param g Graphics object to be used.
-     */
-    public void paintSnow(Graphics g){
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(this.getClass().getResource("snow.jpg"));
-        }       
-        catch (IOException e) {
-        }
-        g.drawImage(img,280, pic, 30, 30,null);
-    }
-    
-    /**
-     * Adds an animationengine to the list of engines
-     * @param eng 
-     */
-    private void addEngine(AnimationEngine eng){
-        this.engines.add(eng);
-    }
-    
-    /**
-     * Function that updates the current weather
-     */
     /**********************************************************
      ********* Getters and setters ****************************
      **********************************************************/
