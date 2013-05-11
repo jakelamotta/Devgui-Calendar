@@ -20,10 +20,11 @@ public class AnimationEngine implements Runnable, Drawable{
     private int pic = 0;
     private JPanel panel;
     private int sleepTime = 100;
-    private boolean showAnimation;
+    private static boolean showAnimation;
 
     public AnimationEngine(JPanel comp){
         this.panel = comp;
+        this.showAnimation = true;
     }
     
 
@@ -47,21 +48,30 @@ public class AnimationEngine implements Runnable, Drawable{
     }
     
     public void drawWeatherAnimation(Graphics g, Weather weather) {
-        //Draw animation according to current weather.
-        if(weather == Weather.CLOUDY){
-            paintCloud(g);
-        }
-        else if(weather == Weather.RAINY){
-        
-            paintRain(g,pic);
-        }
-        else if(weather == Weather.SUNNY){
-            try {
-                paintSun(g,pic);
-            } catch (IOException ex) {
-                Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+        System.out.println(showAnimation); 
+        if(showAnimation){
+            switch(weather){
+                default:
+                    break;
+                case CLOUDY:
+                    paintCloud(g);
+                    break;
+                case RAINY:
+                    paintRain(g,pic);
+                    break;
+                case SUNNY:
+                    try {
+                        paintSun(g,pic);
+                    } 
+                    catch (IOException ex) {
+                        Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                case SNOWY:
+                    paintSnow(g);
+                    break;
             }
-        }
+         }
     }
     
     /**
@@ -164,4 +174,8 @@ public class AnimationEngine implements Runnable, Drawable{
     public void setSleeptime(int newTime){
         this.sleepTime = newTime;
     }    
+
+    protected static void setShowAnimation(boolean showAni) {
+        showAnimation = showAni;
+    }
 }

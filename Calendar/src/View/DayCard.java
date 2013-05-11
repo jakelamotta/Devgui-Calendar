@@ -6,15 +6,11 @@ import Model.WeatherAPI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
@@ -23,11 +19,6 @@ import javax.swing.border.BevelBorder;
  * 
  * Currently only works with todays date, obv need to get specific date from
  * calendar selection
- * 
- * All the animations should later be put into the animation engine
- * 
- * Animations arent done yet
- * 
  * @author Kristian
  */
 public class DayCard extends JPanel{
@@ -72,7 +63,10 @@ public class DayCard extends JPanel{
         startEngine(engine);
     }
     
-    
+    /**
+     * Function that starts a new thread for the input animationengine
+     * @param engine 
+     */
     private void startEngine(AnimationEngine engine){
         Thread thread = new Thread(engine);
         thread.start();            
@@ -85,7 +79,6 @@ public class DayCard extends JPanel{
      */
     @Override
     public void paintComponent(Graphics g){ 
-    	
     	super.paintComponent(g);
     	
         Graphics temp = g.create();      

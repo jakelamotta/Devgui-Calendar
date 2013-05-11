@@ -46,17 +46,17 @@ public class TableModel extends AbstractTableModel {
 	
     public void addRow(Object[] values){
     	EventTable t = new EventTable();
-    	t.setDone((boolean)values[0]);
-    	t.setCheck((boolean)values[1]);
+    	//t.setDone((boolean)values[0]);
+    	//t.setCheck((boolean)values[1]);
     	t.setEventName((String) values[2]);
     	t.setEventDueDate((String) values[3]);
-	  	t.setEventCategory((String) values[4]);
-	   	t.setEventPriority((int) values[5]);
-	   	t.setbutton1((String) values[6]);
-	    t.setbutton2((String) values[7]);
-	    data.add(t);
+	t.setEventCategory((String) values[4]);
+	//t.setEventPriority((int) values[5]);
+	t.setbutton1((String) values[6]);
+	t.setbutton2((String) values[7]);
+	data.add(t);
 	    
-		fireTableDataChanged();
+        fireTableDataChanged();
 	}
 
 	/**

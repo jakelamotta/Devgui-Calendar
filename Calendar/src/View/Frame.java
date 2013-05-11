@@ -31,6 +31,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Application.CalendarApp;
+import Controller.DisableAnimationAction;
+import Controller.EnableAnimationAction;
 import Controller.ShowAddEventUIAction;
 
 /**
@@ -113,11 +115,11 @@ public class Frame extends JFrame{
 	   btn=new JMenuItem("Window Transparency");
 	   btn.addActionListener(new ActionListener() {
 
-          @Override
-          public void actionPerformed(ActionEvent ae) {
-            setOpacity();
-          }
-       	});
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 setOpacity();
+                }
+           });
    
 	   editMenu = new JMenu("Edit");
 	
@@ -152,6 +154,8 @@ public class Frame extends JFrame{
       
 	   editMenu.add(undo);
 	   editMenu.add(redo);
+           editMenu.add(new EnableAnimationAction());
+           editMenu.add(new DisableAnimationAction());
 	   menuBar.add(editMenu);
       
 	   this.setMenu.add(btn);
