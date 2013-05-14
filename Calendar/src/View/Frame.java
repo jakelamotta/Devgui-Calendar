@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package View;
 
 import java.awt.BorderLayout;
@@ -37,7 +34,8 @@ import Controller.ShowAddEventUIAction;
 
 /**
  *
- * @author bigbigguoguo
+ * @author Guo
+ * @author Qi
  * @author Deha
  */
 public class Frame extends JFrame{
@@ -92,7 +90,7 @@ public class Frame extends JFrame{
 	   c.gridy = 2;
 	   getContentPane().add(eventPanel, c); 
 	   this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	   this.setPreferredSize(new Dimension(900, 600));     
+	   this.setPreferredSize(new Dimension(900, 630));     
 	   this.setUndecorated(true);
       
 	   //********** Menu **********
@@ -112,6 +110,7 @@ public class Frame extends JFrame{
 	   
 	   setMenu = new JMenu("Settings");
       
+           //Set Transparency
 	   btn=new JMenuItem("Window Transparency");
 	   btn.addActionListener(new ActionListener() {
 

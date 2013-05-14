@@ -20,26 +20,26 @@ public class Daymousemovelistener extends MouseMotionAdapter {
     private int d;
     private int week;
     public void getxpoint(float x,float y){
-if((63.5-22.5<x)&&(x<63.5+22.5)){
+if((108.5-22.5<x)&&(x<108.5+22.5)){
                  d=1;
                  getypoint(y);}
-if((108.5-22.5<x)&&(x<108.5+22.5)){
+if((153.5-22.5<x)&&(x<153.5+22.5)){
                  d=2;
                  getypoint(y);}
-if((153.5-22.5<x)&&(x<153.5+22.5)){
+if((198.5-22.5<x)&&(x<198.5+22.5)){
                  d=3;
                  getypoint(y);}
-if((198.5-22.5<x)&&(x<198.5+22.5)){
+if((243.5-22.5<x)&&(x<243.5+22.5)){
                  d=4;
                  getypoint(y);}
-if((243.5-22.5<x)&&(x<243.5+22.5)){
+if((288.5-22.5<x)&&(x<288.5+22.5)){
                  d=5;
                  getypoint(y);}
-if((288.5-22.5<x)&&(x<288.5+22.5)){
-                 d=6;
-                 getypoint(y);}
 if((333.5-22.5<x)&&(x<333.5+22.5)){
-                 d=7; 
+                 d=6; 
+                 getypoint(y);}
+if((378.5-22.5<x)&&(x<378.5+22.5)){
+                 d=7;
                  getypoint(y);}
 }
      public void getypoint(float y){

@@ -2,6 +2,9 @@ package View;
 
 import Controller.DayMouseListener;
 import Controller.Daymousemovelistener;
+import Controller.MouseListenerImpt;
+import Controller.MouseListenerPrevNext;
+import Controller.MouseListenerToday;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -26,7 +29,7 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-// test the pushing
+
  
   
 public class Calendar extends JPanel implements Runnable {
@@ -39,9 +42,12 @@ public class Calendar extends JPanel implements Runnable {
   public List<Drawable> DrawForDay = new ArrayList<Drawable>();
   public static List<Drawable> Selected = new ArrayList<Drawable>();
   public static List<Drawable> Selected2 = new ArrayList<Drawable>();
+  public static List<Drawable> MovedPrevNext = new ArrayList<Drawable>();
+  public static List<Drawable> MovedToday = new ArrayList<Drawable>();
+  public static List<Drawable> MovedImportant = new ArrayList<Drawable>();
   public  Calendar(){
       
-      setPreferredSize(new Dimension(380,400));
+      setPreferredSize(new Dimension(380,420));
       Thread thread = new Thread(this);
         thread.start();
   }
@@ -82,6 +88,7 @@ public class Calendar extends JPanel implements Runnable {
     //g.setColor(Color.white);
     //g.drawString(year.format(date), 235, 36);
   
+    addDrawable(new DrawButtons());
     addDrawable(new DrawYear());  
     addDrawable(new DrawMonth());
     addDrawable(new DrawWeek());
@@ -93,6 +100,9 @@ public class Calendar extends JPanel implements Runnable {
         }
     this.addMouseListener(new DayMouseListener());
    this.addMouseMotionListener(new Daymousemovelistener());
+   this.addMouseMotionListener(new MouseListenerPrevNext());
+   this.addMouseMotionListener(new MouseListenerToday());
+   this.addMouseMotionListener(new MouseListenerImpt());
      // temp.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));
     for (Drawable d: Calendars) {
         d.drawString(temp);
@@ -104,6 +114,15 @@ public class Calendar extends JPanel implements Runnable {
         d.drawString(temp);
     }
        for (Drawable d: Selected2) {
+        d.drawString(temp);
+    }
+        for (Drawable d: MovedPrevNext) {
+        d.drawString(temp);
+    }
+        for (Drawable d: MovedToday) {
+        d.drawString(temp);
+    }
+        for (Drawable d: MovedImportant) {
         d.drawString(temp);
     }
     Calendars.clear();

@@ -1,9 +1,12 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Draw the texts and rectangles of every date.
  */
 package View;
 
+/**
+ *
+ * @author Guo
+ */
 
 import Model.CalculateDate;
 import java.awt.AlphaComposite;
@@ -50,7 +53,7 @@ public class DrawDay implements Drawable {
         //else{
         
         g2.setColor(Color.darkGray);
-        g2.fillRoundRect((d-1) * 45 + 41, (week-1) * 45 + 76, 40, 40,10,10);
+        g2.fillRoundRect((d-1) * 45 + 86, (week-1) * 45 + 86, 40, 40,10,10);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN,0.05f));
         
         //calculatedate.upgradeCalendar();
@@ -59,7 +62,7 @@ public class DrawDay implements Drawable {
         g.setColor(Color.white); 
         g.setFont(Bday);
         present=day.format(calculatedate.gettime());
-             g.drawString(present, (d-1) * 45 + 46 + 4, (week-1) * 45 + 81 + 20);
+             g.drawString(present, (d-1) * 45 + 91 + 4, (week-1) * 45 + 91 + 20);
         calculatedate.upgradeCalendar();
     }
 }
