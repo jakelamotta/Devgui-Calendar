@@ -49,6 +49,7 @@ public class AnimationEngine implements Runnable, Drawable{
     
     public void drawWeatherAnimation(Graphics g, Weather weather) {
         if(showAnimation){
+        	weather = Weather.RAINY;
             switch(weather){
                 default:
                     break;
