@@ -130,10 +130,10 @@ public class AnimationEngine implements Runnable, Drawable{
             img = ImageIO.read(this.getClass().getResource("rainpng.png"));
         }
         else if(i==1){
-            img = ImageIO.read(this.getClass().getResource("rainpng2.jpg"));
+            img = ImageIO.read(this.getClass().getResource("rainpng2.png"));
         }
         else if(i==2){
-            img = ImageIO.read(this.getClass().getResource("rainpng3.jpg"));
+            img = ImageIO.read(this.getClass().getResource("rainpng3.png"));
         }
         
         }
@@ -141,7 +141,7 @@ public class AnimationEngine implements Runnable, Drawable{
             System.out.println(e.toString());
         }
         
-        g.drawImage(img,250,20,30,30,null);
+        g.drawImage(img,250,20,150,150,null);
         
         //Update choice of images (switching between 0,1 and 2, animation shifts 
         //between three pictures to create a rain animation
