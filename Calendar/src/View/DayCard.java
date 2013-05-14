@@ -5,6 +5,7 @@ import Enums.Weather;
 import Model.WeatherAPI;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -81,11 +82,20 @@ public class DayCard extends JPanel{
     public void paintComponent(Graphics g){ 
     	super.paintComponent(g);
     	
-        Graphics temp = g.create();      
+         Graphics temp = g.create();      
                 
-        temp.setColor(Color.white);
-        
-        temp.drawString("Temperature in Uppsala: " + String.valueOf(this.weather.getAvgTemp()) + "C", 30, 30);
+        temp.setColor(Color.lightGray);
+        Font Eweather=new Font("Century Gothic",Font.PLAIN,50);
+        temp.setFont(Eweather);
+        temp.drawString(String.valueOf(this.weather.getAvgTemp()), 50, 100);
+        Font Gweather=new Font("Century Gothic",Font.PLAIN,30);
+        temp.setFont(Gweather);
+        temp.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
+        temp.drawString("°C", 110, 100);
+        Font Fweather=new Font("Century Gothic",Font.PLAIN,26);
+        temp.setFont(Fweather);
+        temp.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
+        temp.drawString("Uppsala",50,150);
         
         this.engine.drawWeatherAnimation(temp,this.current);
         
