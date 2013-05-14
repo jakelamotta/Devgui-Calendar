@@ -48,7 +48,7 @@ public class DayCard extends JPanel{
         setPreferredSize(new Dimension(300,400));
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
         this.engine = new AnimationEngine(this);
-        
+        setBackground(new Color(51,51,51));
         //attempt to get weather information
         try {
             this.current = weather.getWeather(this.date);

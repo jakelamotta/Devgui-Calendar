@@ -130,10 +130,10 @@ public class AnimationEngine implements Runnable, Drawable{
             img = ImageIO.read(this.getClass().getResource("rainpng.png"));
         }
         else if(i==1){
-            img = ImageIO.read(this.getClass().getResource("rainpng2.png"));
+            img = ImageIO.read(this.getClass().getResource("rainpng2.jpg"));
         }
         else if(i==2){
-            img = ImageIO.read(this.getClass().getResource("rainpng3.png"));
+            img = ImageIO.read(this.getClass().getResource("rainpng3.jpg"));
         }
         
         }
