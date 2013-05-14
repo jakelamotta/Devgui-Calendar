@@ -113,7 +113,7 @@ public class AddEventGUI extends JFrame
 		mainPanel.add(editPanel,BorderLayout.CENTER);
 		mainPanel.add(buttonPanel,BorderLayout.SOUTH);
 	
-		setSize(330,150);
+		setSize(350,180);
 		setResizable(false);
 		setContentPane(mainPanel);
 		setVisible(true);
