@@ -16,7 +16,7 @@ public class DrawMouseEventToday implements Drawable {
      public void drawString(Graphics g){
      Graphics2D g2 = (Graphics2D) g.create();  
      
-    g2.setColor(Color.darkGray);
+    g2.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
         g2.fillRoundRect(336, 15, 60, 30,10,10);
         
         Font Dbutton=new Font("Century Gothic",Font.PLAIN,12);

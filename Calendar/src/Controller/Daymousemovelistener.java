@@ -69,8 +69,8 @@ if((278.5-22.5<y)&&(y<278.5+22.5)){
 if((323.5-22.5<y)&&(y<323.5+22.5)){
                  week=6;
                  Calendar.Selected2.clear();
- addDrawableForselected2(new DrawDayforselected2(d,week));
-}
+ addDrawableForselected2(new DrawDayforselected2(d,week));}
+
 
     }
       public void addDrawableForselected2(Drawable d){

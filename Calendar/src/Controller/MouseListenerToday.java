@@ -15,9 +15,10 @@ public class MouseListenerToday extends MouseMotionAdapter{
     
     public void getxpoint(float x,float y){
 if((336<x)&&(x<396)&&(15<y)&&(y<45))
-  Calendar.MovedToday.clear();
+
  addDrawableMovedToday (new DrawMouseEventToday());
-    
+else   
+    Calendar.MovedToday.clear();
     }
   
      

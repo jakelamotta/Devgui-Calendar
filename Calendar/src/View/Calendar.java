@@ -151,7 +151,7 @@ public class Calendar extends JPanel implements Runnable {
             
             
             try {
-                Thread.sleep(200);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
             }

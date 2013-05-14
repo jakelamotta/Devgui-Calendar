@@ -83,7 +83,7 @@ public class DayCard extends JPanel{
     	super.paintComponent(g);
     	
          Graphics temp = g.create();      
-                
+        //set layout of the texts /Qi
         temp.setColor(Color.lightGray);
         Font Eweather=new Font("Century Gothic",Font.PLAIN,50);
         temp.setFont(Eweather);
