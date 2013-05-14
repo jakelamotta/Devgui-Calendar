@@ -83,7 +83,7 @@ public class DayCard extends JPanel{
     	
         Graphics temp = g.create();      
                 
-        temp.setColor(Color.black);
+        temp.setColor(Color.white);
         
         temp.drawString("Temperature in Uppsala: " + String.valueOf(this.weather.getAvgTemp()) + "C", 30, 30);
         
