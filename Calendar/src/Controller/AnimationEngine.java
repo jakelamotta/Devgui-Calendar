@@ -48,9 +48,7 @@ public class AnimationEngine implements Runnable, Drawable{
     }
     
     public void drawWeatherAnimation(Graphics g, Weather weather) {
-        if(showAnimation){
-        	weather = Weather.RAINY;
-            switch(weather){
+        switch(weather){
                 default:
                     break;
                 case CLOUDY:
@@ -70,8 +68,8 @@ public class AnimationEngine implements Runnable, Drawable{
                 case SNOWY:
                     paintSnow(g);
                     break;
-            }
-         }
+        }
+        
     }
     
     /**
@@ -101,7 +99,9 @@ public class AnimationEngine implements Runnable, Drawable{
         
         //Update choice of images (switching between 0 and 1, animation shifts 
         //between two pictures to create a shining sun
-        pic = (pic-1)*(pic-1);
+        if(showAnimation){
+            pic = (pic-1)*(pic-1);
+        }
     }
 
     public void paintCloud(Graphics g) {
@@ -143,13 +143,17 @@ public class AnimationEngine implements Runnable, Drawable{
         
         g.drawImage(img,250,20,150,150,null);
         
-        //Update choice of images (switching between 0,1 and 2, animation shifts 
-        //between three pictures to create a rain animation
-        if(pic == 2){
-            pic = 0;
-        }
-        else{
-            pic += 1;
+        
+        
+        if(showAnimation){
+            //Update choice of images (switching between 0,1 and 2, animation shifts 
+            //between three pictures to create a rain animation
+            if(pic == 2){
+                pic = 0;
+            }
+            else{
+                pic += 1;
+            }
         }
     }
     
