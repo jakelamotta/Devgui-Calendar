@@ -34,9 +34,7 @@ public class AddEventAction extends AbstractAction {
 		}
 		else {
 			//adds the event to the table 
-			EventTable t = new EventTable(new Boolean(false),
-					 					  new Boolean(false),
-					 					  addEventGUI.getEventField().getText(),
+			EventTable t = new EventTable(addEventGUI.getEventField().getText(),
 					 					  addEventGUI.getDateField().getText(),
 					 					  addEventGUI.getCategoryField().getText(),
 					 					  addEventGUI.getPriority().getValue(),  

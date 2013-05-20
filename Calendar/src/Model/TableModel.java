@@ -4,26 +4,29 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
+
+import Controller.XMLHandler;
+
 
 /**
  * This class defines the table model 
  * @author Deha
  *
  */
-
+@Root
 public class TableModel extends AbstractTableModel {
 	
 	private static final long serialVersionUID = 1585636867604774966L;
-	
-    private String[] columnNames = {"DoneStatus",
-    								"CheckMark",
-    								"Event",
-    								"Description",
+	private XMLHandler xmlh;
+    private String[] columnNames = {"Event",
     								"DueDate",
     								"Category",
     								"Priority",
     								"Edit",
     								"Delete"};
+    @ElementList
     private ArrayList<EventTable> data;
     
 	
@@ -33,11 +36,27 @@ public class TableModel extends AbstractTableModel {
 	*  not exist it initiates the arraylist. 
 	*/
     public TableModel() {
-		
+    	xmlh = new XMLHandler();
+		xmlh.readXML(this, XMLHandler.XML_ITEMS);
 		if (data == null) {
 			data = new ArrayList<EventTable>();
 		}
     }
+    
+    /**
+	 * Decides which columns are possible to edit
+	 * @param row the row being queried
+	 * @param col the column being queried
+	 * @return true if the specified column is editable, otherwise false.
+	 */
+	 
+	 public boolean isCellEditable(int row, int col) {
+		 if (col >= 4) {
+              return true;
+          } else {
+              return false;
+          }
+	    }
 
 	/**
 	* Adds row into the table and updates xml
@@ -46,16 +65,14 @@ public class TableModel extends AbstractTableModel {
 	
     public void addRow(Object[] values){
     	EventTable t = new EventTable();
-    	//t.setDone((boolean)values[0]);
-    	//t.setCheck((boolean)values[1]);
-    	t.setEventName((String) values[2]);
-    	t.setEventDueDate((String) values[3]);
-	t.setEventCategory((String) values[4]);
-	//t.setEventPriority((int) values[5]);
-	t.setbutton1((String) values[6]);
-	t.setbutton2((String) values[7]);
-	data.add(t);
-	    
+    	t.setEventName((String) values[0]);
+    	t.setEventDueDate((String) values[1]);
+    	t.setEventCategory((String) values[2]);
+    	t.setEventPriority((int) values[3]);
+    	t.setbutton1((String) values[4]);
+    	t.setbutton2((String) values[5]);
+    	data.add(t);
+    	xmlh.writeXML(this, XMLHandler.XML_ITEMS);
         fireTableDataChanged();
 	}
 
@@ -66,7 +83,7 @@ public class TableModel extends AbstractTableModel {
 			 
 	 public void removeRow(int row){
 	    data.remove(row);
-	    
+	    xmlh.writeXML(this, XMLHandler.XML_ITEMS);
 	    fireTableDataChanged();
    }
 
@@ -108,16 +125,47 @@ public class TableModel extends AbstractTableModel {
 	 public Object getValueAt(int row, int col)
 	    {
 		 switch (col) {
-		    case 0: return data.get(row).getDone();
-		    case 1: return data.get(row).getCheck();
-		    case 2: return data.get(row).getEventName();
-		    case 4: return data.get(row).getEventDueDate();
-		    case 5: return data.get(row).getEventCategory();
-		    case 6: return data.get(row).getEventPriority();
-		    case 7: return data.get(row).getbutton1();
-		    case 8: return data.get(row).getbutton2();
+		    case 0: return data.get(row).getEventName();
+		    case 1: return data.get(row).getEventDueDate();
+		    case 2: return data.get(row).getEventCategory();
+		    case 3: return data.get(row).getEventPriority();
+		    case 4: return data.get(row).getbutton1();
+		    case 5: return data.get(row).getbutton2();
 		    default: return null;
 		  }
 	    }
 	 
+	 
+	 /**
+		 * Sets value for specific cell in the table. Updates the xml file
+		 * and if DEBUG param is set to true prints out log of the changes made.
+		 * DEBUG param is default set to true.
+		 * @param value new alue for the cell
+		 * @param row the row being queried
+		 * @param col the column being queried
+		 */
+		
+		public void setValueAt(Object value, int row, int col){
+		
+			 switch (col) {
+			    case 0:  data.get(row).setEventName((String) value);
+			    		break;
+			    case 1:  data.get(row).setEventDueDate((String) value);
+			    		break;
+			    case 2:  data.get(row).setEventCategory((String) value);
+			    		break;
+			    case 3:  data.get(row).setEventPriority((int) value);
+			    		break;
+			    case 4:  data.get(row).setbutton1((String) value);
+			    		break;
+			    case 5:  data.get(row).setbutton2((String) value);
+			    		break;
+			    default: System.err.println("Error setting new value");
+			    
+			  }
+			
+	    	 xmlh.writeXML(this, XMLHandler.XML_ITEMS);
+			 fireTableCellUpdated(row,col);
+
+		 }
 }

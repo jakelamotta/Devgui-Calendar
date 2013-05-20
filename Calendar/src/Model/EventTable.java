@@ -1,31 +1,28 @@
 package Model;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
 /**
  * The TaskTable class where the attributes of a Task can be saved to an XML file.
  * (will be developed more...)
  * @author Deha
  * 
  */
-
+@Root
 public class EventTable {
-
-	private Boolean done;
-	
-	private Boolean check;
-
+	@Element
 	private String eventName;
-	
+	@Element
 	private String eventDueDate;
-	
+	@Element
 	private String eventCategory;
-	
+	@Element
 	private int eventPriority;
-	
+	@Element
 	private String button1;
-	
+	@Element
 	private String button2;
-	
-	
 	
 	//Zero-argument constructor for XML-management
 	public EventTable() {
@@ -34,8 +31,6 @@ public class EventTable {
 	
 	/**
 	 * Initiate the EventTable
-	 * @param done pending or done event element button
-	 * @param check check mark for the event
 	 * @param eventName the name of Event
 	 * @param eventDueDate the due date of Event
 	 * @param eventCategory the category of Event
@@ -43,11 +38,9 @@ public class EventTable {
 	 * @param button1 edit button
 	 * @param button2 delete button
 	 */
-	public EventTable(Boolean done, Boolean check, String eventName,String eventDueDate, 
+	public EventTable(String eventName,String eventDueDate, 
 						String eventCategory, int eventPriority, String button1, String button2) {
 		super();
-		this.done = done;
-		this.check = check;
 		this.eventName = eventName;
 		this.eventDueDate = eventDueDate;
 		this.eventCategory = eventCategory;
@@ -56,38 +49,6 @@ public class EventTable {
 		this.button2 = button2;
 	}
 
-	/**
-	 * Getter method for the check mark
-	 * @return check value of the check mark
-	 */
-	public Boolean getCheck() {
-		return check;
-	}
-	
-	/**
-	 * Setter method for the check mark
-	 * @param check the check mark
-	 */
-	public void setCheck(Boolean check) {
-		this.check = check;
-	}
-	
-	/**
-	 * Getter method for the done/pending button
-	 * @return done value of the done/pending button
-	 */
-	public Boolean getDone() {
-		return done;
-	}
-	
-	/**
-	 * Setter method for the done/overdue button
-	 * @param check the done/pending button
-	 */
-	public void setDone(Boolean done) {
-		this.done = done;
-	}
-	
 	/**
 	 * Getter method for Event name
 	 * @return taskName the name of the event
