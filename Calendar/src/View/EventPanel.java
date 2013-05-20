@@ -10,6 +10,8 @@ import javax.swing.table.TableColumn;
 
 import Model.EventTable;
 import Model.TableModel;
+import java.awt.Color;
+import javax.swing.table.TableCellRenderer;
 
 /**
 * The event panel of the view. 
@@ -43,6 +45,16 @@ public class EventPanel extends JPanel {
 	    final JTable table = new JTable(model);
 	    table.setAutoCreateRowSorter(true);
 	    table.setRowHeight(40);
+            /**
+             * Set the view of the table.
+             * /Qi
+             */
+            table.setForeground(Color.lightGray); 
+            table.setSelectionBackground(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
+            table.setSelectionForeground(Color.WHITE);
+            table.setBackground(new Color(44, 44, 44));
+            table.setGridColor(Color.lightGray);
+            
 			
 		//new ButtonColumn(table, done, 0);
 		//new ButtonColumn(table, edit, 7);
@@ -56,7 +68,7 @@ public class EventPanel extends JPanel {
 			
 		DefaultTableCellRenderer defaultRenderer = new DefaultTableCellRenderer();
 		defaultRenderer.setHorizontalAlignment( JLabel.CENTER );
-			
+
 		table.getColumnModel().getColumn(2).setCellRenderer( defaultRenderer );
 		table.getColumnModel().getColumn(3).setCellRenderer( defaultRenderer );
 		table.getColumnModel().getColumn(4).setCellRenderer( defaultRenderer );
@@ -89,6 +101,8 @@ public class EventPanel extends JPanel {
 		return this.model;
 	}
 	
+        
+        
 	/**
 	 * Adds the new event to the table
 	 * @param t
