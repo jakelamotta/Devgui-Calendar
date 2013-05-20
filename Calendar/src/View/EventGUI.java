@@ -29,7 +29,8 @@ public class EventGUI extends JPanel {
 	JTextField dateTF;
 	JTextField cateTF;
 	JProgressBar prioBar;
-	
+        
+
 	/**
 	 * The constructor that calls createPanel. 
 	 * @param task The Event is to be added to the JList of Tasks
@@ -54,11 +55,11 @@ public class EventGUI extends JPanel {
 		nameTF.setHorizontalAlignment(JTextField.CENTER);
 		dateTF.setHorizontalAlignment(JTextField.CENTER);
 		cateTF.setHorizontalAlignment(JTextField.CENTER);
-		
+		       
 		nameTF.setFont(new Font("sansserif", Font.PLAIN, 25));
 		dateTF.setFont(new Font("sansserif", Font.PLAIN, 15));
 		cateTF.setFont(new Font("sansserif", Font.ITALIC, 15));
-		
+                
 		nameTF.setPreferredSize(new Dimension(30, 50));
 		dateTF.setPreferredSize(new Dimension(15, 50));
 		cateTF.setPreferredSize(new Dimension(15, 50));		

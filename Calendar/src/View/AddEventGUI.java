@@ -44,13 +44,13 @@ public class AddEventGUI extends JFrame
 	 * to create a new task, and add it to the JTable/xml in the EventPanel.
 	 */
 	public AddEventGUI(){
+            
 		eventField = new JTextField(20);
 		dateField = new JTextField(20);
 		categoryField = new JTextField(10);
 		
 		priority = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
-	
-		priority.setBackground(new Color(0, 255, 0));
+                priority.setBackground(Color.darkGray);
 		priority.setMinorTickSpacing(25);
 		priority.setPaintTicks(true);
 		priority.addChangeListener(new ChangeListener() {
@@ -72,6 +72,7 @@ public class AddEventGUI extends JFrame
 		c.gridx = 0;
 		c.gridy = 0;
 		JLabel name = new JLabel("Event Name");
+                name.setForeground(Color.lightGray);
 		name.setHorizontalAlignment(JLabel.RIGHT);
 		editPanel.add(name,c);
 		c.gridx = 1;
@@ -80,6 +81,7 @@ public class AddEventGUI extends JFrame
 		c.gridx = 0;
 		c.gridy = 2;
 		JLabel date = new JLabel("Due Date");
+                date.setForeground(Color.lightGray);
 		date.setHorizontalAlignment(JLabel.RIGHT);
 		editPanel.add(date,c);
 		c.gridx = 1;
@@ -88,6 +90,7 @@ public class AddEventGUI extends JFrame
 		c.gridx = 0;
 		c.gridy = 3;
 		JLabel cate = new JLabel("Category");
+                cate.setForeground(Color.lightGray);
 		cate.setHorizontalAlignment(JLabel.RIGHT);
 		editPanel.add(cate,c);
 		c.gridx = 1;
@@ -96,6 +99,7 @@ public class AddEventGUI extends JFrame
 		c.gridx = 0;
 		c.gridy = 4;
 		JLabel prio = new JLabel("Priority");
+                prio.setForeground(Color.lightGray);
 		prio.setHorizontalAlignment(JLabel.RIGHT);
 		editPanel.add(prio,c);
 		c.gridx = 1;
@@ -112,8 +116,10 @@ public class AddEventGUI extends JFrame
 		mainPanel = new JPanel(new BorderLayout());
 		mainPanel.add(editPanel,BorderLayout.CENTER);
 		mainPanel.add(buttonPanel,BorderLayout.SOUTH);
+                buttonPanel.setBackground(Color.darkGray);
+                editPanel.setBackground(Color.darkGray);
 	
-		setSize(350,180);
+		setSize(350,200);
 		setResizable(false);
 		setContentPane(mainPanel);
 		setVisible(true);
