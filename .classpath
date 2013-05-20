@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="Calendar/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="Calendar/wunderground-core-1.0.8-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="wunderground-core-1.0.8-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
