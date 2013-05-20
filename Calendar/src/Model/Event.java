@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  * The Event class where the attributes of an Event can be saved to an XML file by using XMLHandler.java
  * (will be developed more...)
@@ -17,6 +20,11 @@ public class Event {
 	public Event() {
 		super();
 	}
+        
+        public Date getEventDate(){
+            GregorianCalendar date = new GregorianCalendar(2013,5,18);
+            return date.getTime();
+        }
 	
 	/**
 	 * 

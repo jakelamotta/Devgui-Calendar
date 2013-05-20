@@ -3,7 +3,9 @@ package Controller;
 import Enums.Weather;
 import View.DayCard;
 import View.Drawable;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,10 +23,21 @@ public class AnimationEngine implements Runnable, Drawable{
     private JPanel panel;
     private int sleepTime = 100;
     private static boolean showAnimation;
+    private int[] colorCodes = {64,64,64};
 
     public AnimationEngine(JPanel comp){
         this.panel = comp;
         this.showAnimation = true;
+    }
+    
+    /**
+     * Function that starts a new thread for the input animationengine
+     * @param engine 
+     */
+    public void startEngine(){
+        Thread thread = new Thread(this);
+        thread.start();            
+        
     }
     
 
@@ -32,7 +45,7 @@ public class AnimationEngine implements Runnable, Drawable{
     public void run() {
         while(true){
             
-            this.panel.repaint();
+            this.panel.repaint();     
             
             try {
                 Thread.sleep(sleepTime);
@@ -171,6 +184,28 @@ public class AnimationEngine implements Runnable, Drawable{
         g.drawImage(img,280, pic, 30, 30,null);
     }
     
+    private void decreaseColors(){
+        if(this.colorCodes[0]>63){
+            this.colorCodes[0] = this.colorCodes[0]-1;
+            this.colorCodes[1] = this.colorCodes[1]-1;
+            this.colorCodes[2] = this.colorCodes[2]-1;
+        }
+    }
+    
+    private void increaseColors(){
+        if(this.colorCodes[0]<151){
+            this.colorCodes[0] = this.colorCodes[0]+1;
+            this.colorCodes[1] = this.colorCodes[1]+1;
+            this.colorCodes[2] = this.colorCodes[2]+1;
+        }
+        
+    }
+    
+    public Color getColor() {
+        increaseColors();
+        return new Color(colorCodes[0],colorCodes[1],colorCodes[2]);
+    }
+    
     /**********************************************************
      ********* Getters and setters ****************************
      **********************************************************/
@@ -182,4 +217,6 @@ public class AnimationEngine implements Runnable, Drawable{
     protected static void setShowAnimation(boolean showAni) {
         showAnimation = showAni;
     }
+
+    
 }
