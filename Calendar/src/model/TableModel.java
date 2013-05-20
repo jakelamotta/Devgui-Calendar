@@ -69,7 +69,7 @@ public class TableModel extends AbstractTableModel {
     	t.setEventName((String) values[0]);
     	t.setEventDueDate((String) values[1]);
     	t.setEventCategory((String) values[2]);
-    	t.setEventPriority((int) values[3]);
+    	t.setEventPriority((Integer) values[3]);
     	t.setbutton1((String) values[4]);
     	t.setbutton2((String) values[5]);
     	data.add(t);
@@ -155,7 +155,7 @@ public class TableModel extends AbstractTableModel {
 			    		break;
 			    case 2:  data.get(row).setEventCategory((String) value);
 			    		break;
-			    case 3:  data.get(row).setEventPriority((int) value);
+			    case 3:  data.get(row).setEventPriority((Integer) value);
 			    		break;
 			    case 4:  data.get(row).setbutton1((String) value);
 			    		break;

@@ -29,7 +29,7 @@ public class EditInTableAction extends AbstractAction{
 	             String a =  (String) ((TableModel)table.getModel()).getValueAt(modelRow,0);
 	             String b =  (String) ((TableModel)table.getModel()).getValueAt(modelRow,1);
 	             String c =  (String) ((TableModel)table.getModel()).getValueAt(modelRow,2);
-	             int d =  (int) ((TableModel)table.getModel()).getValueAt(modelRow,3);
+	             int d =  (Integer) ((TableModel)table.getModel()).getValueAt(modelRow,3);
 				 //sends data to EditPanel
 	             new EditPanel(a,b,c,d,modelRow);
 	         }			

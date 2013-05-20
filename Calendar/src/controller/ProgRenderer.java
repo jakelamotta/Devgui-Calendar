@@ -8,7 +8,7 @@ import javax.swing.table.TableCellRenderer;
 
 /**
 * Renderer for the progress bar
-* @author Björn
+* @author BjÃ¶rn
 */
 
 public class ProgRenderer extends JProgressBar implements TableCellRenderer {

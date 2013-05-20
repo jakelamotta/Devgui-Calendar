@@ -8,7 +8,7 @@ import org.simpleframework.xml.core.Persister;
 /**
  * This class is used to read and write data to and from 
  * an XML-file.
- * @author Björn from UIP I course
+ * @author BjÃ¶rn from UIP I course
  * @author Jimmy from UIP I course
  * @author Deha
  */
