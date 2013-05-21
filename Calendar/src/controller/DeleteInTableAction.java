@@ -7,6 +7,8 @@ import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import application.CalendarApp;
+
 import model.TableModel;
 
 
@@ -34,7 +36,11 @@ public class DeleteInTableAction extends AbstractAction{
 	                table, "Are you sure you want to delete this task?","Delete task",
 	                JOptionPane.ERROR_MESSAGE, JOptionPane.YES_NO_OPTION);
 	        if (n == JOptionPane.YES_OPTION) {
-	        	 ((TableModel)table.getModel()).removeRow(modelRow);
+	        	 //((TableModel)table.getModel()).removeRow(modelRow);
+	        	 
+	        	 	DeleteInTableCommand deleteInTableCommand = new DeleteInTableCommand(modelRow);
+	 				CalendarApp.getInvoker().executeCommand(deleteInTableCommand);
+	 			
 	        } else if (n == JOptionPane.NO_OPTION) {
 	          //closing the window
 	        }
