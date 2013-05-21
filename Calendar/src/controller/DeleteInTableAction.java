@@ -17,7 +17,6 @@ import model.TableModel;
  * @author Rafal from UIP I course
  * @author Deha
  */
-
 public class DeleteInTableAction extends AbstractAction{
 	
 	private static final long serialVersionUID = 7991764614636653578L;
@@ -38,15 +37,15 @@ public class DeleteInTableAction extends AbstractAction{
 	        if (n == JOptionPane.YES_OPTION) {
 	        	 //((TableModel)table.getModel()).removeRow(modelRow);
 	        	 
+	        		//implement Command Pattern
 	        	 	DeleteInTableCommand deleteInTableCommand = new DeleteInTableCommand(modelRow);
 	 				CalendarApp.getInvoker().executeCommand(deleteInTableCommand);
 	 			
 	        } else if (n == JOptionPane.NO_OPTION) {
 	          //closing the window
 	        }
-	    }
-		
 	}
+}
 
 
 
