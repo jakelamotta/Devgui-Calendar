@@ -151,8 +151,4 @@ public class WeatherAnimation extends Animation {
         }
         g.drawImage(img,280, pic, 30, 30,null);
     }
-    
-    public void setShowAnimation(boolean show){
-        super.showAnimation = show;
-    }
 }

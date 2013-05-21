@@ -210,7 +210,7 @@ public class WeatherAPI {
         
         switch(code){
             default:
-                return Weather.UNKNOWN;
+                return Weather.RAINY;
             case 28:
                 return Weather.CLOUDY;
             case 11:

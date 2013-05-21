@@ -1,23 +1,12 @@
 package controller;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
 import view.DayCard;
-import view.Drawable;
-
-import enums.Weather;
 import java.util.ArrayList;
 import java.util.List;
 import view.Animation;
-import view.CalendarAnimation;
 
 /**
  * Animation engine class, each instance of the engine defines a animation. 

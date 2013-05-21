@@ -56,7 +56,6 @@ public class Calendar extends JPanel implements Runnable {
       thread.start();
       
       this.engine = new AnimationEngine(this);
-      this.engine.setSleeptime(500);
       engine.startEngine();
   }
 

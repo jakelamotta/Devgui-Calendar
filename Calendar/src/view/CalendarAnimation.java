@@ -11,12 +11,13 @@ import model.CalculateDate;
 import model.Event;
 
 /**
- * 
+ * A calendaranimation class
  * @author Kristian
  */
 public class CalendarAnimation extends Animation{
     
-    private int fadeing = -1;
+    private int fade = 1;
+    private boolean fadein = false;
     private static ArrayList<Event> events = new ArrayList();
     private int d;
     private int week;
@@ -38,9 +39,9 @@ public class CalendarAnimation extends Animation{
 
     public void drawString(Graphics g){
         Graphics2D g2 = (Graphics2D) g.create();  
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.010f));
-        if(this.highlighted){
-            g2.setColor(this.color);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.02f));
+        if(true){
+            g2.setColor(color);
             this.color = getColor();
             g2.fillRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
         }
@@ -57,21 +58,28 @@ public class CalendarAnimation extends Animation{
     public void setHighlighted(boolean h){
         this.highlighted = h;
     }
-    private void changeColors(){
-        if(this.colorCodes[0] > 63 && this.colorCodes[0]<151){
-            this.colorCodes[0] = this.colorCodes[0]+1;
-            this.colorCodes[1] = this.colorCodes[1]+1;
-            this.colorCodes[2] = this.colorCodes[2]+1;
-        }
-        
+    private void fadeIn(){
+        if(fadein && this.colorCodes[1]<155 && this.colorCodes[0]<155 && this.colorCodes[2]>10){
+            colorCodes[0] = colorCodes[0]+fade+6;
+            colorCodes[1] = colorCodes[1]+fade+6;
+            colorCodes[2] = colorCodes[2]-fade;
+        }        
+    }
+    
+    private void fadeOut(){
+        if(!fadein && this.colorCodes[0] > 63 && this.colorCodes[1] > 63 && this.colorCodes[2]<64){
+            colorCodes[0] = colorCodes[0]-fade+6;
+            colorCodes[1] = colorCodes[1]-fade+6;
+            colorCodes[2] = colorCodes[2]+fade;
+        }        
     }
     
     public void setFade(){
-        this.fadeing = fadeing*-1;
+        fadein = fadein != true;
     }
     
     public Color getColor() {
-        changeColors();
+        fadeIn();
         return new Color(colorCodes[0],colorCodes[1],colorCodes[2]);
     }
 }

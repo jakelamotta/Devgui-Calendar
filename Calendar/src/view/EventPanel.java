@@ -48,10 +48,10 @@ public class EventPanel extends JPanel {
 	public EventPanel() {
 		this.setLayout(new BorderLayout());
 		model = new TableModel();
-		
-	    table = new JTable(model);
-	    table.setAutoCreateRowSorter(true);
-	    table.setRowHeight(40);
+                
+                table = new JTable(model);
+                table.setAutoCreateRowSorter(true);
+                table.setRowHeight(40);
 			
 		new ButtonColumn(table, edit, 4);
 		
@@ -92,9 +92,9 @@ public class EventPanel extends JPanel {
 	 */
 	public void addEventToTable(EventTable t) {
 		this.model.addRow(new Object[]
-						  {t.getEventName(), t.getEventDueDate(), 
-						  t.getEventCategory(), t.getEventPriority(),  
-						  "Edit", "Delete"});
+		{t.getEventName(), t.getEventDueDate(), 
+                t.getEventCategory(), t.getEventPriority(),  
+		"Edit", "Delete"});
 	}
 
 	/**
