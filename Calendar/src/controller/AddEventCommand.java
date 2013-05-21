@@ -8,7 +8,7 @@ import application.CalendarApp;
  * @author Deha
  *
  */
-public class AddNewEventCommand implements Command {
+public class AddEventCommand implements Command {
 	
 	private EventTable newEvent;
 	
@@ -16,7 +16,7 @@ public class AddNewEventCommand implements Command {
 	 * Constructor
 	 * @param n the new event that will be added
 	 */
-	public AddNewEventCommand(EventTable n) {
+	public AddEventCommand(EventTable n) {
 		newEvent = n;
 	}
 

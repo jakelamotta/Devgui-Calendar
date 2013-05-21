@@ -10,7 +10,6 @@ import model.EventTable;
 
 import application.CalendarApp;
 
-
 /**
  * The Action that handles entry of a new event
  * @author Deha
@@ -21,6 +20,11 @@ public class AddEventAction extends AbstractAction {
 	private static final long serialVersionUID = 8432852662784652822L;
 	private AddEventGUI addEventGUI;
 
+	/**
+	 * Constructor
+	 * @param name the mnemonic of Action event
+	 * @param gui the interface to add a new event
+	 */
 	public AddEventAction(String name, AddEventGUI gui) {
 		putValue(Action.NAME, name);
 		addEventGUI = gui;
@@ -44,7 +48,8 @@ public class AddEventAction extends AbstractAction {
 					 					  "Edit", 
 					 					  "Delete");
 			
-			AddNewEventCommand addNewEventCommand = new AddNewEventCommand(t);
+			//implement Command Pattern
+			AddEventCommand addNewEventCommand = new AddEventCommand(t);
 			CalendarApp.getInvoker().executeCommand(addNewEventCommand );
 			
 			addEventGUI.setVisible(false);
