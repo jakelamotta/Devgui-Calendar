@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 
 import model.Event;
 
-
 /**
  * The Event class creates a JPanel to be added to the 
  * list of events in the EventPanel class.
@@ -22,9 +21,6 @@ import model.Event;
  */
 public class EventGUI extends JPanel {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -81886355557044626L;
 	JTextField nameTF;
 	JTextField dateTF;
@@ -113,6 +109,4 @@ public class EventGUI extends JPanel {
 		cateTF.setBackground(c);
 		prioBar.setBackground(c);
 	}
-
-
 }

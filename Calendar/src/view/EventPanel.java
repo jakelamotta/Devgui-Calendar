@@ -18,19 +18,13 @@ import controller.DeleteInTableAction;
 import controller.EditInTableAction;
 import controller.ProgRenderer;
 
-
-
 /**
 * The event panel of the view. 
 * Contains the table with all the events and action components 
 * like edit, delete, change to done/pending state
-* 
-* 
-* Current State: edit and delete will be added, to be improved...
 * @author Deha
 * 
 */
-
 public class EventPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1411392940572978940L;
@@ -59,8 +53,7 @@ public class EventPanel extends JPanel {
 			
 		TableColumn column = table.getColumnModel().getColumn(3);
 		column.setCellRenderer(new ProgRenderer());
-			
-			
+					
 		DefaultTableCellRenderer defaultRenderer = new DefaultTableCellRenderer();
 		defaultRenderer.setHorizontalAlignment( JLabel.CENTER );
 			

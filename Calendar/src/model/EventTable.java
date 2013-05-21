@@ -5,7 +5,6 @@ import org.simpleframework.xml.Root;
 
 /**
  * The TaskTable class where the attributes of a Task can be saved to an XML file.
- * (will be developed more...)
  * @author Deha
  * 
  */
@@ -152,7 +151,5 @@ public class EventTable {
 	 */
 	public void setbutton2(String button2) {
 		this.button2 = button2;
-	}	
-	
-	
+	}		
 }

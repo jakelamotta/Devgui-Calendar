@@ -9,8 +9,6 @@ import org.simpleframework.xml.Root;
 
 import controller.XMLHandler;
 
-
-
 /**
  * This class defines the table model 
  * @author Deha
@@ -33,8 +31,8 @@ public class TableModel extends AbstractTableModel {
 	
 	/**
 	*  Initiate XML handler and load data from XML 
-	*  into an arraylist. If the file is empty or do  
-	*  not exist it initiates the arraylist. 
+	*  into an ArrayList. If the file is empty or do  
+	*  not exist it initiates the ArrayList. 
 	*/
     public TableModel() {
     	xmlh = new XMLHandler();
@@ -59,7 +57,7 @@ public class TableModel extends AbstractTableModel {
 	    }
 
 	/**
-	* Adds row into the table and updates xml
+	* Adds row into the table and updates XML
 	* @param values contain values that should be added into the row
 	*/	
     public void addRow(Object[] values){
@@ -76,9 +74,9 @@ public class TableModel extends AbstractTableModel {
 	}
     
     /**
-     * 	
-     * @param row
-     * @param values
+     * Adds row into the table according to row number and updates XML	
+     * @param row defines where the new row will be added
+     * @param values contain values that should be added into the row
      */
     public void addRow(int row, Object[] values){
     	EventTable t = new EventTable();
@@ -94,7 +92,7 @@ public class TableModel extends AbstractTableModel {
 	}
 
 	/**
-	*  Remove row from the table and updates xml
+	*  Remove row from the table and updates XML
 	*  @param row the row being queried
 	*/			 
 	 public void removeRow(int row){

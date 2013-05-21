@@ -23,7 +23,6 @@ import controller.AddEventAction;
  * @author Deha
  *
  */
-
 public class AddEventGUI extends JFrame
 {
 	private static final long serialVersionUID = -6918601926489258608L;
