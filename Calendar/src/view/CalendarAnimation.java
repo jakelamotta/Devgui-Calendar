@@ -1,5 +1,6 @@
 package view;
 
+import controller.AnimationEngine;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,24 +11,27 @@ import model.CalculateDate;
 import model.Event;
 
 /**
- *
+ * 
  * @author Kristian
  */
 public class CalendarAnimation extends Animation{
+    
     
     private static ArrayList<Event> events = new ArrayList();
     private int d;
     private int week;
     private Color color;
     private boolean highlighted = false;
+    private int[] colorCodes = {64,64,64};
+    private AnimationEngine engine;
     CalculateDate calculatedate = new CalculateDate();
     
-    public CalendarAnimation(int d,int week, Color col){
-        
+    public CalendarAnimation(int d,int week, AnimationEngine e){
         this.d=d;
         this.week=week;
-        this.color = col;
         this.setHighPrio();
+        engine = e;
+        engine.addAnimation(this);        
     }
 
     public void drawString(Graphics g){
@@ -55,5 +59,27 @@ public class CalendarAnimation extends Animation{
     
     public void setHighlighted(boolean h){
         this.highlighted = h;
+    }
+    
+    private void decreaseColors(){
+        if(this.colorCodes[0]>63){
+            this.colorCodes[0] = this.colorCodes[0]-1;
+            this.colorCodes[1] = this.colorCodes[1]-1;
+            this.colorCodes[2] = this.colorCodes[2]-1;
+        }
+    }
+    
+    private void increaseColors(){
+        if(this.colorCodes[0]<151){
+            this.colorCodes[0] = this.colorCodes[0]+1;
+            this.colorCodes[1] = this.colorCodes[1]+1;
+            this.colorCodes[2] = this.colorCodes[2]+1;
+        }
+        
+    }
+    
+    public Color getColor() {
+        increaseColors();
+        return new Color(colorCodes[0],colorCodes[1],colorCodes[2]);
     }
 }

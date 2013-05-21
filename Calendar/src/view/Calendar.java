@@ -50,7 +50,7 @@ public class Calendar extends JPanel implements Runnable {
       
       setPreferredSize(new Dimension(380,420));
       Thread thread = new Thread(this);
-        thread.start();
+      thread.start();
   }
 
   

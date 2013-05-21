@@ -15,6 +15,6 @@ public class DisableAnimationAction extends AbstractAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        AnimationEngine.setShowAnimation(false);
+        //AnimationEngine.setShowAnimation(false);
     }
 }

@@ -99,7 +99,7 @@ public class DayCard extends JPanel{
         temp.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
         temp.drawString("Uppsala",50,150);
         
-        this.engine.drawWeatherAnimation(temp,this.current);
+        ((WeatherAnimation)this.engine.getAnimationAtIndex(0)).drawWeatherAnimation(temp,this.current);
         
         temp.dispose();
     }

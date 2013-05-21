@@ -15,7 +15,7 @@ public class EnableAnimationAction extends AbstractAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        AnimationEngine.setShowAnimation(true);
+        //AnimationEngine.setShowAnimation(true);
     }
     
 }
