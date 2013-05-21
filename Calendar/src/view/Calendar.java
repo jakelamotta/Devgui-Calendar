@@ -1,5 +1,6 @@
 package view;
 
+import controller.AnimationEngine;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -39,8 +40,10 @@ public class Calendar extends JPanel implements Runnable {
   private SimpleDateFormat year = new SimpleDateFormat("yyyy");
   private SimpleDateFormat day = new SimpleDateFormat("d");
   private Date date = new Date();
+  private AnimationEngine engine;
   public List<Drawable> Calendars = new ArrayList<Drawable>();
   public List<Drawable> DrawForDay = new ArrayList<Drawable>();
+  public List<Drawable> drawAnimation = new ArrayList<Drawable>();
   public static List<Drawable> Selected = new ArrayList<Drawable>();
   public static List<Drawable> Selected2 = new ArrayList<Drawable>();
   public static List<Drawable> MovedPrevNext = new ArrayList<Drawable>();
@@ -51,6 +54,10 @@ public class Calendar extends JPanel implements Runnable {
       setPreferredSize(new Dimension(380,420));
       Thread thread = new Thread(this);
       thread.start();
+      
+      this.engine = new AnimationEngine(this);
+      this.engine.setSleeptime(500);
+      engine.startEngine();
   }
 
   
@@ -61,6 +68,12 @@ public class Calendar extends JPanel implements Runnable {
   public void addDrawableForDay(Drawable d){
 	    DrawForDay.add(d);
   }
+  
+  public void addDrawableForAnimation(Drawable d){
+      this.drawAnimation.add(d);
+  }
+  
+  
 	
 
 //Drawable[] calendars = new Drawable[] {
@@ -96,6 +109,7 @@ public class Calendar extends JPanel implements Runnable {
     for (int week = 1; week < 7; week++) {
         for (int d = 1; d < 8; d++) {
         	addDrawableForDay(new DrawDay(d,week));
+                addDrawableForAnimation(new CalendarAnimation(d,week,this.engine));
                 //Listener L=new Listener(d,week);
         }
         }
@@ -126,6 +140,9 @@ public class Calendar extends JPanel implements Runnable {
         for (Drawable d: MovedImportant) {
         d.drawString(temp);
     }
+        for (Drawable d: drawAnimation){
+            d.drawString(temp);
+        }
     Calendars.clear();
     DrawForDay.clear();
    // Calendar today = Calendar.getInstance();

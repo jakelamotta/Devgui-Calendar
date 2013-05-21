@@ -30,6 +30,7 @@ public class DayCard extends JPanel{
     private AnimationEngine engine;
     private Weather current;
     private GregorianCalendar date;
+    private WeatherAnimation animation = new WeatherAnimation();
     
     /**
      * Default constructor, created with todays date as date.
@@ -62,7 +63,7 @@ public class DayCard extends JPanel{
         }
         
         setTemperature();
-        
+        this.engine.addAnimation(this.animation);
         startEngine(engine);
     }
     

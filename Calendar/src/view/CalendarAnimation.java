@@ -16,7 +16,7 @@ import model.Event;
  */
 public class CalendarAnimation extends Animation{
     
-    
+    private int fadeing = -1;
     private static ArrayList<Event> events = new ArrayList();
     private int d;
     private int week;
@@ -27,25 +27,26 @@ public class CalendarAnimation extends Animation{
     CalculateDate calculatedate = new CalculateDate();
     
     public CalendarAnimation(int d,int week, AnimationEngine e){
+        super.showAnimation = true;
         this.d=d;
         this.week=week;
         this.setHighPrio();
+        this.color = new Color(colorCodes[0],colorCodes[1],colorCodes[2]);
         engine = e;
         engine.addAnimation(this);        
     }
 
     public void drawString(Graphics g){
         Graphics2D g2 = (Graphics2D) g.create();  
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.30f));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.010f));
         if(this.highlighted){
             g2.setColor(this.color);
-            g2.drawRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
+            this.color = getColor();
+            g2.fillRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
         }
     }     
     
     private void setHighPrio(){
-        CalendarAnimation.events.add(new Event());
-        
         for (Event e: CalendarAnimation.events){
             if(e.getEventDate().equals(calculatedate.gettime()) && e.getEventPriority() == 5){
                 this.highlighted = true;
@@ -53,24 +54,11 @@ public class CalendarAnimation extends Animation{
         }
     }
     
-    public void setColor(Color c){
-        this.color = c;
-    }
-    
     public void setHighlighted(boolean h){
         this.highlighted = h;
     }
-    
-    private void decreaseColors(){
-        if(this.colorCodes[0]>63){
-            this.colorCodes[0] = this.colorCodes[0]-1;
-            this.colorCodes[1] = this.colorCodes[1]-1;
-            this.colorCodes[2] = this.colorCodes[2]-1;
-        }
-    }
-    
-    private void increaseColors(){
-        if(this.colorCodes[0]<151){
+    private void changeColors(){
+        if(this.colorCodes[0] > 63 && this.colorCodes[0]<151){
             this.colorCodes[0] = this.colorCodes[0]+1;
             this.colorCodes[1] = this.colorCodes[1]+1;
             this.colorCodes[2] = this.colorCodes[2]+1;
@@ -78,8 +66,12 @@ public class CalendarAnimation extends Animation{
         
     }
     
+    public void setFade(){
+        this.fadeing = fadeing*-1;
+    }
+    
     public Color getColor() {
-        increaseColors();
+        changeColors();
         return new Color(colorCodes[0],colorCodes[1],colorCodes[2]);
     }
 }

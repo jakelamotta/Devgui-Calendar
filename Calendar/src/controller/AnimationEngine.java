@@ -70,7 +70,7 @@ public class AnimationEngine implements Runnable{
         return this.animations.get(i);
     }
 
-    public void addAnimation(CalendarAnimation animation) {
+    public void addAnimation(Animation animation) {
         this.animations.add(animation);
     }
 }

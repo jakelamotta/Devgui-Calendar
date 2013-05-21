@@ -43,7 +43,7 @@ import application.CalendarApp;
 public class Frame extends JFrame{
     private Calendar ch;
     private DayCard card;
-	private JSlider slider;
+    private JSlider slider;
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem addEventItem;

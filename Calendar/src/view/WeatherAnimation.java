@@ -26,7 +26,6 @@ public class WeatherAnimation extends Animation {
     
     @Override
     public void drawString(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public void drawWeatherAnimation(Graphics g, Weather weather) {
