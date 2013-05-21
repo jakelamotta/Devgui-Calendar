@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import application.CalendarApp;
+import controller.EditInTableCommand;
+
 
 /**
 * The GUI that appears when the Add task button is pressed.
@@ -23,7 +26,6 @@ import javax.swing.event.ChangeListener;
 public class EditPanel extends JFrame{
 	
 	private static final long serialVersionUID = 2492997705671130626L;
-	private Frame frame = new Frame();
 	
 	/**
 	 * The constructor that is run when the edit task button is pressed.
@@ -43,16 +45,16 @@ public class EditPanel extends JFrame{
 		JTextField dateField = new JTextField(20);
 		JTextField categoryField = new JTextField(10);
 		
-		JSlider priority = new JSlider(JSlider.HORIZONTAL, 20, 100, 20);
+		JSlider priority = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
 		
 		priority.setBackground(new Color(0, 255, 0));
-		priority.setMinorTickSpacing(20);
+		priority.setMinorTickSpacing(25);
 		priority.setPaintTicks(true);
 		priority.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider) e.getSource();
-				source.setBackground(new Color(source.getValue()*2, 255-source.getValue()*2, 0));
+				source.setBackground(new Color(source.getValue()*2+25, 255-source.getValue()*2, 0));
 			}
 		});
 		
@@ -108,10 +110,12 @@ public class EditPanel extends JFrame{
 	
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
 		if (result == JOptionPane.OK_OPTION) {
-			frame.getEventPanel().getEvents().setValueAt(taskField.getText(),modelRow, 0);
-			frame.getEventPanel().getEvents().setValueAt(dateField.getText(),modelRow, 1);
-			frame.getEventPanel().getEvents().setValueAt(categoryField.getText(),modelRow, 2);
-			frame.getEventPanel().getEvents().setValueAt(priority.getValue(),modelRow, 3);		 
+			EditInTableCommand editInTableCommand = new EditInTableCommand(taskField.getText(),
+																		   dateField.getText(), 
+																		   categoryField.getText(),
+																		   priority.getValue(),
+																		   modelRow);
+            CalendarApp.getInvoker().executeCommand(editInTableCommand);
 		}
 	}
 }

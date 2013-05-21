@@ -49,8 +49,7 @@ public class TableModel extends AbstractTableModel {
 	 * @param row the row being queried
 	 * @param col the column being queried
 	 * @return true if the specified column is editable, otherwise false.
-	 */
-	 
+	 */	 
 	 public boolean isCellEditable(int row, int col) {
 		 if (col >= 4) {
               return true;
@@ -62,8 +61,7 @@ public class TableModel extends AbstractTableModel {
 	/**
 	* Adds row into the table and updates xml
 	* @param values contain values that should be added into the row
-	*/
-	
+	*/	
     public void addRow(Object[] values){
     	EventTable t = new EventTable();
     	t.setEventName((String) values[0]);
@@ -76,12 +74,29 @@ public class TableModel extends AbstractTableModel {
     	xmlh.writeXML(this, XMLHandler.XML_ITEMS);
         fireTableDataChanged();
 	}
+    
+    /**
+     * 	
+     * @param row
+     * @param values
+     */
+    public void addRow(int row, Object[] values){
+    	EventTable t = new EventTable();
+    	t.setEventName((String) values[0]);
+    	t.setEventDueDate((String) values[1]);
+    	t.setEventCategory((String) values[2]);
+    	t.setEventPriority((Integer) values[3]);
+    	t.setbutton1((String) values[4]);
+    	t.setbutton2((String) values[5]);
+    	data.add(row, t);
+    	xmlh.writeXML(this, XMLHandler.XML_ITEMS);
+        fireTableDataChanged();
+	}
 
 	/**
 	*  Remove row from the table and updates xml
 	*  @param row the row being queried
-	*/
-			 
+	*/			 
 	 public void removeRow(int row){
 	    data.remove(row);
 	    xmlh.writeXML(this, XMLHandler.XML_ITEMS);
@@ -100,8 +115,7 @@ public class TableModel extends AbstractTableModel {
 	* Returns number of rows  
 	* @return data.size number of rows
 	*/
- 
-	public int getRowCount() {
+ 	public int getRowCount() {
 		
 		 return data.size();
 	}
@@ -111,8 +125,7 @@ public class TableModel extends AbstractTableModel {
 	* @param col the column being queried
 	* @return columnNames[col] name of the column
 	*/
- 
-	 public String getColumnName(int col){
+ 	 public String getColumnName(int col){
 		 return columnNames[col];
 	 }
 
@@ -122,7 +135,6 @@ public class TableModel extends AbstractTableModel {
 	 * @param col the column being queried
 	 * @return The value of the cell at row row and column col in the table.
 	 */
-	 
 	 public Object getValueAt(int row, int col)
 	    {
 		 switch (col) {
@@ -144,8 +156,7 @@ public class TableModel extends AbstractTableModel {
 		 * @param value new alue for the cell
 		 * @param row the row being queried
 		 * @param col the column being queried
-		 */
-		
+		 */		
 		public void setValueAt(Object value, int row, int col){
 		
 			 switch (col) {
