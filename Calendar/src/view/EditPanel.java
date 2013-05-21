@@ -19,7 +19,6 @@ import controller.EditInTableCommand;
 
 /**
 * The GUI that appears when the Add task button is pressed.
-* @author Rafal from UIP I course
 * @author Deha 
 */
 
@@ -69,7 +68,6 @@ public class EditPanel extends JFrame{
 		editPanel.setLayout(new GridBagLayout());
 		GridBagConstraints cons = new GridBagConstraints();
 		
-		
 				cons.fill = GridBagConstraints.HORIZONTAL;
 			
 				cons.gridx = 0;
@@ -115,7 +113,8 @@ public class EditPanel extends JFrame{
 																		   categoryField.getText(),
 																		   priority.getValue(),
 																		   modelRow);
-            CalendarApp.getInvoker().executeCommand(editInTableCommand);
+            //Implement Command Pattern
+			CalendarApp.getInvoker().executeCommand(editInTableCommand);
 		}
 	}
 }

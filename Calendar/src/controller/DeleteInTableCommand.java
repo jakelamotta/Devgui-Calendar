@@ -4,7 +4,7 @@ import model.TableModel;
 import application.CalendarApp;
 
 /**
- * The concrete command that handles addition of a new event
+ * The concrete command that handles deletion of an event
  * @author Deha
  *
  */
@@ -15,9 +15,8 @@ public class DeleteInTableCommand implements Command {
 	private int modelRow;
 	
 	/**
-	 * Constructor
-	 * @param n the new event that will be added
-	 * @param modelRow 
+	 * Constructor - keeps the values before deletion
+	 * @param row the row that will be deleted
 	 */
 	public DeleteInTableCommand(int row) {
 		modelRow = row;
@@ -32,7 +31,7 @@ public class DeleteInTableCommand implements Command {
 	}
 
 	/**
-	 * Adds the new event to the table
+	 * Removes the row
 	 */
 	@Override
 	public void execute() {
@@ -40,7 +39,7 @@ public class DeleteInTableCommand implements Command {
 	}
 
 	/**
-	 * Removes the added event from the table
+	 * Adds the deleted row back
 	 */
 	@Override
 	public void unexecute() {
@@ -49,7 +48,7 @@ public class DeleteInTableCommand implements Command {
 	}
 
 	/**
-	 * Adds the removed event back to the table
+	 * Removes the added row back
 	 */
 	@Override
 	public void reexecute() {
