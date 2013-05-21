@@ -19,10 +19,10 @@ import model.TableModel;
 public class EditInTableAction extends AbstractAction{
 	
 	private static final long serialVersionUID = 241403663318566147L;
-
+	
 			public void actionPerformed(ActionEvent e)
 	         {
-	             JTable table = (JTable)e.getSource();
+				JTable table = (JTable)e.getSource();
 				 
 				 //temporarily saves data for specific row 
 	             int modelRow = Integer.valueOf( e.getActionCommand() );
@@ -31,7 +31,10 @@ public class EditInTableAction extends AbstractAction{
 	             String c =  (String) ((TableModel)table.getModel()).getValueAt(modelRow,2);
 	             int d =  (Integer) ((TableModel)table.getModel()).getValueAt(modelRow,3);
 				 //sends data to EditPanel
-	             new EditPanel(a,b,c,d,modelRow);
+	             
+	            new EditPanel(a,b,c,d,modelRow);
+	               
+	             
 	         }			
 	}
 
