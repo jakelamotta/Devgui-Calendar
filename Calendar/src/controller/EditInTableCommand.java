@@ -4,7 +4,7 @@ import application.CalendarApp;
 import model.TableModel;
 
 /**
- * The concrete command that handles addition of a new event
+ * The concrete command that handles edit action of a row
  * @author Deha
  *
  */
@@ -18,10 +18,14 @@ public class EditInTableCommand implements Command {
 	private int priority;
 	
 	/**
-	 * Constructor
-	 * @param n the new event that will be added
+	 * Constructor - keeps the values before edit
+	 * @param a - Name of the Event
+	 * @param b - Due date of the Event
+	 * @param c - Category of the Event
+	 * @param d - Priority of the Event
+	 * @param row - the row that is edited
 	 */
-	public EditInTableCommand(String a0, String b1, String c2, int d3, int row) {
+	public EditInTableCommand(String a, String b, String c, int d, int row) {
 		modelRow = row;
 		tm = CalendarApp.getFrame().getEventPanel().getModel();
 		et = new Object[6];
@@ -32,14 +36,14 @@ public class EditInTableCommand implements Command {
 		et[4] = tm.getValueAt(modelRow, 4);
 		et[5] = tm.getValueAt(modelRow, 5);
 		
-		name = a0;
-		dueDate = b1;
-		category = c2;
-		priority = d3;
+		name = a;
+		dueDate = b;
+		category = c;
+		priority = d;
 	}
 
 	/**
-	 * Adds the new event to the table
+	 * Set the new values after edit action
 	 */
 	@Override
 	public void execute() {
@@ -50,7 +54,7 @@ public class EditInTableCommand implements Command {
 	}
 
 	/**
-	 * Removes the added event from the table
+	 * Set values to before edit action
 	 */
 	@Override
 	public void unexecute() {
@@ -61,7 +65,7 @@ public class EditInTableCommand implements Command {
 	}
 
 	/**
-	 * Adds the removed event back to the table
+	 * Sets the values to after edit action
 	 */
 	@Override
 	public void reexecute() {
