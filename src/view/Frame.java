@@ -59,7 +59,7 @@ public class Frame extends JFrame{
    public Frame()
    { 
 	   eventPanel = new EventPanel();
-	   ch = new Calendar();
+	   ch = new Calendar() ;
 	   ch.setDate(new Date());
 	   card = new DayCard();
 	   slider = new JSlider(0,7,0);

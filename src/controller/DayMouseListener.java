@@ -65,12 +65,13 @@ if((336<x)&&(x<396)&&(15<y)&&(y<45))
     for(int i=0;i<row;i++){
    
         taskdate=(String) EventPanel.table.getValueAt(i,1);
- System.out.print((String) EventPanel.table.getValueAt(i,1));
+ System.out.print((String) EventPanel.table.getValueAt(i,2));
         if(taskdate.equals(present.format(today))){
 //model.TableModel.removeRowforDisplay(i);
     System.out.print((String) EventPanel.table.getValueAt(i,0));
     
-}      
+
+        }      
 }
 }
 }
