@@ -103,7 +103,7 @@ public class TableModel extends AbstractTableModel {
  public static void removeRowforDisplay(int row)
  {
  data.remove(row);
- 
+
  }
 	/**
 	* Returns number of columns.  

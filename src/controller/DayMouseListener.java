@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import model.TableModel;
 import view.EventPanel;
 /**
  *
@@ -32,6 +33,7 @@ public class DayMouseListener extends MouseAdapter {
     private Date today=new Date();
     int row;
     String taskdate;
+    
     //float leftX=(float)((d-2) * 45 + 41);  
     //float upY=(float)((week-2) * 45);  
     //float rightX=(float)((d) * 45 + 41);  
@@ -65,12 +67,12 @@ if((336<x)&&(x<396)&&(15<y)&&(y<45))
     for(int i=0;i<row;i++){
    
         taskdate=(String) EventPanel.table.getValueAt(i,1);
- System.out.print((String) EventPanel.table.getValueAt(i,2));
-        if(taskdate.equals(present.format(today))){
+ System.out.print((String) EventPanel.table.getValueAt(i,1));
+        if(taskdate.equals(present.format(today))==false){
 //model.TableModel.removeRowforDisplay(i);
-    System.out.print((String) EventPanel.table.getValueAt(i,0));
-    
-
+System.out.print((String) EventPanel.table.getValueAt(i,0));
+    TableModel.removeRowforDisplay(i);
+EventPanel.table.updateUI();
         }      
 }
 }
