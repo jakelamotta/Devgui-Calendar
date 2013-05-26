@@ -4,9 +4,9 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JOptionPane;
 
-import view.AddEventGUI;
+import view.EventGUI;
 
-import model.EventTable;
+import model.Event;
 
 import application.CalendarApp;
 
@@ -18,14 +18,14 @@ import application.CalendarApp;
 public class AddEventAction extends AbstractAction {
 	
 	private static final long serialVersionUID = 8432852662784652822L;
-	private AddEventGUI addEventGUI;
+	private EventGUI addEventGUI;
 
 	/**
 	 * Constructor
 	 * @param name the mnemonic of Action event
 	 * @param gui the interface to add a new event
 	 */
-	public AddEventAction(String name, AddEventGUI gui) {
+	public AddEventAction(String name, EventGUI gui) {
 		putValue(Action.NAME, name);
 		addEventGUI = gui;
 	}
@@ -41,12 +41,12 @@ public class AddEventAction extends AbstractAction {
 		}
 		else {
 			//adds the event to the table 
-			EventTable t = new EventTable(addEventGUI.getEventField().getText(),
-					 					  addEventGUI.getDateField().getText(),
-					 					  addEventGUI.getCategoryField().getText(),
-					 					  addEventGUI.getPriority().getValue(),  
-					 					  "Edit", 
-					 					  "Delete");
+			Event t = new Event(addEventGUI.getEventField().getText(),
+					 			addEventGUI.getDate(),
+		 					    addEventGUI.getCategoryField().getText(),
+		 					    addEventGUI.getPriority().getValue(),  
+		 					    "Edit", 
+		 					    "Delete");
 			
 			//implement Command Pattern
 			AddEventCommand addNewEventCommand = new AddEventCommand(t);

@@ -10,7 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import model.EventTable;
+import model.Event;
 import model.TableModel;
 
 import controller.ButtonColumn;
@@ -83,7 +83,7 @@ public class EventPanel extends JPanel {
 	 * Adds the new event to the table
 	 * @param t
 	 */
-	public void addEventToTable(EventTable t) {
+	public void addEventToTable(Event t) {
 		this.model.addRow(new Object[]
 		{t.getEventName(), t.getEventDueDate(), 
                 t.getEventCategory(), t.getEventPriority(),  

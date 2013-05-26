@@ -1,6 +1,6 @@
 package controller;
 
-import model.EventTable;
+import model.Event;
 import application.CalendarApp;
 
 /**
@@ -10,13 +10,13 @@ import application.CalendarApp;
  */
 public class AddEventCommand implements Command {
 	
-	private EventTable newEvent;
+	private Event newEvent;
 	
 	/**
 	 * Constructor
 	 * @param n the new event that will be added
 	 */
-	public AddEventCommand(EventTable n) {
+	public AddEventCommand(Event n) {
 		newEvent = n;
 	}
 

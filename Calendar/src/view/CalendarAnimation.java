@@ -49,7 +49,7 @@ public class CalendarAnimation extends Animation{
     
     private void setHighPrio(){
         for (Event e: CalendarAnimation.events){
-            if(e.getEventDate().equals(calculatedate.gettime()) && e.getEventPriority() == 5){
+            if(e.getEventDueDate().equals(calculatedate.gettime()) && e.getEventPriority() == 5){
                 this.highlighted = true;
             }
         }

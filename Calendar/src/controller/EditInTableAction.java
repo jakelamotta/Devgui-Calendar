@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JTable;
 
-import view.EditPanel;
+import view.EventGUI;
 
 import model.TableModel;
 
@@ -32,7 +32,7 @@ public class EditInTableAction extends AbstractAction{
 	             int d =  (Integer) ((TableModel)table.getModel()).getValueAt(modelRow,3);
 				 //sends data to EditPanel
 	             
-	            new EditPanel(a,b,c,d,modelRow);
+	            new EventGUI(a,b,c,d,modelRow);
 	               
 	             
 	         }			

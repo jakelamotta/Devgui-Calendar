@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import view.AddEventGUI;
+import view.EventGUI;
 
 /**
  * This class controls adding new event interface
@@ -20,7 +20,7 @@ public class ShowAddEventUIAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		new AddEventGUI();
+		new EventGUI();
 	}
 
 }

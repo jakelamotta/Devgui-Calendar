@@ -26,7 +26,7 @@ public class TableModel extends AbstractTableModel {
     								"Edit",
     								"Delete"};
     @ElementList
-    private ArrayList<EventTable> data;
+    private ArrayList<Event> data;
     
 	
 	/**
@@ -38,7 +38,7 @@ public class TableModel extends AbstractTableModel {
     	xmlh = new XMLHandler();
 		xmlh.readXML(this, XMLHandler.XML_ITEMS);
 		if (data == null) {
-			data = new ArrayList<EventTable>();
+			data = new ArrayList<Event>();
 		}
     }
     
@@ -61,7 +61,7 @@ public class TableModel extends AbstractTableModel {
 	* @param values contain values that should be added into the row
 	*/	
     public void addRow(Object[] values){
-    	EventTable t = new EventTable();
+    	Event t = new Event();
     	t.setEventName((String) values[0]);
     	t.setEventDueDate((String) values[1]);
     	t.setEventCategory((String) values[2]);
@@ -79,7 +79,7 @@ public class TableModel extends AbstractTableModel {
      * @param values contain values that should be added into the row
      */
     public void addRow(int row, Object[] values){
-    	EventTable t = new EventTable();
+    	Event t = new Event();
     	t.setEventName((String) values[0]);
     	t.setEventDueDate((String) values[1]);
     	t.setEventCategory((String) values[2]);
