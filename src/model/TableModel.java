@@ -26,7 +26,7 @@ public class TableModel extends AbstractTableModel {
     								"Edit",
     								"Delete"};
     @ElementList
-    private static ArrayList<EventTable> data;
+    public static ArrayList<EventTable> data;
     
 	
 	/**
@@ -105,6 +105,8 @@ public class TableModel extends AbstractTableModel {
  data.remove(row);
 
  }
+ 
+ 
 	/**
 	* Returns number of columns.  
 	* @return columnnNames.length number of columns
