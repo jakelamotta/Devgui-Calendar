@@ -1,12 +1,10 @@
 package model;
 
-import java.util.GregorianCalendar;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 /**
- * The TaskTable class where the attributes of a Task can be saved to an XML file.
+ * The Event class where the attributes of an Event can be saved to an XML file.
  * @author Deha
  * 
  */
@@ -31,7 +29,7 @@ public class Event {
 	}
 	
 	/**
-	 * Initiate the EventTable
+	 * Initiate the Event
 	 * @param eventName the name of Event
 	 * @param eventDueDate the due date of Event
 	 * @param eventCategory the category of Event
@@ -52,7 +50,7 @@ public class Event {
 
 	/**
 	 * Getter method for Event name
-	 * @return taskName the name of the event
+	 * @return eventName the name of the event
 	 */
 	public String getEventName() {
 		return eventName;
@@ -60,18 +58,18 @@ public class Event {
 
 	/**
 	 * Setter method for Event name
-	 * @param taskName the name of the event
+	 * @param eventName the name of the event
 	 */
-	public void setEventName(String taskName) {
-		if (taskName.equals(""))  {
-			taskName = " ";
+	public void setEventName(String eventName) {
+		if (eventName.equals(""))  {
+			eventName = " ";
 		}
-		this.eventName = taskName;
+		this.eventName = eventName;
 	}
 
 	/**
 	 * Getter method for Event due date
-	 * @return taskDueDate the due date of Event
+	 * @return eventDueDate the due date of Event
 	 */
 	public String getEventDueDate() {
 		return eventDueDate;
@@ -79,15 +77,15 @@ public class Event {
 
 	/**
 	 * Setter method for Event due date
-	 * @param taskDueDate the due date of Event
+	 * @param eventDueDate the due date of Event
 	 */
-	public void setEventDueDate(String taskDueDate) {
-		this.eventDueDate = taskDueDate;
+	public void setEventDueDate(String eventDueDate) {
+		this.eventDueDate = eventDueDate;
 	}
 
 	/**
 	 * Getter method for Event Category
-	 * @return taskCategory the category of Event
+	 * @return eventCategory the category of Event
 	 */
 	public String getEventCategory() {
 		return eventCategory;
@@ -95,13 +93,13 @@ public class Event {
 
 	/**
 	 * Setter method for Event category
-	 * @param taskCategory the category of Event
+	 * @param eventCategory the category of Event
 	 */
-	public void setEventCategory(String taskCategory) {
-		if (taskCategory.equals(""))  {
-			taskCategory = " ";
+	public void setEventCategory(String eventCategory) {
+		if (eventCategory.equals(""))  {
+			eventCategory = " ";
 		}
-		this.eventCategory = taskCategory;
+		this.eventCategory = eventCategory;
 	}
 
 	/**
@@ -114,10 +112,10 @@ public class Event {
 
 	/**
 	 * Setter method for Event priority
-	 * @param taskPriority the priority of Event
+	 * @param eventPriority the priority of Event
 	 */
-	public void setEventPriority(int taskPriority) {
-		this.eventPriority = taskPriority;
+	public void setEventPriority(int eventPriority) {
+		this.eventPriority = eventPriority;
 	}
 	
 	/**
