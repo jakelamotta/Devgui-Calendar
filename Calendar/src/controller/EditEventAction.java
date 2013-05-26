@@ -13,7 +13,7 @@ import view.EventGUI;
 public class EditEventAction extends AbstractAction {
 	
 	/**
-	 * 
+	 * @author Deha
 	 */
 	private static final long serialVersionUID = 7045343146380830821L;
 	private EventGUI editEventGUI;
