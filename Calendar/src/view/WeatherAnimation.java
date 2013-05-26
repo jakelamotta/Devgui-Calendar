@@ -1,10 +1,6 @@
 package view;
 
 import enums.Weather;
-import static enums.Weather.CLOUDY;
-import static enums.Weather.RAINY;
-import static enums.Weather.SNOWY;
-import static enums.Weather.SUNNY;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

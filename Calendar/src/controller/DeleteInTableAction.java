@@ -9,8 +9,6 @@ import javax.swing.JTable;
 
 import application.CalendarApp;
 
-import model.TableModel;
-
 
 /**
  * The Action that perform deletion of specific row in the table

@@ -5,19 +5,12 @@
 package controller;
 
 import java.awt.event.MouseEvent;
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
-import javax.swing.JPanel;
 
 import view.Calendar;
 import view.DrawDayforselected;
 import view.Drawable;
 
-import java.awt.AlphaComposite;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.geom.Point2D;
 /**
  *
  * @author bigbigguoguo

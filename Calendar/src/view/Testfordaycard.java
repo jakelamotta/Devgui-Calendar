@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

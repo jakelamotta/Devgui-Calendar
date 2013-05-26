@@ -3,9 +3,6 @@ package view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Draw the texts of week: "Sun", "Mon", "Tue", etc.

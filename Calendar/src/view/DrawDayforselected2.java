@@ -3,18 +3,10 @@ package view;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.awt.event.MouseAdapter;
-import java.awt.Point;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import controller.DayMouseListener;
 
 /**
  * Draw for mouse moving over a certain date.
