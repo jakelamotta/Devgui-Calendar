@@ -26,7 +26,7 @@ public class ButtonColumn extends AbstractCellEditor
 	private boolean isButtonColumnEditor;
 	
 	private final Icon delico = new ImageIcon(getClass().getResource("delete.png"));
-	private final Icon edit = new ImageIcon(getClass().getResource("edit.png"));
+	private final Icon edit = new ImageIcon(getClass().getResource("edit2.png"));
 	
 	/**
 	 *  Create the ButtonColumn to be used as a renderer and editor. The
