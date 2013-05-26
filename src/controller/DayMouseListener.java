@@ -19,7 +19,9 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import model.EventTable;
 import model.TableModel;
 import view.EventPanel;
 /**
@@ -39,7 +41,7 @@ public class DayMouseListener extends MouseAdapter {
     //float rightX=(float)((d) * 45 + 41);  
     //float downY=(float)((week) * 45);  
     public void getxpoint(float x,float y){
-row= EventPanel.table.getRowCount();
+        row= EventPanel.table.getRowCount();
 
 if((108.5-22.5<x)&&(x<108.5+22.5)){
                  d=1;
@@ -63,18 +65,9 @@ if((378.5-22.5<x)&&(x<378.5+22.5)){
                  d=7;
                  getypoint(y);}
 if((336<x)&&(x<396)&&(15<y)&&(y<45))
-{System.out.print(row);
-    for(int i=0;i<row;i++){
-   
-        taskdate=(String) EventPanel.table.getValueAt(i,1);
- System.out.print((String) EventPanel.table.getValueAt(i,1));
-        if(taskdate.equals(present.format(today))==false){
-//model.TableModel.removeRowforDisplay(i);
-System.out.print((String) EventPanel.table.getValueAt(i,0));
-    TableModel.removeRowforDisplay(i);
+{System.out.print(row); 
+TodayTask();
 EventPanel.table.updateUI();
-        }      
-}
 }
 }
      public void getypoint(float y){
@@ -114,11 +107,23 @@ if((323.5-22.5<y)&&(y<323.5+22.5)){
                  Calendar.Selected2.clear();
  addDrawableForselected(new DrawDayforselected(d,week));
 }
-
-    }
-      public void addDrawableForselected(Drawable d){
+}
+      
+public void addDrawableForselected(Drawable d){
 	    Calendar.Selected.add(d);
-      }    
+}    
+     
+public void TodayTask(){
+
+    for(int i = 0; i<TableModel.data.size(); i++){         
+
+        if(TableModel.data.get(i).getEventDueDate()
+                .equals(present.format(today))
+                ==false){
+        TableModel.removeRowforDisplay(i);    
+}
+}   
+}
     public void mouseClicked(MouseEvent e) {
 
     
@@ -127,17 +132,7 @@ if((323.5-22.5<y)&&(y<323.5+22.5)){
              float x=e.getX();
              float y=e.getY();
              getxpoint( x, y);
-                  //float distance=(x-centerX)*(x-centerX)+(y-centerY)*(y-centerY);
-             //System.out.println("work");
-                 
-                
-                 
-                 //(x-centerX)*(x-centerX)+(y-centerY)*(y-centerY);
-               //P.setLocation(e.getX(),e.getY());(x-centerX)*(x-centerX)+(y-centerY)*(y-centerY);
-            //week * 29 + 81 + 20
-             
-      	    	
-                     //Calendar.Calendars.add(0,new(DrawMonth(Color.getColor(gray))));
+
                  }
             }
 }
