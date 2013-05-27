@@ -58,8 +58,15 @@ public class TableModel extends AbstractTableModel {
 	 
 	public void dateFilterTable(String date){
 		
+		
+		ArrayList<Event> datacopy = new ArrayList<Event>();
+		
+		for(Event i: data){
+			datacopy.add(i);
+		}
+		
 		ArrayList<Event> filteredData = new ArrayList<Event>();
-	
+		
     	for(int i=0; i<getRowCount(); i++){
     		
     		if(((String) getValueAt(i, 1)).equalsIgnoreCase(date)){
@@ -84,6 +91,10 @@ public class TableModel extends AbstractTableModel {
     	}
     	
     	fireTableDataChanged();
+    	
+    	for(Event i: datacopy){
+			data.add(i);
+		}
 	} 
 	
 	public void priorityFilterTable(int priority){

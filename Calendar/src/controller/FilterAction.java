@@ -17,9 +17,9 @@ public class FilterAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//CalendarApp.getFrame().getEventPanel().getModel().dateFilterTable("2013-5-31");
+		CalendarApp.getFrame().getEventPanel().getModel().dateFilterTable("2013-5-31");
 		
-		CalendarApp.getFrame().getEventPanel().getModel().priorityFilterTable(100);
+		//CalendarApp.getFrame().getEventPanel().getModel().priorityFilterTable(100);
 	}
 
 }
