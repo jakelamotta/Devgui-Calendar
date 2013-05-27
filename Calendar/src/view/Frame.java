@@ -98,7 +98,7 @@ public class Frame extends JFrame{
 	   c.weightx = 0;
 	   c.weighty = 0;
 	   
-	   Action filterEvent = new FilterAction("Filter Event");
+	   Action filterEvent = new FilterAction("Show All Events");
 	   JButton filterEventButton = new JButton(filterEvent);
 	   getContentPane().add(filterEventButton, c);
 	   
