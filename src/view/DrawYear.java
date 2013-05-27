@@ -17,19 +17,20 @@ public class DrawYear implements Drawable {
 	
     private SimpleDateFormat year = new SimpleDateFormat("yyyy"); 
     private Date date = new Date();
-
+    public static String Year; 
     public void setDate(Date date) {
         this.date = date;
+        
     }
 
     public void drawString(Graphics g) {
         // Set font and color of the texts.
         Font Ayear=new Font("Century Gothic",Font.PLAIN,50);
     	 g.setColor(Color.gray); 
-       
          g.setFont(Ayear);
-    	    g.drawString(year.format(date), 5, 45);
-           
+    	 g.drawString(year.format(date), 5, 45);
+         Year=year.format(date);
+      
     }
 
    

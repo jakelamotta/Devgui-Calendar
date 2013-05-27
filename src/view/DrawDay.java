@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,6 +25,7 @@ public class DrawDay implements Drawable {
     private int week;    
     private SimpleDateFormat day = new SimpleDateFormat("d");
     private Date date = new Date();
+    public static String[][] dateposition= new String[8][9];
     CalculateDate calculatedate=new CalculateDate();
    
     
@@ -32,12 +34,15 @@ public class DrawDay implements Drawable {
             this.week=week;
             
      calculatedate.setCalendar();
+     
+   
     }
     
     public void setDate(Date date) {
 	    this.date = date;
     }
     
+   
     //@Override
     public void drawString(Graphics g) {
     
@@ -63,7 +68,9 @@ public class DrawDay implements Drawable {
         g.setColor(Color.white); 
         g.setFont(Bday);
         present=day.format(calculatedate.gettime());
-             g.drawString(present, (d-1) * 45 + 91 + 4, (week-1) * 45 + 91 + 20);
+        dateposition[d][week] =present;
+        g.drawString(present, (d-1) * 45 + 91 + 4, (week-1) * 45 + 91 + 20);
+        
         calculatedate.upgradeCalendar();
     }
 }
