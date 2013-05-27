@@ -16,8 +16,9 @@ public class AnimationEngine implements Runnable{
     
     private List<Animation> animations = new ArrayList();
     private JPanel panel;
-    private int sleepTime = 100;    
-
+    private int sleepTime = 100;
+    private boolean pauseAnimation = false;
+    
     public AnimationEngine(JPanel comp){
         this.panel = comp;
     }
@@ -41,6 +42,7 @@ public class AnimationEngine implements Runnable{
             
             try {
                 Thread.sleep(sleepTime);
+                
             } catch (InterruptedException ex) {
                 Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -54,6 +56,14 @@ public class AnimationEngine implements Runnable{
     public void setSleeptime(int newTime){
         this.sleepTime = newTime;
     }   
+   
+    public void setPauseAnimation(boolean run){
+        this.pauseAnimation = run; 
+    }
+    
+    public boolean getPauseAnimation(){
+        return this.pauseAnimation;
+    }
     
     public Animation getAnimationAtIndex(int i){
         return this.animations.get(i);

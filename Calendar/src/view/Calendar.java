@@ -16,9 +16,11 @@ import javax.swing.JPanel;
 
 import controller.DayMouseListener;
 import controller.Daymousemovelistener;
+import controller.ImportantMouseListener;
 import controller.MouseListenerImpt;
 import controller.MouseListenerPrevNext;
 import controller.MouseListenerToday;
+import java.awt.event.MouseAdapter;
 
  
   
@@ -40,11 +42,14 @@ public class Calendar extends JPanel implements Runnable {
   public  Calendar(){
       
       setPreferredSize(new Dimension(380,420));
-      Thread thread = new Thread(this);
-      thread.start();
+      //Thread thread = new Thread(this);
+      //thread.start();
       
       this.engine = new AnimationEngine(this);
       engine.startEngine();
+      this.engine.setPauseAnimation(true);
+      ImportantMouseListener listener = new ImportantMouseListener(this.engine);
+      this.addMouseListener(listener);
   }
 
   
@@ -93,6 +98,8 @@ public class Calendar extends JPanel implements Runnable {
     addDrawable(new DrawYear());  
     addDrawable(new DrawMonth());
     addDrawable(new DrawWeek());
+    this.drawAnimation.clear();
+    
     for (int week = 1; week < 7; week++) {
         for (int d = 1; d < 8; d++) {
         	addDrawableForDay(new DrawDay(d,week));
@@ -100,7 +107,8 @@ public class Calendar extends JPanel implements Runnable {
                 //Listener L=new Listener(d,week);
         }
         }
-    this.addMouseListener(new DayMouseListener());
+   System.out.println(this.drawAnimation.size());
+   this.addMouseListener(new DayMouseListener());
    this.addMouseMotionListener(new Daymousemovelistener());
    this.addMouseMotionListener(new MouseListenerPrevNext());
    this.addMouseMotionListener(new MouseListenerToday());

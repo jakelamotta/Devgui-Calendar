@@ -1,5 +1,6 @@
 package view;
 
+import application.CalendarApp;
 import controller.AnimationEngine;
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -39,8 +40,8 @@ public class CalendarAnimation extends Animation{
 
     public void drawString(Graphics g){
         Graphics2D g2 = (Graphics2D) g.create();  
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.02f));
-        if(true){
+        if(this.highlighted){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.02f));
             g2.setColor(color);
             this.color = getColor();
             g2.fillRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
@@ -48,9 +49,12 @@ public class CalendarAnimation extends Animation{
     }     
     
     private void setHighPrio(){
-        for (Event e: CalendarAnimation.events){
-            if(e.getEventDueDate().equals(calculatedate.gettime()) && e.getEventPriority() == 5){
-                this.highlighted = true;
+        if(!CalendarApp.getFrame().getEventPanel().getModel().getFilteredData().isEmpty()){
+            for (Event e: CalendarApp.getFrame().getEventPanel().getModel().getFilteredData()){
+                System.out.println("Is due: " + e.getEventDueDate() + "calc date is: " + calculatedate.gettime());
+                if(e.getEventDueDate().equals(calculatedate.gettime()) && e.getEventPriority() == 100){
+                    this.highlighted = true;
+                }
             }
         }
     }

@@ -19,7 +19,8 @@ public class TableModel extends AbstractTableModel {
 	
 	private static final long serialVersionUID = 1585636867604774966L;
 	private XMLHandler xmlh;
-    private String[] columnNames = {"Event",
+        private ArrayList<Event> filteredData;
+        private String[] columnNames = {"Event",
     								"DueDate",
     								"Category",
     								"Priority",
@@ -35,6 +36,7 @@ public class TableModel extends AbstractTableModel {
 	*  not exist it initiates the ArrayList. 
 	*/
     public TableModel() {
+        this.filteredData = new ArrayList();
     	xmlh = new XMLHandler();
 		xmlh.readXML(this, XMLHandler.XML_ITEMS);
 		if (data == null) {
@@ -65,7 +67,7 @@ public class TableModel extends AbstractTableModel {
 			datacopy.add(i);
 		}
 		
-		ArrayList<Event> filteredData = new ArrayList<Event>();
+		ArrayList<Event> filteredByDateData = new ArrayList<Event>();
 		
     	for(int i=0; i<getRowCount(); i++){
     		
@@ -78,7 +80,7 @@ public class TableModel extends AbstractTableModel {
  					    "Edit", 
  					    "Delete");
     			
-    			filteredData.add(t);    
+    			filteredByDateData.add(t);    
     		}
     	}
     	
@@ -86,8 +88,8 @@ public class TableModel extends AbstractTableModel {
     		data.remove(i);
     	}
     	
-    	for(int i=0; i<filteredData.size(); i++){
-    		data.add(filteredData.get(i));
+    	for(int i=0; i<filteredByDateData.size(); i++){
+    		data.add(filteredByDateData.get(i));
     	}
     	
     	fireTableDataChanged();
@@ -98,10 +100,10 @@ public class TableModel extends AbstractTableModel {
 	} 
 	
 	public void priorityFilterTable(int priority){
-		
-		ArrayList<Event> filteredData = new ArrayList<Event>();
-		
-    	for(int i=0; i<getRowCount(); i++){
+	
+        this.filteredData.clear();
+            
+        for(int i=0; i<getRowCount(); i++){
     		
     		if((Integer) getValueAt(i, 3) == priority){
     			
@@ -249,4 +251,12 @@ public class TableModel extends AbstractTableModel {
 			 fireTableCellUpdated(row,col);
 
 		 }
+                
+                public ArrayList<Event> getFilteredData(){
+                    return this.filteredData;
+                }
+                
+                public void setFilteredData(ArrayList<Event> events){
+                    this.filteredData = events;
+                }
 }
