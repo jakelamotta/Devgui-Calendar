@@ -6,7 +6,6 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 import model.InputUtilities;
 import model.CalculateDate;
 import model.Event;
@@ -19,7 +18,6 @@ public class CalendarAnimation extends Animation{
     
     private static int fade = 1;
     public static boolean fadein;
-    private static ArrayList<Event> events = new ArrayList();
     private int d;
     private int week;
     private Color color;
