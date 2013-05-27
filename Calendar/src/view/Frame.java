@@ -11,6 +11,8 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+
+import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -27,6 +29,7 @@ import javax.swing.event.ChangeListener;
 
 import controller.DisableAnimationAction;
 import controller.EnableAnimationAction;
+import controller.FilterAction;
 import controller.ShowAddEventUIAction;
 
 import application.CalendarApp;
@@ -84,9 +87,31 @@ public class Frame extends JFrame{
 	   addEventButton = new JButton(addEvent);
 	   getContentPane().add(addEventButton, c);
 	   
+	   /*
+	    * ************************************************************
+	    * FILTER BUTTON FOR MOCK UP
+	    * REMOVE HERE
+	    */
+	   
+	   c.gridx = 1;
+	   c.gridy = 1;
+	   c.weightx = 0;
+	   c.weighty = 0;
+	   
+	   Action filterEvent = new FilterAction("Filter Event");
+	   JButton filterEventButton = new JButton(filterEvent);
+	   getContentPane().add(filterEventButton, c);
+	   
+	   /*
+	    * FILTER BUTTON FOR MOCK UP
+	    * REMOVE HERE
+	    * ************************************************************
+	    */
+	   
 	   c.weightx = 1;
 	   c.weighty = 1;
 	   c.gridwidth = 2;
+	   c.gridx = 0;
 	   c.gridy = 2;
 	   getContentPane().add(eventPanel, c); 
 	   this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -55,6 +55,66 @@ public class TableModel extends AbstractTableModel {
               return false;
           }
 	    }
+	 
+	public void dateFilterTable(String date){
+		
+		ArrayList<Event> filteredData = new ArrayList<Event>();
+	
+    	for(int i=0; i<getRowCount(); i++){
+    		
+    		if(((String) getValueAt(i, 1)).equalsIgnoreCase(date)){
+    			
+    			Event t = new Event(data.get(i).getEventName(),
+    					data.get(i).getEventDueDate(),
+    					data.get(i).getEventCategory(),
+    					data.get(i).getEventPriority(),  
+ 					    "Edit", 
+ 					    "Delete");
+    			
+    			filteredData.add(t);    
+    		}
+    	}
+    	
+    	for(int i=getRowCount()-1; i>=0; i--){
+    		data.remove(i);
+    	}
+    	
+    	for(int i=0; i<filteredData.size(); i++){
+    		data.add(filteredData.get(i));
+    	}
+    	
+    	fireTableDataChanged();
+	} 
+	
+	public void priorityFilterTable(int priority){
+		
+		ArrayList<Event> filteredData = new ArrayList<Event>();
+		
+    	for(int i=0; i<getRowCount(); i++){
+    		
+    		if((Integer) getValueAt(i, 3) == priority){
+    			
+    			Event t = new Event(data.get(i).getEventName(),
+    					data.get(i).getEventDueDate(),
+    					data.get(i).getEventCategory(),
+    					data.get(i).getEventPriority(),  
+ 					    "Edit", 
+ 					    "Delete");
+    			
+    			filteredData.add(t);	    
+    		}
+    	}
+    	
+    	for(int i=getRowCount()-1; i>=0; i--){
+    		data.remove(i);
+    	}
+    	
+    	for(int i=0; i<filteredData.size(); i++){
+    		data.add(filteredData.get(i));
+    	}
+    	
+    	fireTableDataChanged();
+	}
 
 	/**
 	* Adds row into the table and updates XML
