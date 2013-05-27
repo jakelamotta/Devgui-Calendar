@@ -16,11 +16,12 @@ import view.Drawable;
 public class MouseListenerImpt extends MouseMotionAdapter{
     
     public void getxpoint(float x,float y){
-if((401<x)&&(x<481)&&(15<y)&&(y<45))
-addDrawableMovedImpt (new DrawMouseEventImpt());
- else 
-    Calendar.MovedImportant.clear();
-
+        if((401<x)&&(x<481)&&(15<y)&&(y<45)){
+            addDrawableMovedImpt (new DrawMouseEventImpt());
+        }
+        else{ 
+            Calendar.MovedImportant.clear();
+        }
 }
     
      

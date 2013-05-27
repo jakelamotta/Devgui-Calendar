@@ -80,10 +80,10 @@ public class CalendarAnimation extends Animation{
         }        
     }
     
-    private void fadeOut(){
-        if(!fadein && this.colorCodes[0] > 63 && this.colorCodes[1] > 63 && this.colorCodes[2]<64){
-            colorCodes[0] = colorCodes[0]-fade+6;
-            colorCodes[1] = colorCodes[1]-fade+6;
+    private static void fadeOut(){
+        if(!fadein && colorCodes[0] > 63 && colorCodes[1] > 63 && colorCodes[2]<64){
+            colorCodes[0] = colorCodes[0]-fade-6;
+            colorCodes[1] = colorCodes[1]-fade-6;
             colorCodes[2] = colorCodes[2]+fade;
         }
     }
@@ -94,6 +94,7 @@ public class CalendarAnimation extends Animation{
     
     public static Color getColor() {
         fadeIn();
+        fadeOut();
         return new Color(colorCodes[0],colorCodes[1],colorCodes[2]);
     }
 }
