@@ -17,14 +17,17 @@ import java.util.Date;
 public class DrawMonth implements Drawable {
     private SimpleDateFormat month = new SimpleDateFormat("MMMM");
     private Date date = new Date();
-    private SimpleDateFormat present= new SimpleDateFormat("yyyy.MM.d")	;
+    private SimpleDateFormat present= new SimpleDateFormat("MM")	;
+    public static String Month;
     public void setDate(Date date) {
         this.date = date;
+       
     }
 
     public void drawString(Graphics g) {
     	    g.drawString(month.format(date), 150, 45);
-           //System.out.print(present.format(date));
+            Month=present.format(date);
+         
     }
 
     
