@@ -54,8 +54,9 @@ public class CalendarAnimation extends Animation{
     
     private void setHighPrio(){
                 
-        if(!CalendarApp.getFrame().getEventPanel().getModel().getFilteredData().isEmpty()){
-            for (Event e: CalendarApp.getFrame().getEventPanel().getModel().getFilteredData()){
+        if(CalendarApp.getFrame().getEventPanel().getModel().isFiltered() && CalendarApp.getFrame().getEventPanel().getModel().getRowCount()>0){
+            for (int i=0; i<CalendarApp.getFrame().getEventPanel().getModel().getRowCount(); i++){
+            	Event e = CalendarApp.getFrame().getEventPanel().getModel().getRow(i);
                 if(InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getDate() == calculatedate.gettime2().getDate() &&
                         InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getMonth() == calculatedate.gettime2().getMonth() &&     
                         InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getYear() == calculatedate.gettime2().getYear()){
