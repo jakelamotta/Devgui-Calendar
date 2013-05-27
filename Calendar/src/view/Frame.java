@@ -115,7 +115,7 @@ public class Frame extends JFrame{
 	   c.gridy = 2;
 	   getContentPane().add(eventPanel, c); 
 	   this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	   this.setPreferredSize(new Dimension(900, 630));     
+	   this.setPreferredSize(new Dimension(1100, 630));     
 	   this.setUndecorated(true);
       
 	   //********** Menu **********
