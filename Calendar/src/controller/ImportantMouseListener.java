@@ -3,6 +3,7 @@ package controller;
 import application.CalendarApp;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import view.CalendarAnimation;
 
 /**
  * @author Kristian
@@ -30,6 +31,7 @@ public class ImportantMouseListener extends MouseAdapter{
         if(e.getButton() == MouseEvent.BUTTON1 && getXY(e.getX(),e.getY())){
             CalendarApp.getFrame().getEventPanel().getModel().priorityFilterTable(100);
             engine.setPauseAnimation(false);
+            CalendarAnimation.fadein = true;
         }
     }
 }

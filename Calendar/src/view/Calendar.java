@@ -107,7 +107,7 @@ public class Calendar extends JPanel implements Runnable {
                 //Listener L=new Listener(d,week);
         }
         }
-   System.out.println(this.drawAnimation.size());
+    
    this.addMouseListener(new DayMouseListener());
    this.addMouseMotionListener(new Daymousemovelistener());
    this.addMouseMotionListener(new MouseListenerPrevNext());
