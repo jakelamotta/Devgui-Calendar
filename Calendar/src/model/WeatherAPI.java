@@ -125,7 +125,7 @@ public class WeatherAPI {
                 
                 avg = (low+high)/2;
                 
-                temperatures.add(Utilities.fahrenheitToCelcius(avg));
+                temperatures.add(InputUtilities.fahrenheitToCelcius(avg));
             }
             
             
@@ -197,10 +197,10 @@ public class WeatherAPI {
         
         //Check weather date is today or tomrrow to determine
         //which data to provide
-        if(Utilities.isSpecficDay(cal,1)){
+        if(InputUtilities.isSpecficDay(cal,1)){
             code = getWeatherCode().get(2);
         }
-        else if(Utilities.isSpecficDay(cal, 0)){
+        else if(InputUtilities.isSpecficDay(cal, 0)){
             code = getWeatherCode().get(1);
         }
         else{
@@ -232,10 +232,10 @@ public class WeatherAPI {
     public void setAvgTemp(GregorianCalendar cal) throws IOException{
         //Check weather date is today or tomrrow to determine
         //which data to provide
-        if(Utilities.isSpecficDay(cal, 0)){
+        if(InputUtilities.isSpecficDay(cal, 0)){
             this.avgTemp = getTemperatures(getRSSDocument()).get(1);
         }
-        else if(Utilities.isSpecficDay(cal,1)){
+        else if(InputUtilities.isSpecficDay(cal,1)){
             this.avgTemp = getTemperatures(getRSSDocument()).get(2);
         }
     }

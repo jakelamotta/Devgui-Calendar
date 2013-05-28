@@ -6,8 +6,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
-
+import model.InputUtilities;
 import model.CalculateDate;
 import model.Event;
 
@@ -17,14 +16,13 @@ import model.Event;
  */
 public class CalendarAnimation extends Animation{
     
-    private int fade = 1;
-    private boolean fadein = false;
-    private static ArrayList<Event> events = new ArrayList();
+    private static int fade = 1;
+    public static boolean fadein;
     private int d;
     private int week;
     private Color color;
     private boolean highlighted = false;
-    private int[] colorCodes = {64,64,64};
+    private static int[] colorCodes = {64,64,64};
     private AnimationEngine engine;
     CalculateDate calculatedate = new CalculateDate();
     
@@ -36,23 +34,32 @@ public class CalendarAnimation extends Animation{
         this.color = new Color(colorCodes[0],colorCodes[1],colorCodes[2]);
         engine = e;
         engine.addAnimation(this);        
+        calculatedate.setCalendar2();
     }
 
     public void drawString(Graphics g){
         Graphics2D g2 = (Graphics2D) g.create();  
+        
+        this.setHighPrio();
+        
         if(this.highlighted){
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.02f));
-            g2.setColor(color);
+            
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.2f));
+            g2.setColor(this.color);
             this.color = getColor();
             g2.fillRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
         }
+        calculatedate.upgradeCalendar2();
     }     
     
     private void setHighPrio(){
-        if(!CalendarApp.getFrame().getEventPanel().getModel().getFilteredData().isEmpty()){
-            for (Event e: CalendarApp.getFrame().getEventPanel().getModel().getFilteredData()){
-                System.out.println("Is due: " + e.getEventDueDate() + "calc date is: " + calculatedate.gettime());
-                if(e.getEventDueDate().equals(calculatedate.gettime()) && e.getEventPriority() == 100){
+                
+        if(CalendarApp.getFrame().getEventPanel().getModel().isFiltered() && CalendarApp.getFrame().getEventPanel().getModel().getRowCount()>0){
+            for (int i=0; i<CalendarApp.getFrame().getEventPanel().getModel().getRowCount(); i++){
+            	Event e = CalendarApp.getFrame().getEventPanel().getModel().getRow(i);
+                if(InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getDate() == calculatedate.gettime2().getDate() &&
+                        InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getMonth() == calculatedate.gettime2().getMonth() &&     
+                        InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getYear() == calculatedate.gettime2().getYear()){
                     this.highlighted = true;
                 }
             }
@@ -62,28 +69,31 @@ public class CalendarAnimation extends Animation{
     public void setHighlighted(boolean h){
         this.highlighted = h;
     }
-    private void fadeIn(){
-        if(fadein && this.colorCodes[1]<155 && this.colorCodes[0]<155 && this.colorCodes[2]>10){
+    
+    private static void fadeIn(){
+        if(fadein && colorCodes[1]<245 && colorCodes[0]<245 && colorCodes[2]>7){
             colorCodes[0] = colorCodes[0]+fade+6;
             colorCodes[1] = colorCodes[1]+fade+6;
             colorCodes[2] = colorCodes[2]-fade;
+
         }        
     }
     
-    private void fadeOut(){
-        if(!fadein && this.colorCodes[0] > 63 && this.colorCodes[1] > 63 && this.colorCodes[2]<64){
-            colorCodes[0] = colorCodes[0]-fade+6;
-            colorCodes[1] = colorCodes[1]-fade+6;
+    private static void fadeOut(){
+        if(!fadein && colorCodes[0] > 63 && colorCodes[1] > 63 && colorCodes[2]<64){
+            colorCodes[0] = colorCodes[0]-fade-6;
+            colorCodes[1] = colorCodes[1]-fade-6;
             colorCodes[2] = colorCodes[2]+fade;
-        }        
+        }
     }
     
     public void setFade(){
         fadein = fadein != true;
     }
     
-    public Color getColor() {
+    public static Color getColor() {
         fadeIn();
+        fadeOut();
         return new Color(colorCodes[0],colorCodes[1],colorCodes[2]);
     }
 }

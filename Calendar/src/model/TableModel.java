@@ -19,8 +19,7 @@ public class TableModel extends AbstractTableModel {
 	
 	private static final long serialVersionUID = 1585636867604774966L;
 	private XMLHandler xmlh;
-        private ArrayList<Event> filteredData;
-        private String[] columnNames = {"Event",
+    private String[] columnNames = {"Event",
     								"DueDate",
     								"Category",
     								"Priority",
@@ -28,6 +27,7 @@ public class TableModel extends AbstractTableModel {
     								"Delete"};
     @ElementList
     private ArrayList<Event> data;
+    private boolean filtered;
     
 	
 	/**
@@ -36,12 +36,12 @@ public class TableModel extends AbstractTableModel {
 	*  not exist it initiates the ArrayList. 
 	*/
     public TableModel() {
-        this.filteredData = new ArrayList();
     	xmlh = new XMLHandler();
 		xmlh.readXML(this, XMLHandler.XML_ITEMS);
 		if (data == null) {
 			data = new ArrayList<Event>();
 		}
+		filtered = false;
     }
     
     /**
@@ -58,17 +58,28 @@ public class TableModel extends AbstractTableModel {
           }
 	    }
 	 
+	 public void showUnfilteredTable(){
+		 if(filtered){
+				for(int i=getRowCount()-1; i>=0; i--){
+		    		data.remove(i);
+		    	}
+				xmlh.readXML(this, XMLHandler.XML_ITEMS);
+				fireTableDataChanged();
+				filtered = false;
+			}		 
+	 }
+	 
 	public void dateFilterTable(String date){
 		
-		
-		ArrayList<Event> datacopy = new ArrayList<Event>();
-		
-		for(Event i: data){
-			datacopy.add(i);
+		if(filtered){
+			for(int i=getRowCount()-1; i>=0; i--){
+	    		data.remove(i);
+	    	}
+			xmlh.readXML(this, XMLHandler.XML_ITEMS);
 		}
 		
-		ArrayList<Event> filteredByDateData = new ArrayList<Event>();
-		
+		ArrayList<Event> filteredData = new ArrayList<Event>();
+	
     	for(int i=0; i<getRowCount(); i++){
     		
     		if(((String) getValueAt(i, 1)).equalsIgnoreCase(date)){
@@ -80,7 +91,7 @@ public class TableModel extends AbstractTableModel {
  					    "Edit", 
  					    "Delete");
     			
-    			filteredByDateData.add(t);    
+    			filteredData.add(t);    
     		}
     	}
     	
@@ -88,22 +99,26 @@ public class TableModel extends AbstractTableModel {
     		data.remove(i);
     	}
     	
-    	for(int i=0; i<filteredByDateData.size(); i++){
-    		data.add(filteredByDateData.get(i));
+    	for(int i=0; i<filteredData.size(); i++){
+    		data.add(filteredData.get(i));
     	}
     	
     	fireTableDataChanged();
-    	
-    	for(Event i: datacopy){
-			data.add(i);
-		}
+    	filtered = true;
 	} 
 	
 	public void priorityFilterTable(int priority){
-	
-        this.filteredData.clear();
-            
-        for(int i=0; i<getRowCount(); i++){
+		
+		if(filtered){
+			for(int i=getRowCount()-1; i>=0; i--){
+	    		data.remove(i);
+	    	}
+			xmlh.readXML(this, XMLHandler.XML_ITEMS);
+		}
+		
+		ArrayList<Event> filteredData = new ArrayList<Event>();
+		
+    	for(int i=0; i<getRowCount(); i++){
     		
     		if((Integer) getValueAt(i, 3) == priority){
     			
@@ -127,6 +142,7 @@ public class TableModel extends AbstractTableModel {
     	}
     	
     	fireTableDataChanged();
+    	filtered = true;
 	}
 
 	/**
@@ -251,12 +267,12 @@ public class TableModel extends AbstractTableModel {
 			 fireTableCellUpdated(row,col);
 
 		 }
-                
-                public ArrayList<Event> getFilteredData(){
-                    return this.filteredData;
-                }
-                
-                public void setFilteredData(ArrayList<Event> events){
-                    this.filteredData = events;
-                }
+
+	public boolean isFiltered() {
+		return filtered;
+	}
+	
+	public Event getRow(int index){
+		return data.get(index);
+	}
 }

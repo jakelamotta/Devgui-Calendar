@@ -1,12 +1,13 @@
 package model;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
  * 
  * @author Kristian
  */
-public class Utilities {
+public class InputUtilities {
     protected static GregorianCalendar todaysDate = new GregorianCalendar();
     
     /**
@@ -62,6 +63,40 @@ public class Utilities {
     protected static int fahrenheitToCelcius(int fah){  
         int celcius = (int)(((double)fah-(double)32)/1.8);
         return celcius;
+    }
+    
+    public static GregorianCalendar convertStringToDate(String dateToConvert){
+        int tempYear,tempMonth,tempDay;
+        tempDay = 0;
+        String character = "-";
+        
+        
+        tempYear = Character.getNumericValue(dateToConvert.charAt(0))*1000+Character.getNumericValue(dateToConvert.charAt(1))*100+Character.getNumericValue(dateToConvert.charAt(2))*10+Character.getNumericValue(dateToConvert.charAt(3));
+        
+        
+        try{
+            tempMonth = Character.getNumericValue(dateToConvert.charAt(5))+Character.getNumericValue(dateToConvert.charAt(6));
+        }
+        catch(NullPointerException e){
+            tempMonth = Character.getNumericValue(dateToConvert.charAt(5));
+            try{
+                tempDay = Character.getNumericValue(dateToConvert.charAt(7))+Character.getNumericValue(dateToConvert.charAt(8));;
+            }
+            catch(NullPointerException en){
+                tempDay = Character.getNumericValue(dateToConvert.charAt(7));    
+            }
+            finally{
+                return new GregorianCalendar(tempYear,tempMonth+1,tempDay);
+            }
+        }
+                
+        try{
+            tempDay = Character.getNumericValue(dateToConvert.charAt(7))*10+Character.getNumericValue(dateToConvert.charAt(8));;
+        }
+        catch(Exception e){
+                tempDay = Character.getNumericValue(dateToConvert.charAt(7));    
+        }
+        return new GregorianCalendar(tempYear,tempMonth,tempDay);
     }
 }
 
