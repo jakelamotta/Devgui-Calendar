@@ -42,15 +42,8 @@ public class Calendar extends JPanel implements Runnable {
   public  Calendar(){
       
       setPreferredSize(new Dimension(380,420));
-
-      //Thread thread = new Thread(this);
-      //thread.start();
-      //
-  this.addMouseListener(new DayMouseListener());
-   this.addMouseMotionListener(new Daymousemovelistener());
-   this.addMouseMotionListener(new MouseListenerPrevNext());
-   this.addMouseMotionListener(new MouseListenerToday());
-   this.addMouseMotionListener(new MouseListenerImpt());
+      
+      
       this.engine = new AnimationEngine(this);
       engine.startEngine();
      
@@ -114,10 +107,6 @@ public class Calendar extends JPanel implements Runnable {
                 //Listener L=new Listener(d,week);
         }
         }
-
-   System.out.println(this.drawAnimation.size());
-  
-
     
    
      // temp.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));
