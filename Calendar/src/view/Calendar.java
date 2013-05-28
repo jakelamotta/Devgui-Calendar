@@ -20,7 +20,6 @@ import controller.ImportantMouseListener;
 import controller.MouseListenerImpt;
 import controller.MouseListenerPrevNext;
 import controller.MouseListenerToday;
-import java.awt.event.MouseAdapter;
 
  
   
@@ -39,19 +38,22 @@ public class Calendar extends JPanel implements Runnable {
   public static List<Drawable> MovedPrevNext = new ArrayList<Drawable>();
   public static List<Drawable> MovedToday = new ArrayList<Drawable>();
   public static List<Drawable> MovedImportant = new ArrayList<Drawable>();
+  
   public  Calendar(){
       
       setPreferredSize(new Dimension(380,420));
+
       //Thread thread = new Thread(this);
       //thread.start();
       //
-      this.engine = new AnimationEngine(this);
-      engine.startEngine();
-       this.addMouseListener(new DayMouseListener());
+  this.addMouseListener(new DayMouseListener());
    this.addMouseMotionListener(new Daymousemovelistener());
    this.addMouseMotionListener(new MouseListenerPrevNext());
    this.addMouseMotionListener(new MouseListenerToday());
    this.addMouseMotionListener(new MouseListenerImpt());
+      this.engine = new AnimationEngine(this);
+      engine.startEngine();
+     
       this.engine.setPauseAnimation(true);
       ImportantMouseListener listener = new ImportantMouseListener(this.engine);
       this.addMouseListener(listener);
@@ -103,7 +105,7 @@ public class Calendar extends JPanel implements Runnable {
     addDrawable(new DrawYear());  
     addDrawable(new DrawMonth());
     addDrawable(new DrawWeek());
-    this.drawAnimation.clear();
+    
     
     for (int week = 1; week < 7; week++) {
         for (int d = 1; d < 8; d++) {
@@ -112,8 +114,12 @@ public class Calendar extends JPanel implements Runnable {
                 //Listener L=new Listener(d,week);
         }
         }
+
    System.out.println(this.drawAnimation.size());
   
+
+    
+   
      // temp.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));
     for (Drawable d: Calendars) {
         d.drawString(temp);
@@ -141,6 +147,7 @@ public class Calendar extends JPanel implements Runnable {
         }
     Calendars.clear();
     DrawForDay.clear();
+    drawAnimation.clear();
    // Calendar today = Calendar.getInstance();
     //today.setTime(date);
     //Calendar cal = Calendar.getInstance();
