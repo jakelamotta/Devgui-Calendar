@@ -6,6 +6,7 @@ package controller;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
+import model.CalculateDate;
 
 import view.Calendar;
 import view.DrawDayforselected;
@@ -19,10 +20,7 @@ public class DayMouseListener extends MouseAdapter {
     
     private int d;
     private int week;
-    //float leftX=(float)((d-2) * 45 + 41);  
-    //float upY=(float)((week-2) * 45);  
-    //float rightX=(float)((d) * 45 + 41);  
-    //float downY=(float)((week) * 45);  
+    
     public void getxpoint(float x,float y){
 
 if((108.5-22.5<x)&&(x<108.5+22.5)){
@@ -46,6 +44,13 @@ if((333.5-22.5<x)&&(x<333.5+22.5)){
 if((378.5-22.5<x)&&(x<378.5+22.5)){
                  d=7;
                  getypoint(y);}
+if((0<x)&&(x<45)&&(86<y)&&(y<351)){
+    CalculateDate.dayaccount--;
+
+}
+if((440<x)&&(x<495)&&(86<y)&&(y<351)){
+  CalculateDate.dayaccount++;}
+
 }
      public void getypoint(float y){
 if((98.5-22.5<y)&&(y<98.5+22.5)){

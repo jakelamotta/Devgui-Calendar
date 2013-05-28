@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
  */
 
 public class DrawMouseEventPrevNext implements Drawable{
-    
+    //int b;
     private int a;
     public DrawMouseEventPrevNext(int a){
             this.a=a;
