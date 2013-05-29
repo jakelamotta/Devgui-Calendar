@@ -9,7 +9,7 @@ public class CalculateDate {
         private  Calendar today = Calendar.getInstance();
 	private static Calendar cal = Calendar.getInstance();
         private static Calendar cal2 = Calendar.getInstance();
-        //private static int dayaccount =0;
+        public static int dayaccount =0;
 	
         private void setDate(Date date) {
             this.date = date;
@@ -30,6 +30,7 @@ public class CalculateDate {
             today.setTime(date);
             cal.setTime(date);
             cal.set(Calendar.DATE, 1);
+            cal.add(Calendar.MONTH, dayaccount*1);
             cal.add(Calendar.DATE, -cal.get(Calendar.DAY_OF_WEEK) + 1);
             //cal.add(Calendar.DATE, +dayaccount);dayaccount++; 
             //return cal.getTime();

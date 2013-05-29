@@ -35,9 +35,10 @@ public class EventGUI extends JFrame
 	private static final long serialVersionUID = -6918601926489258608L;
 	
 	private JTextField eventField;
-	private JComboBox<String> month;
-    private JComboBox<String> day;
-    private JComboBox<String> year;
+    
+	private JComboBox month;
+        private JComboBox day;
+        private JComboBox year;
 	private JTextField categoryField;
 	private JSlider priority;
 	private JPanel mainPanel;
@@ -80,8 +81,8 @@ public class EventGUI extends JFrame
 		eventField = new JTextField(20);
 
 		GregorianCalendar today = new GregorianCalendar();
-		day = new JComboBox<String>(new DefaultComboBoxModel<String>());
-		year = new JComboBox<String>(getYears());
+		day = new JComboBox(new DefaultComboBoxModel());
+		year = new JComboBox(getYears());
 		year.setSelectedItem(today.get(GregorianCalendar.YEAR));
 		year.addItemListener(new ItemListener() {
 					
@@ -93,7 +94,7 @@ public class EventGUI extends JFrame
 				}
 			}
 		});
-        month = new JComboBox<String>(getMonths());
+        month = new JComboBox(getMonths());
         month.setSelectedItem("" + (today.get(GregorianCalendar.MONTH)+1));
         month.addItemListener(new ItemListener() {
 			

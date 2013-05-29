@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
  */
 public class DrawMouseEventToday implements Drawable {
     
-    
+    int b;
      public void drawString(Graphics g){
      Graphics2D g2 = (Graphics2D) g.create();  
      

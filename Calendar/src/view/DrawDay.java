@@ -25,7 +25,7 @@ public class DrawDay implements Drawable {
     private SimpleDateFormat day = new SimpleDateFormat("d");
     private Date date = new Date();
     CalculateDate calculatedate=new CalculateDate();
-   
+   public static String[][] dateposition= new String[8][9];
     
     public DrawDay(int d,int week){
             this.d=d;
@@ -63,6 +63,7 @@ public class DrawDay implements Drawable {
         g.setColor(Color.white); 
         g.setFont(Bday);
         present=day.format(calculatedate.gettime());
+        dateposition[d][week] =present;
              g.drawString(present, (d-1) * 45 + 91 + 4, (week-1) * 45 + 91 + 20);
         calculatedate.upgradeCalendar();
     }
