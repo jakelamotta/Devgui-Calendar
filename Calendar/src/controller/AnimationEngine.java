@@ -22,6 +22,10 @@ public class AnimationEngine implements Runnable{
     public AnimationEngine(JPanel comp){
         this.panel = comp;
     }
+
+    public AnimationEngine() {
+        this(null);
+    }
     
     /**
      * Function that starts a new thread for the input animationengine
@@ -71,5 +75,15 @@ public class AnimationEngine implements Runnable{
 
     public void addAnimation(Animation animation) {
         this.animations.add(animation);
+    }
+    
+    public void setPanel(JPanel p){
+        this.panel = p;
+    }
+    
+    public void setShowAnimation(){
+        for(Animation ani:this.animations){
+            ani.showAnimation = ani.showAnimation != true;
+        }
     }
 }

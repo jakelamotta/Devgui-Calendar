@@ -9,13 +9,16 @@ import javax.swing.AbstractAction;
  */
 public class EnableAnimationAction extends AbstractAction {
 
-    public EnableAnimationAction(){
+    private AnimationEngine animationengine;
+    
+    public EnableAnimationAction(AnimationEngine engine){
         super("Enable animation");
+        this.animationengine = engine;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        //AnimationEngine.setShowAnimation(true);
+       animationengine.setShowAnimation();
     }
     
 }

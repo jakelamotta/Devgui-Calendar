@@ -33,6 +33,7 @@ import controller.FilterAction;
 import controller.ShowAddEventUIAction;
 
 import application.CalendarApp;
+import controller.AnimationEngine;
 
 
 /**
@@ -56,13 +57,18 @@ public class Frame extends JFrame{
     private JMenuItem btn;
     private JButton addEventButton;
     private EventPanel eventPanel;
+    private AnimationEngine calendarEngine;
+    private AnimationEngine dayCardEngine;
     
    public Frame()
    { 
+           calendarEngine = new AnimationEngine();
+           dayCardEngine = new AnimationEngine();
+           
 	   eventPanel = new EventPanel();
 	   ch = new Calendar();
 	   ch.setDate(new Date());
-	   card = new DayCard();
+	   card = new DayCard(dayCardEngine);
 	   slider = new JSlider(0,7,0);
 	   
 	   getContentPane().setLayout(new GridBagLayout());
@@ -178,8 +184,8 @@ public class Frame extends JFrame{
       
 	   editMenu.add(undo);
 	   editMenu.add(redo);
-           editMenu.add(new EnableAnimationAction());
-           editMenu.add(new DisableAnimationAction());
+           editMenu.add(new EnableAnimationAction(dayCardEngine));
+           editMenu.add(new DisableAnimationAction(dayCardEngine));
 	   menuBar.add(editMenu);
       
 	   this.setMenu.add(btn);

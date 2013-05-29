@@ -46,6 +46,9 @@ public class WeatherAnimation extends Animation {
                     paintSnow(g);
                     break;
         }
+        if(!super.showAnimation){
+            pic = 0;
+        }
         
     }
     

@@ -16,6 +16,7 @@ public class ImportantMouseListener extends MouseAdapter{
     private boolean enabled;
     
     public ImportantMouseListener(AnimationEngine eng) {
+        super();
         this.engine = eng;
         enabled = false;
     }

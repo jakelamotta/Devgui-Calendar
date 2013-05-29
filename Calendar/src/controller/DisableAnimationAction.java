@@ -9,12 +9,15 @@ import javax.swing.AbstractAction;
  */
 public class DisableAnimationAction extends AbstractAction {
 
-    public DisableAnimationAction(){
+    private AnimationEngine engine;
+    
+    public DisableAnimationAction(AnimationEngine dayCardEngine) {
         super("Disable animation");
+        engine = dayCardEngine;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        //AnimationEngine.setShowAnimation(false);
+        engine.setShowAnimation();
     }
 }

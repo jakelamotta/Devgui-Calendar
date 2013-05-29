@@ -15,6 +15,7 @@ import javax.swing.border.BevelBorder;
 import model.WeatherAPI;
 
 import controller.AnimationEngine;
+import controller.WeatherMouseListener;
 import enums.Weather;
 
 /**
@@ -36,7 +37,11 @@ public class DayCard extends JPanel{
      * Default constructor, created with todays date as date.
      */
     public DayCard(){
-        this(new GregorianCalendar());
+        this(null);
+    }
+    
+    public DayCard(AnimationEngine engine){
+        this(engine,new GregorianCalendar());
     }
     
     /**
@@ -44,14 +49,21 @@ public class DayCard extends JPanel{
      * a specific date.
      * @param cal 
      */
-    public DayCard(GregorianCalendar cal){
+    public DayCard(AnimationEngine eng, GregorianCalendar cal){
         //Initialize all variables
         this.date = cal;
+        
         weather = new WeatherAPI();
         weather.setWeather(new GregorianCalendar());
+        
         setPreferredSize(new Dimension(300,400));
         this.setBorder(new BevelBorder(BevelBorder.RAISED));
-        this.engine = new AnimationEngine(this);
+        
+        this.engine = eng;
+        eng.setPanel(this);
+        
+        this.addMouseListener(new WeatherMouseListener(engine));
+        
         setBackground(new Color(51,51,51));
         //attempt to get weather information
         try {
