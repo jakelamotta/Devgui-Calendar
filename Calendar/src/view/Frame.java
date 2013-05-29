@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -27,13 +26,12 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import controller.DisableAnimationAction;
-import controller.EnableAnimationAction;
 import controller.FilterAction;
 import controller.ShowAddEventUIAction;
 
 import application.CalendarApp;
 import controller.AnimationEngine;
+import controller.ToggleAnimationAction;
 
 
 /**
@@ -184,9 +182,8 @@ public class Frame extends JFrame{
       
 	   editMenu.add(undo);
 	   editMenu.add(redo);
-           editMenu.add(new EnableAnimationAction(dayCardEngine));
-           editMenu.add(new DisableAnimationAction(dayCardEngine));
-	   menuBar.add(editMenu);
+           editMenu.add(new ToggleAnimationAction(dayCardEngine));
+           menuBar.add(editMenu);
       
 	   this.setMenu.add(btn);
 	   this.menuBar.add(setMenu);
