@@ -10,7 +10,8 @@ public class CalculateDate {
 	private static Calendar cal = Calendar.getInstance();
         private static Calendar cal2 = Calendar.getInstance();
         public static int dayaccount =0;
-	
+	public static int relativeMonthCount = 0;
+        
         private void setDate(Date date) {
             this.date = date;
         }
@@ -20,6 +21,7 @@ public class CalculateDate {
             today.setTime(date);
             cal2.setTime(date);
             cal2.set(Calendar.DATE, 1);
+            cal2.add(Calendar.MONTH, relativeMonthCount*1);
             cal2.add(Calendar.DATE, -cal2.get(Calendar.DAY_OF_WEEK) + 1);
             //cal.add(Calendar.DATE, +dayaccount);dayaccount++; 
             //return cal.getTime();
