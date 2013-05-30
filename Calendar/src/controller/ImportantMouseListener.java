@@ -30,7 +30,7 @@ public class ImportantMouseListener extends MouseAdapter{
      */
     private boolean getXY(int x, int y){
         
-        if(400<x && x<482 && 14<y && y<46 ){
+        if(399<x && x<521 && 14<y && y<46 ){
             return true;
         }
         else{

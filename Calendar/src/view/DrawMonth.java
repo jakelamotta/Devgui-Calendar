@@ -1,4 +1,6 @@
 package view;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,6 +32,9 @@ public class DrawMonth implements Drawable {
             //return cal.getTime();
         }
     public void drawString(Graphics g) {
+        Font Amonth=new Font("Century Gothic",Font.PLAIN,45);
+    	 g.setColor(Color.gray); 
+         g.setFont(Amonth);
     	    g.drawString(month.format(today.getTime()), 150, 45);
             Month=present.format(today.getTime());
          

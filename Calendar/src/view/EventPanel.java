@@ -17,6 +17,7 @@ import controller.ButtonColumn;
 import controller.DeleteInTableAction;
 import controller.EditInTableAction;
 import controller.ProgRenderer;
+import java.awt.Color;
 
 /**
 * The event panel of the view. 
@@ -46,7 +47,16 @@ public class EventPanel extends JPanel {
                 table = new JTable(model);
                 table.setAutoCreateRowSorter(true);
                 table.setRowHeight(40);
-			
+		/**
+                * Set the view of the table.
+                * /Qi
+                */
+             table.setForeground(Color.lightGray); 
+             table.setSelectionBackground(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
+             table.setSelectionForeground(Color.WHITE);
+             table.setBackground(new Color(44, 44, 44));
+             table.setGridColor(Color.lightGray);	
+             
 		new ButtonColumn(table, edit, 4);
 		
 		new ButtonColumn(table, del, 5);

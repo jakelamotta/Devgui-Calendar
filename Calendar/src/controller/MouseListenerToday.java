@@ -15,7 +15,7 @@ import view.Drawable;
 public class MouseListenerToday extends MouseMotionAdapter{
     
     public void getxpoint(float x,float y){
-if((336<x)&&(x<396)&&(15<y)&&(y<45))
+if((460<x)&&(x<520)&&(50<y)&&(y<80))
 
  addDrawableMovedToday (new DrawMouseEventToday());
 else   

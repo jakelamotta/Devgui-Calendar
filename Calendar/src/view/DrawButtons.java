@@ -32,21 +32,21 @@ public class DrawButtons implements Drawable {
            //"Today" button
            
             g2.setColor(Color.black);
-        g2.drawRoundRect(336, 15, 61, 31,10,10);
+        g2.drawRoundRect(460, 50, 61, 31,10,10);
         g2.setColor(Color.darkGray);
-        g2.fillRoundRect(336, 15, 60, 30,10,10);
+        g2.fillRoundRect(460, 50, 60, 30,10,10);
         
            Font Dbutton=new Font("Century Gothic",Font.PLAIN,12);
         g.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5)); 
         g.setFont(Dbutton);
-           g.drawString("Today",350, 35);
+           g.drawString("Today",475, 70);
            
            
         //"High priority" button
         g2.setColor(Color.black);
-        g2.drawRoundRect(401, 15, 81, 31,10,10);
+        g2.drawRoundRect(400, 15, 121, 31,10,10);
         g2.setColor(Color.darkGray);
-        g2.fillRoundRect(401, 15, 80, 30,10,10);
+        g2.fillRoundRect(400, 15, 120, 30,10,10);
         
         g.setColor(Color.lightGray);
         g.setFont(Dbutton);
