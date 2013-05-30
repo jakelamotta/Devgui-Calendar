@@ -9,11 +9,14 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * A class of type animation that has definitions for how the weather
+ * animation is to be drawn
  * @author Kristian
  */
 public class WeatherAnimation extends Animation {
     
+    //this int defines what picture to draw, the animation is done by
+    //rotating between pictures.
     private int pic = 0;
     
     public WeatherAnimation(){
@@ -24,6 +27,12 @@ public class WeatherAnimation extends Animation {
     public void drawString(Graphics g) {
     }
     
+    /**
+     * Function that make sure the correct animation is drawn by using an
+     * Weather enum as parameter
+     * @param g Object to draw on
+     * @param weather Weather to be drawn
+     */
     public void drawWeatherAnimation(Graphics g, Weather weather) {
         switch(weather){
                 default:
@@ -84,6 +93,10 @@ public class WeatherAnimation extends Animation {
         }
     }
 
+    /**
+     * Paints a cloud
+     * @param g 
+     */    
     public void paintCloud(Graphics g) {
         BufferedImage img = null;
         

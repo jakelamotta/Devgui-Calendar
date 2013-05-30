@@ -51,8 +51,7 @@ public class Calendar extends JPanel implements Runnable {
       this.engine = new AnimationEngine(this);
       engine.startEngine();
      
-      this.engine.setPauseAnimation(true);
-      ImportantMouseListener listener = new ImportantMouseListener(this.engine);
+      ImportantMouseListener listener = new ImportantMouseListener();
       this.addMouseListener(listener);
   }
 

@@ -8,19 +8,26 @@ import view.DrawButtons;
 import view.DrawMouseEventImpt;
 
 /**
+ * Mouse adapater for the "show important"-button, defines actions for clicking
+ * on that.
  * @author Kristian
  */
 public class ImportantMouseListener extends MouseAdapter{
 
-    private AnimationEngine engine;
     private boolean enabled;
     
-    public ImportantMouseListener(AnimationEngine eng) {
+    public ImportantMouseListener() {
         super();
-        this.engine = eng;
         enabled = false;
     }
 
+    /**
+     * Function that returns true if the click is in the area of the button,
+     * false if not
+     * @param x x-coordinate of the click
+     * @param y y-coordinate of the click
+     * @return 
+     */
     private boolean getXY(int x, int y){
         
         if(400<x && x<482 && 14<y && y<46 ){
@@ -31,8 +38,12 @@ public class ImportantMouseListener extends MouseAdapter{
         }
         
     }
+    
     @Override
     public void mouseClicked(MouseEvent e){
+        
+        //If the correct mouse button and the correct place has been clicked
+        //the following code executes
         if(e.getButton() == MouseEvent.BUTTON1 && getXY(e.getX(),e.getY())){
             if(!enabled){
                 CalendarApp.getFrame().getEventPanel().getModel().priorityFilterTable(100);

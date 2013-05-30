@@ -9,23 +9,35 @@ import java.awt.Graphics2D;
 import model.InputUtilities;
 import model.CalculateDate;
 import model.Event;
+import model.TableModel;
 
 /**
- * A calendaranimation class
+ * A calendaranimation class of the type animation
  * @author Kristian
  */
 public class CalendarAnimation extends Animation{
     
-    private static int fade = 1;
+    //Model with event objects
+    private TableModel model = CalendarApp.getFrame().getEventPanel().getModel();
+    
+    //static variables as they arent instance specific and all highligts have
+    //the same color
     public static boolean fadein;
+    private static int[] colorCodes = {64,64,64};
+    
     private int d;
     private int week;
     private Color color;
-    private boolean highlighted = false;
-    private static int[] colorCodes = {64,64,64};
+    private boolean highlighted = false;    
     private AnimationEngine engine;
     CalculateDate calculatedate = new CalculateDate();
     
+    /**
+     * Constructor that sets the intial variables of the animation
+     * @param d
+     * @param week
+     * @param e 
+     */
     public CalendarAnimation(int d,int week, AnimationEngine e){
         super.showAnimation = true;
         this.d=d;
@@ -37,6 +49,11 @@ public class CalendarAnimation extends Animation{
         calculatedate.setCalendar2();
     }
 
+    /**
+     * Overriden drawstring method, paints the highligting if the day should be
+     * highlighted, if not this function doesnt do anything. 
+     * @param g 
+     */
     public void drawString(Graphics g){
         Graphics2D g2 = (Graphics2D) g.create();  
         
@@ -52,11 +69,15 @@ public class CalendarAnimation extends Animation{
         calculatedate.upgradeCalendar2();
     }     
     
-    private void setHighPrio(){
-                
-        if(CalendarApp.getFrame().getEventPanel().getModel().isFiltered() && CalendarApp.getFrame().getEventPanel().getModel().getRowCount()>0){
-            for (int i=0; i<CalendarApp.getFrame().getEventPanel().getModel().getRowCount(); i++){
-            	Event e = CalendarApp.getFrame().getEventPanel().getModel().getRow(i);
+    /**
+     * Method that for the given day sets the boolean "highlighted" to true 
+     * or false depending on whether or not that day has a high prio event
+     * on it
+     */
+    private void setHighPrio(){                
+        if(model.isFiltered() && model.getRowCount()>0){
+            for (int i=0; i<model.getRowCount(); i++){
+            	Event e = model.getRow(i);
                 if(InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getDate() == calculatedate.gettime2().getDate() &&
                         InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getMonth() == calculatedate.gettime2().getMonth() &&     
                         InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getYear() == calculatedate.gettime2().getYear()){
@@ -66,26 +87,34 @@ public class CalendarAnimation extends Animation{
         }
     }
     
-    public void setHighlighted(boolean h){
-        this.highlighted = h;
-    }
-    
+    /**
+     * Function that fades in on the highlighting by changing the color codes
+     * accordingly
+     */
     private static void fadeIn(){
         if(fadein && colorCodes[1]<245 && colorCodes[0]<245 && colorCodes[2]>7){
-            colorCodes[0] = colorCodes[0]+fade+6;
-            colorCodes[1] = colorCodes[1]+fade+6;
-            colorCodes[2] = colorCodes[2]-fade;
+            colorCodes[0] = colorCodes[0]+7;
+            colorCodes[1] = colorCodes[1]+7;
+            colorCodes[2] = colorCodes[2]-1;
 
         }        
     }
     
+    /**
+     * Function that fades out from the highlighting by changing the color codes
+     * accordingly
+     */
     private static void fadeOut(){
         if(!fadein && colorCodes[0] > 63 && colorCodes[1] > 63 && colorCodes[2]<64){
-            colorCodes[0] = colorCodes[0]-fade-6;
-            colorCodes[1] = colorCodes[1]-fade-6;
-            colorCodes[2] = colorCodes[2]+fade;
+            colorCodes[0] = colorCodes[0]-7;
+            colorCodes[1] = colorCodes[1]-7;
+            colorCodes[2] = colorCodes[2]+1;
         }
     }
+    
+    /**********************************************************
+     ********* Getters and setters ****************************
+     **********************************************************/
     
     public void setFade(){
         fadein = fadein != true;
@@ -95,5 +124,9 @@ public class CalendarAnimation extends Animation{
         fadeIn();
         fadeOut();
         return new Color(colorCodes[0],colorCodes[1],colorCodes[2]);
+    }
+    
+    public void setHighlighted(boolean h){
+        this.highlighted = h;
     }
 }

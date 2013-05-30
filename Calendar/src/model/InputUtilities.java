@@ -1,11 +1,10 @@
 package model;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * 
- * @author Kristian
+ * A simple class with static method for validating different kinds of input. 
+ * @author Kristian (class taken from UIP I project with some additions)
  */
 public class InputUtilities {
     protected static GregorianCalendar todaysDate = new GregorianCalendar();
@@ -65,6 +64,12 @@ public class InputUtilities {
         return celcius;
     }
     
+    /**
+     * Converts a string input in the very specifc form of year-month-day to
+     * an gregorian calendar object corresponding to that date
+     * @param dateToConvert String representation of a date
+     * @return Date object corresponding to the input string
+     */
     public static GregorianCalendar convertStringToDate(String dateToConvert){
         int tempYear,tempMonth,tempDay;
         tempDay = 0;

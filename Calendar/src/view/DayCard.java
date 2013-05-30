@@ -34,12 +34,16 @@ public class DayCard extends JPanel{
     private WeatherAnimation animation = new WeatherAnimation();
     
     /**
-     * Default constructor, created with todays date as date.
+     * Default constructor, chain calls the 2nd constructor with null object.
      */
     public DayCard(){
         this(null);
     }
     
+    /**
+     * Calls the 2-parameter constructor with todays date
+     * @param engine 
+     */
     public DayCard(AnimationEngine engine){
         this(engine,new GregorianCalendar());
     }
@@ -65,6 +69,7 @@ public class DayCard extends JPanel{
         this.addMouseListener(new WeatherMouseListener(engine));
         
         setBackground(new Color(51,51,51));
+        
         //attempt to get weather information
         try {
             this.current = weather.getWeather(this.date);

@@ -14,10 +14,12 @@ import view.Animation;
  */
 public class AnimationEngine implements Runnable{
     
+    //List of animations that this engine instance runs
     private List<Animation> animations = new ArrayList();
+    
+    //The panel where the engine draws animations
     private JPanel panel;
     private int sleepTime = 100;
-    private boolean pauseAnimation = false;
     
     public AnimationEngine(JPanel comp){
         this.panel = comp;
@@ -59,15 +61,7 @@ public class AnimationEngine implements Runnable{
     
     public void setSleeptime(int newTime){
         this.sleepTime = newTime;
-    }   
-   
-    public void setPauseAnimation(boolean run){
-        this.pauseAnimation = run; 
-    }
-    
-    public boolean getPauseAnimation(){
-        return this.pauseAnimation;
-    }
+    }      
     
     public Animation getAnimationAtIndex(int i){
         return this.animations.get(i);
