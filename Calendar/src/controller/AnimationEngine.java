@@ -44,8 +44,7 @@ public class AnimationEngine implements Runnable{
     public void run() {
         while(true){
             
-            this.panel.repaint();     
-            
+            this.panel.repaint();
             try {
                 Thread.sleep(sleepTime);
                 
@@ -79,5 +78,9 @@ public class AnimationEngine implements Runnable{
         for(Animation ani:this.animations){
             ani.showAnimation = ani.showAnimation != true;
         }
+    }
+    
+    public void clearAnimationList(){
+        this.animations.clear();
     }
 }

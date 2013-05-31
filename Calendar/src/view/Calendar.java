@@ -91,7 +91,7 @@ public class Calendar extends JPanel implements Runnable {
     addDrawable(new DrawMonth());
     addDrawable(new DrawWeek());
     
-    
+    this.engine.clearAnimationList();
     for (int week = 1; week < 7; week++) {
         for (int d = 1; d < 8; d++) {
         	addDrawableForDay(new DrawDay(d,week));
