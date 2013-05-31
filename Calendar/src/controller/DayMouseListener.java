@@ -20,6 +20,7 @@ public class DayMouseListener extends MouseAdapter {
     
     private int d;
     private int week;
+    public static int i=0;
     
     public void getxpoint(float x,float y){
 
@@ -57,41 +58,55 @@ public class DayMouseListener extends MouseAdapter {
             CalculateDate.dayaccount++;
             CalculateDate.relativeMonthCount++;
             }
+        if((460<x)&&(x<520)&&(50<y)&&(y<80))
+        {CalculateDate.dayaccount=0;
+         CalculateDate.relativeMonthCount=0;
+         i=1;
+        Calendar.Selected.clear();
+        Calendar.Selected2.clear();
+        }
         }
     
      public void getypoint(float y){
         if((98.5-22.5<y)&&(y<98.5+22.5)){
             week=1;
+            i=0;
             Calendar.Selected.clear();
             Calendar.Selected2.clear();
+            
             addDrawableForselected(new DrawDayforselected(d,week));
         }
         if((143.5-22.5<y)&&(y<143.5+22.5)){
             week=2;
+                i=0;
             Calendar.Selected.clear();
             Calendar.Selected2.clear();
             addDrawableForselected(new DrawDayforselected(d,week));
         }
         if((188.5-22.5<y)&&(y<188.5+22.5)){
             week=3;
+                i=0;
             Calendar.Selected.clear();
             Calendar.Selected2.clear();
             addDrawableForselected(new DrawDayforselected(d,week));
         }
         if((233.5-22.5<y)&&(y<233.5+22.5)){
             week=4;
+            i=0;
             Calendar.Selected.clear();
             Calendar.Selected2.clear();
             addDrawableForselected(new DrawDayforselected(d,week));
         }
         if((278.5-22.5<y)&&(y<278.5+22.5)){
             week=5;
+            i=0;
             Calendar.Selected.clear();
             Calendar.Selected2.clear();
             addDrawableForselected(new DrawDayforselected(d,week));
         }
         if((323.5-22.5<y)&&(y<323.5+22.5)){
             week=6;
+            i=0;
             Calendar.Selected.clear();
             Calendar.Selected2.clear();
             addDrawableForselected(new DrawDayforselected(d,week));

@@ -67,21 +67,10 @@ public class Calendar extends JPanel implements Runnable {
   public void addDrawableForAnimation(Drawable d){
       this.drawAnimation.add(d);
   }
-  
-  
-	
-
-//Drawable[] calendars = new Drawable[] {
-  //        new DrawMonth(),
-    //      new DrawYear(),
-      //    new Drawday(3,5),
-        //  new Drawday(1,1),
-//};
 
   public void setDate(Date date) {
     this.date = date;
   }
-  
   
   
   public void paintComponent(Graphics g) {

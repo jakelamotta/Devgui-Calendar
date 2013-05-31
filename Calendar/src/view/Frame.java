@@ -120,7 +120,7 @@ public class Frame extends JFrame{
 	   getContentPane().add(eventPanel, c); 
 	   this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	   this.setPreferredSize(new Dimension(1100, 630));     
-	   this.setUndecorated(true);
+	   //this.setUndecorated(true);
       
 	   //********** Menu **********
 	   menuBar = new JMenuBar();
