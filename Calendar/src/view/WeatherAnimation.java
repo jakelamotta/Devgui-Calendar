@@ -4,6 +4,7 @@ import enums.Weather;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -18,9 +19,15 @@ public class WeatherAnimation extends Animation {
     //this int defines what picture to draw, the animation is done by
     //rotating between pictures.
     private int pic = 0;
+    private ArrayList<BufferedImage> imgSuns;
+    private ArrayList<BufferedImage> imgClouds;
+    private ArrayList<BufferedImage> imgRains;
+    private ArrayList<BufferedImage> imgSnow;
+    
     
     public WeatherAnimation(){
         super.showAnimation = true;
+        loadWeatherImages();
     }
     
     @Override
@@ -44,12 +51,7 @@ public class WeatherAnimation extends Animation {
                     paintRain(g,pic);
                     break;
                 case SUNNY:
-                    try {
-                        paintSun(g,pic);
-                    } 
-                    catch (IOException ex) {
-                        Logger.getLogger(DayCard.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    paintSun(g,pic);
                     break;
                 case SNOWY:
                     paintSnow(g);
@@ -67,24 +69,9 @@ public class WeatherAnimation extends Animation {
      * @param i Which of the image to be used
      * @throws IOException 
      */
-    public void paintSun(Graphics g, int i) throws IOException {
-        BufferedImage img = null;
-        
-        try{
-            if(i==0){
-                //img = ImageIO(this.getClass().getResource("addtask.jpg"));
-                img = ImageIO.read(this.getClass().getResource("sun.jpg"));
-            }
-        else if(i==1){
-            img = ImageIO.read(this.getClass().getResource("sun2.jpg"));
-        }
-        
-        }
-        catch(IOException e){
-            System.out.println(e.toString());
-        }
-        
-        g.drawImage(img,250,20,30,30,null);
+    public void paintSun(Graphics g, int i) {
+                
+        g.drawImage(this.imgSuns.get(i),250,20,30,30,null);
         
         //Update choice of images (switching between 0 and 1, animation shifts 
         //between two pictures to create a shining sun
@@ -98,16 +85,7 @@ public class WeatherAnimation extends Animation {
      * @param g 
      */    
     public void paintCloud(Graphics g) {
-        BufferedImage img = null;
-        
-        try{
-            img = ImageIO.read(this.getClass().getResource("clody.png"));
-        }
-        catch(IOException e){
-            System.out.println(e.toString());
-        }
-        
-        g.drawImage(img,250,20,30,30,null);
+        g.drawImage(this.imgClouds.get(0),250,20,30,30,null);
     }
     
     /**
@@ -116,27 +94,8 @@ public class WeatherAnimation extends Animation {
      * @param i i is the number used to choose between pictures to draw
      */
     public void paintRain(Graphics g, int i){
-        BufferedImage img = null;
         
-        try{
-        if(i==0){
-            img = ImageIO.read(this.getClass().getResource("rainpng.png"));
-        }
-        else if(i==1){
-            img = ImageIO.read(this.getClass().getResource("rainpng2.png"));
-        }
-        else if(i==2){
-            img = ImageIO.read(this.getClass().getResource("rainpng3.png"));
-        }
-        
-        }
-        catch(IOException e){
-            System.out.println(e.toString());
-        }
-        
-        g.drawImage(img,250,20,150,150,null);
-        
-        
+        g.drawImage(this.imgRains.get(i),250,20,150,150,null);       
         
         if(showAnimation){
             //Update choice of images (switching between 0,1 and 2, animation shifts 
@@ -155,12 +114,27 @@ public class WeatherAnimation extends Animation {
      * @param g Graphics object to be used.
      */
     public void paintSnow(Graphics g){
-        BufferedImage img = null;
+        g.drawImage(this.imgSnow.get(0),280, pic, 30, 30,null);
+    }
+
+    private void loadWeatherImages() {
+        this.imgClouds = new ArrayList();
+        this.imgRains = new ArrayList();
+        this.imgSnow = new ArrayList();
+        this.imgSuns = new ArrayList();
+        
         try {
-            img = ImageIO.read(this.getClass().getResource("snow.jpg"));
-        }       
-        catch (IOException e) {
+            this.imgRains.add(ImageIO.read(this.getClass().getResource("rainpng.png")));
+            this.imgRains.add(ImageIO.read(this.getClass().getResource("rainpng2.png")));
+            this.imgRains.add(ImageIO.read(this.getClass().getResource("rainpng3.png")));
+            
+            this.imgSuns.add(ImageIO.read(this.getClass().getResource("sun.jpg")));
+            this.imgSuns.add(ImageIO.read(this.getClass().getResource("sun2.jpg")));
+            
+            this.imgClouds.add(ImageIO.read(this.getClass().getResource("clody.png")));
+        } catch (IOException ex) {
+            Logger.getLogger(WeatherAnimation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        g.drawImage(img,280, pic, 30, 30,null);
+        
     }
 }
