@@ -24,6 +24,7 @@ public class DrawDay implements Drawable {
     private int d;
     private int week;    
     private SimpleDateFormat day = new SimpleDateFormat("d");
+    private SimpleDateFormat copydate=new SimpleDateFormat("yyyy-M-d");
     private Date date = new Date();
     CalculateDate calculatedate=new CalculateDate();
    public static String[][] dateposition= new String[8][9];
@@ -46,7 +47,7 @@ public class DrawDay implements Drawable {
         
     	
  
-        if(day.format(calculatedate.gettime()).equals(day.format(date))&&DayMouseListener.i==1){
+        if(copydate.format(calculatedate.gettime()).equals(copydate.format(date))&&DayMouseListener.i==1){
            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.30f));
       g2.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
       g2.fillRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);     
@@ -64,7 +65,8 @@ public class DrawDay implements Drawable {
         g.setColor(Color.white); 
         g.setFont(Bday);
         present=day.format(calculatedate.gettime());
-        dateposition[d][week] =present;
+        dateposition[d][week] =copydate.format(calculatedate.gettime());
+      
              g.drawString(present, (d-1) * 45 + 91 + 4, (week-1) * 45 + 91 + 20);
         calculatedate.upgradeCalendar();
     }
