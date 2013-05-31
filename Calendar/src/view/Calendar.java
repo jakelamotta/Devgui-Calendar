@@ -41,8 +41,8 @@ public class Calendar extends JPanel implements Runnable {
   
   public  Calendar(){
       
-      setPreferredSize(new Dimension(380,420));
-         this.addMouseListener(new DayMouseListener());
+   setPreferredSize(new Dimension(380,420));
+   this.addMouseListener(new DayMouseListener());
    this.addMouseMotionListener(new Daymousemovelistener());
    this.addMouseMotionListener(new MouseListenerPrevNext());
    this.addMouseMotionListener(new MouseListenerToday());

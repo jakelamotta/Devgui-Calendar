@@ -32,8 +32,13 @@ import controller.ShowAddEventUIAction;
 import application.CalendarApp;
 import controller.AnimationEngine;
 import controller.ToggleAnimationAction;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 
 
@@ -49,7 +54,9 @@ public class Frame extends JFrame{
     private JSlider slider;
     private JMenuBar menuBar;
     private JMenu fileMenu;
+    private JMenu helpMenu;
     private JMenuItem help;
+    private JMenuItem cancel;
     private JMenuItem addEventItem;
     private JMenuItem close;
     private JMenu editMenu;
@@ -135,15 +142,30 @@ public class Frame extends JFrame{
 	   //********** Menu **********
 	   menuBar = new JMenuBar();
 	   fileMenu = new JMenu("File");
-           help= new JMenuItem("Help");
-           
+           helpMenu = new JMenu("Help");
+           help= new JMenuItem("ShowGuide");
+           cancel=new JMenuItem("Cancel");
 	   help.addActionListener(new ActionListener() {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
-                    G=new Glasspane();
+                   try {
+                       G=new Glasspane();
+                   } catch (IOException ex) {
+                       Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+                    //G.addMouseListener(new Glasslistener());
                     setTheGlassPane(G,true);
+                      
+		}
+	   });
+           cancel.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+                  
+                    //G.addMouseListener(new Glasslistener());
+                    setTheGlassPane(G,false);
                       
 		}
 	   });
@@ -207,15 +229,35 @@ public class Frame extends JFrame{
            menuBar.add(editMenu);
       
 	   this.setMenu.add(btn);
-           this.setMenu.add(help);
+           this.helpMenu.add(help);
+           this.helpMenu.add(cancel);
 	   this.menuBar.add(setMenu);
-           //this.menuBar.add(help);
+           this.menuBar.add(helpMenu);
 	   this.setJMenuBar(this.menuBar);
       
 	   this.setVisible(true);    
 	   this.pack();
    	}
      
+  /* public class Glasslistener extends MouseAdapter {
+   public void getxpoint(float x,float y){
+
+        if((108.5-22.5<x)&&(x<108.5+22.5)){
+             setTheGlassPane(G,false);
+        }
+   }
+       public void mouseClicked(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            if (e.getClickCount() == 1) {
+               float x=e.getX();
+                float y=e.getY();
+               getxpoint(x,y);
+            }
+        }
+   
+   }
+   
+   }*/
    	/**
  	* Adjust Transparency
  	*/
