@@ -32,6 +32,9 @@ import controller.ShowAddEventUIAction;
 import application.CalendarApp;
 import controller.AnimationEngine;
 import controller.ToggleAnimationAction;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JComponent;
 
 
 /**
@@ -46,6 +49,7 @@ public class Frame extends JFrame{
     private JSlider slider;
     private JMenuBar menuBar;
     private JMenu fileMenu;
+    private JMenuItem help;
     private JMenuItem addEventItem;
     private JMenuItem close;
     private JMenu editMenu;
@@ -57,9 +61,10 @@ public class Frame extends JFrame{
     private EventPanel eventPanel;
     private AnimationEngine calendarEngine;
     private AnimationEngine dayCardEngine;
-    
+    private Glasspane G;
+    public List<Drawable> Glass = new ArrayList<Drawable>();
    public Frame()
-   { 
+   {    JFrame f=this;
            calendarEngine = new AnimationEngine();
            dayCardEngine = new AnimationEngine();
            
@@ -68,7 +73,12 @@ public class Frame extends JFrame{
 	   ch.setDate(new Date());
 	   card = new DayCard(dayCardEngine);
 	   slider = new JSlider(0,7,0);
-	   
+          
+           
+           //setTheGlassPane(G,true);
+	   //Glasspane G= (Glasspane)this.getGlassPane();
+           //G.setVisible(true);
+           
 	   getContentPane().setLayout(new GridBagLayout());
 	   
 	   GridBagConstraints c = new GridBagConstraints();
@@ -77,7 +87,7 @@ public class Frame extends JFrame{
 	   c.weighty = 2;
 	   c.gridx = 0;
 	   c.gridy = 0;	   
-	   getContentPane().add(ch, c);
+	  getContentPane().add(ch, c);
 	   
 	   c.gridx = 1;
 	   getContentPane().add(card, c);
@@ -125,7 +135,18 @@ public class Frame extends JFrame{
 	   //********** Menu **********
 	   menuBar = new JMenuBar();
 	   fileMenu = new JMenu("File");
-	   
+           help= new JMenuItem("Help");
+           
+	   help.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			
+                    G=new Glasspane();
+                    setTheGlassPane(G,true);
+                      
+		}
+	   });
 	   addEventItem = new JMenuItem(addEvent);
 	   
 	   close = new JMenuItem("Exit");
@@ -186,8 +207,9 @@ public class Frame extends JFrame{
            menuBar.add(editMenu);
       
 	   this.setMenu.add(btn);
+           this.setMenu.add(help);
 	   this.menuBar.add(setMenu);
-      
+           //this.menuBar.add(help);
 	   this.setJMenuBar(this.menuBar);
       
 	   this.setVisible(true);    
@@ -197,6 +219,11 @@ public class Frame extends JFrame{
    	/**
  	* Adjust Transparency
  	*/
+   void setTheGlassPane(JComponent glassPane,boolean i) {
+    	this.setGlassPane(glassPane);
+    	this.getGlassPane().setVisible(i);
+        //this.validate();
+    }
    	public void setOpacity(){
 	   JDialog dialog;
 	   dialog = new JDialog(this,"Adjust Transparency",true);

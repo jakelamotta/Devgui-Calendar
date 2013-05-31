@@ -51,19 +51,26 @@ public class DayMouseListener extends MouseAdapter {
             getypoint(y);
         }
         if((0<x)&&(x<45)&&(86<y)&&(y<351)){
-            CalculateDate.dayaccount--;
-            CalculateDate.relativeMonthCount--;
+            i=0;
+           CalculateDate.dayaccount--;
+           CalculateDate.relativeMonthCount--;
+           Calendar.Selected.clear();
+           Calendar.Selected2.clear();
         }
         if((440<x)&&(x<495)&&(86<y)&&(y<351)){
-            CalculateDate.dayaccount++;
-            CalculateDate.relativeMonthCount++;
+          i=0;
+           CalculateDate.dayaccount++;
+           CalculateDate.relativeMonthCount++;
+           Calendar.Selected.clear();
+           Calendar.Selected2.clear();
             }
         if((460<x)&&(x<520)&&(50<y)&&(y<80))
-        {CalculateDate.dayaccount=0;
-         CalculateDate.relativeMonthCount=0;
-         i=1;
-        Calendar.Selected.clear();
-        Calendar.Selected2.clear();
+        {
+          CalculateDate.dayaccount=0;
+          CalculateDate.relativeMonthCount=0;
+          i=1;
+         Calendar.Selected.clear();
+         Calendar.Selected2.clear();
         }
         }
     
@@ -122,17 +129,7 @@ public class DayMouseListener extends MouseAdapter {
                 float x=e.getX();
                 float y=e.getY();
                 getxpoint( x, y);
-                //float distance=(x-centerX)*(x-centerX)+(y-centerY)*(y-centerY);
-                //System.out.println("work");
-
-
-
-                //(x-centerX)*(x-centerX)+(y-centerY)*(y-centerY);
-                //P.setLocation(e.getX(),e.getY());(x-centerX)*(x-centerX)+(y-centerY)*(y-centerY);
-                //week * 29 + 81 + 20
-
-
-                //Calendar.Calendars.add(0,new(DrawMonth(Color.getColor(gray))));
+                
             }
         }
     }
