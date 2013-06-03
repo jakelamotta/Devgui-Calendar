@@ -37,14 +37,15 @@ public class EventGUI extends JFrame
 	private JTextField eventField;
     
 	private JComboBox month;
-        private JComboBox day;
-        private JComboBox year;
+    private JComboBox day;
+    private JComboBox year;
 	private JTextField categoryField;
 	private JSlider priority;
 	private JPanel mainPanel;
 	private JPanel editPanel;
 	private JPanel buttonPanel;
 	private JButton addEventButton;
+	
 	
 	// required for edit in table action
 	private int tableRow = -1;
