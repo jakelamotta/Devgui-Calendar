@@ -82,9 +82,7 @@ public class Frame extends JFrame{
 	   slider = new JSlider(0,7,0);
           
            
-           //setTheGlassPane(G,true);
-	   //Glasspane G= (Glasspane)this.getGlassPane();
-           //G.setVisible(true);
+          
            
 	   getContentPane().setLayout(new GridBagLayout());
 	   

@@ -12,6 +12,7 @@ import view.Calendar;
 import view.DrawDay;
 import view.DrawDayforselected;
 import view.Drawable;
+import view.EventGUI;
 
 /**
  *
@@ -127,11 +128,19 @@ public class DayMouseListener extends MouseAdapter {
     }    
     public void mouseClicked(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            if (e.getClickCount() == 1) {
-                float x=e.getX();
+            float x=e.getX();
                 float y=e.getY();
+            if (e.getClickCount() == 1) {
+               
                 getxpoint( x, y);
-                date = DrawDay.dateposition[d][week];
+                
+            }
+            if (e.getClickCount()==2)
+            {
+           if((108.5-22.5<x)&&(x<378.5+22.5)&&(98.5-22.5<y)&&(y<323.5+22.5))
+           new EventGUI(DrawDay.dateposition[d][week]);
+            
+            
             }
         }
     }
