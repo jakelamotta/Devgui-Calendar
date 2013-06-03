@@ -29,6 +29,7 @@ public class CalendarAnimation extends Animation{
     private int week;
     private Color color;
     private boolean highlighted = false;    
+    private boolean hasEvent = false;
     private AnimationEngine engine;
     CalculateDate calculatedate = new CalculateDate();
     
@@ -57,6 +58,7 @@ public class CalendarAnimation extends Animation{
     public void drawString(Graphics g){
         Graphics2D g2 = (Graphics2D) g.create();  
         
+        this.setHasEvent();
         this.setHighPrio();
         
         if(this.highlighted){
@@ -66,6 +68,13 @@ public class CalendarAnimation extends Animation{
             this.color = getColor();
             g2.fillRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
         }
+        
+        //Sets a border around those days that has a event on them
+        if(hasEvent && !highlighted){
+            g2.setColor(Color.red);
+            g2.drawRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
+        }
+        
         calculatedate.upgradeCalendar2();
     }     
     
@@ -83,6 +92,21 @@ public class CalendarAnimation extends Animation{
                         InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getYear() == calculatedate.gettime2().getYear()){
                     this.highlighted = true;
                 }
+            }
+        }
+    }
+    
+    /**
+     * Sets the boolean hasevent for the given day. 
+     */
+    private void setHasEvent(){
+        Event e;
+        for (int i=0;i<model.getRowCount();i++){
+            e = model.getRow(i);
+            if(InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getDate() == calculatedate.gettime2().getDate() &&
+                    InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getMonth() == calculatedate.gettime2().getMonth() &&     
+                    InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getYear() == calculatedate.gettime2().getYear()){
+                    this.hasEvent = true;
             }
         }
     }
