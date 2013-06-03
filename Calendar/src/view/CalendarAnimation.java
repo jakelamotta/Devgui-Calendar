@@ -66,12 +66,13 @@ public class CalendarAnimation extends Animation{
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.2f));
             g2.setColor(this.color);
             this.color = getColor();
+            
             g2.fillRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
         }
         
         //Sets a border around those days that has a event on them
         if(hasEvent && !highlighted){
-            g2.setColor(Color.red);
+            g2.setColor(new Color(255,255,204));
             g2.drawRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
         }
         
@@ -116,10 +117,10 @@ public class CalendarAnimation extends Animation{
      * accordingly
      */
     private static void fadeIn(){
-        if(fadein && colorCodes[1]<245 && colorCodes[0]<245 && colorCodes[2]>7){
-            colorCodes[0] = colorCodes[0]+7;
-            colorCodes[1] = colorCodes[1]+7;
-            colorCodes[2] = colorCodes[2]-1;
+        if(fadein && colorCodes[1]<245 && colorCodes[0]<250 && colorCodes[2]>4){
+            colorCodes[0] = colorCodes[0]+10;
+            colorCodes[1] = colorCodes[1]-1;
+            colorCodes[2] = colorCodes[2]-3;
 
         }        
     }
@@ -130,9 +131,9 @@ public class CalendarAnimation extends Animation{
      */
     private static void fadeOut(){
         if(!fadein && colorCodes[0] > 63 && colorCodes[1] > 63 && colorCodes[2]<64){
-            colorCodes[0] = colorCodes[0]-7;
-            colorCodes[1] = colorCodes[1]-7;
-            colorCodes[2] = colorCodes[2]+1;
+            colorCodes[0] = colorCodes[0]-10;
+            colorCodes[1] = colorCodes[1]+1;
+            colorCodes[2] = colorCodes[2]+3;
         }
     }
     
