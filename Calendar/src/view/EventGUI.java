@@ -61,13 +61,7 @@ public class EventGUI extends JFrame
             
 		init(new AddEventAction("Add Event", this));
 	}
-	public EventGUI(String dueDate)
-        {
-        
-        init(new AddEventAction("Add Event", this),dueDate);
-        
-        
-        }
+	
 	public EventGUI(String name, String dueDate, String category, int prio, int modelRow){
         
 		init(new EditEventAction("Edit Event", this)); 
@@ -83,133 +77,7 @@ public class EventGUI extends JFrame
 		priority.setValue(prio);
 		tableRow = modelRow;
 	}
-	private void init(Action eventAction,String dueDate){
-		eventField = new JTextField(20);
-                day = new JComboBox(new DefaultComboBoxModel());
-                String[] dateParts = dueDate.split("-");
-                year = new JComboBox(getYears());
-		year.setSelectedItem(dateParts[0]);
-                month = new JComboBox(getMonths());
-		month.setSelectedItem(dateParts[1]);
-		day.removeAllItems();
-		getDays(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]));
-		day.setSelectedItem(dateParts[2]);
-		GregorianCalendar today = new GregorianCalendar();
-		year.addItemListener(new ItemListener() {
-					
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange() == ItemEvent.SELECTED){
-					day.removeAllItems();
-					getDays(Integer.parseInt((String) year.getSelectedItem()), Integer.parseInt((String) month.getSelectedItem()));
-				}
-			}
-		});
-        month.addItemListener(new ItemListener() {
-			
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange() == ItemEvent.SELECTED){
-					day.removeAllItems();
-					getDays(Integer.parseInt((String) year.getSelectedItem()), Integer.parseInt((String) month.getSelectedItem()));
-				}
-			}
-		});
-        //getDays(today.get(GregorianCalendar.YEAR), today.get(GregorianCalendar.MONTH)+1);
-        //day.setSelectedItem(dateParts[2]);
-		
-		categoryField = new JTextField(10);
-		
-		priority = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
-                priority.setBackground(Color.darkGray);
-		priority.setMinorTickSpacing(20);
-		priority.setPaintTicks(true);
-		priority.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				JSlider source = (JSlider) e.getSource();
-				source.setBackground(new Color(source.getValue()*2+25, 255-source.getValue()*2, 0));
-			}
-		});
-		
-		editPanel = new JPanel();
-		
-		editPanel.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		
-		//natural height, maximum width
-		c.fill = GridBagConstraints.HORIZONTAL;
 	
-		Insets inset = new Insets(2,2,5,2);
-		c.insets = inset;
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridwidth = 1;
-		JLabel name = new JLabel("Event Name");
-                name.setForeground(Color.lightGray);
-		name.setHorizontalAlignment(JLabel.RIGHT);
-		editPanel.add(name,c);
-		c.gridx = 1;
-		c.gridwidth = 4;
-		editPanel.add(eventField, c);
-		
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 2;
-		JLabel date = new JLabel("Due Date");
-                date.setForeground(Color.lightGray);
-		date.setHorizontalAlignment(JLabel.RIGHT);
-		c.gridwidth = 1;
-		editPanel.add(date,c);
-		c.gridx = 1;
-		editPanel.add(year, c);
-		c.gridx = 2;
-		editPanel.add(month, c);
-		c.gridx = 3;
-		editPanel.add(day, c);
-	
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 3;
-		JLabel cate = new JLabel("Category");
-                cate.setForeground(Color.lightGray);
-		cate.setHorizontalAlignment(JLabel.RIGHT);
-		editPanel.add(cate,c);
-		c.gridx = 1;
-		c.gridwidth = 4;
-		editPanel.add(categoryField, c);
-		
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 4;
-		JLabel prio = new JLabel("Priority");
-                prio.setForeground(Color.lightGray);
-		prio.setHorizontalAlignment(JLabel.RIGHT);
-		editPanel.add(prio,c);
-		c.gridx = 1;
-		c.gridwidth = 4;
-		editPanel.add(priority, c);
-
-		buttonPanel = new JPanel(new GridBagLayout());
-		addEventButton = new JButton(eventAction);
-		c.fill = (GridBagConstraints.HORIZONTAL);
-		c.gridx = 1;
-		c.gridy = 0;
-		buttonPanel.add(addEventButton,c);
-		
-		mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(editPanel,BorderLayout.CENTER);
-		mainPanel.add(buttonPanel,BorderLayout.SOUTH);
-                buttonPanel.setBackground(Color.darkGray);
-                editPanel.setBackground(Color.darkGray);
-	
-		setSize(350,200);
-		setResizable(false);
-		setContentPane(mainPanel);
-		setVisible(true);
-		setAlwaysOnTop(true);
-	}
-
 	private void init(Action eventAction){
 		eventField = new JTextField(20);
 
