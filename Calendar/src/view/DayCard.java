@@ -15,8 +15,12 @@ import javax.swing.border.BevelBorder;
 import model.WeatherAPI;
 
 import controller.AnimationEngine;
+import controller.DayMouseListener;
 import controller.WeatherMouseListener;
 import enums.Weather;
+import java.util.Date;
+import java.util.Locale;
+import model.InputUtilities;
 
 /**
  * Not done:
@@ -27,6 +31,7 @@ import enums.Weather;
  */
 public class DayCard extends JPanel{
     
+    private GregorianCalendar day;
     private WeatherAPI weather;
     private AnimationEngine engine;
     private Weather current;
@@ -118,6 +123,23 @@ public class DayCard extends JPanel{
         temp.drawString("Uppsala",50,150);
         
         ((WeatherAnimation)this.engine.getAnimationAtIndex(0)).drawWeatherAnimation(temp,this.current);
+        
+        try{
+            day = InputUtilities.convertStringToDate(DayMouseListener.getDate());
+            
+            if(!InputUtilities.isSpecficDay(day, 0)){
+                temp.drawString(day.getTime().toString(), 50, 200);
+            }
+            else{
+                GregorianCalendar tempDate = new GregorianCalendar();
+                temp.drawString(tempDate.getTime().toString(), 50, 200);
+            }
+        }
+        catch(NullPointerException e){
+            GregorianCalendar tempDate = new GregorianCalendar();
+            temp.drawString(tempDate.getTime().toString(), 50, 200);
+        }
+        
         
         temp.dispose();
     }

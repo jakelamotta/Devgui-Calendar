@@ -27,7 +27,7 @@ public class DrawDay implements Drawable {
     private SimpleDateFormat copydate=new SimpleDateFormat("yyyy-M-d");
     private Date date = new Date();
     CalculateDate calculatedate=new CalculateDate();
-   public static String[][] dateposition= new String[8][9];
+    public static String[][] dateposition= new String[8][9];
     
     public DrawDay(int d,int week){
             this.d=d;

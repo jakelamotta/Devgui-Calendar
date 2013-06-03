@@ -130,10 +130,15 @@ public class CalendarAnimation extends Animation{
      * accordingly
      */
     private static void fadeOut(){
-        if(!fadein && colorCodes[0] > 63 && colorCodes[1] > 63 && colorCodes[2]<64){
+        if(!fadein && colorCodes[0] > 63 && colorCodes[1] < 65 && colorCodes[2]<64){
             colorCodes[0] = colorCodes[0]-10;
             colorCodes[1] = colorCodes[1]+1;
             colorCodes[2] = colorCodes[2]+3;
+        }
+        else{
+            if(!fadein){
+                CalendarApp.getFrame().getEventPanel().getModel().showUnfilteredTable();
+            }
         }
     }
     

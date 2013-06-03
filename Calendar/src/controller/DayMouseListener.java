@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import model.CalculateDate;
 
 import view.Calendar;
+import view.DrawDay;
 import view.DrawDayforselected;
 import view.Drawable;
 
@@ -20,6 +21,7 @@ public class DayMouseListener extends MouseAdapter {
     
     private int d;
     private int week;
+    private static String date;
     public static int i=0;
     
     public void getxpoint(float x,float y){
@@ -129,9 +131,13 @@ public class DayMouseListener extends MouseAdapter {
                 float x=e.getX();
                 float y=e.getY();
                 getxpoint( x, y);
-                
+                date = DrawDay.dateposition[d][week];
             }
         }
+    }
+    
+    public static String getDate(){
+        return date;
     }
 }
 

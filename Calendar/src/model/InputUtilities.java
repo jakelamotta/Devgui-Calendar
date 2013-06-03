@@ -18,7 +18,7 @@ public class InputUtilities {
      * @param offset Number of days added or removed from todays day.
      * @return 
      */
-    protected static boolean isSpecficDay(GregorianCalendar toBeCompared, int offset){
+    public static boolean isSpecficDay(GregorianCalendar toBeCompared, int offset){
         
         //Last day of the year is a special case
         if(todaysDate.get(GregorianCalendar.DAY_OF_YEAR) == 365){
