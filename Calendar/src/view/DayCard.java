@@ -16,6 +16,7 @@ import model.WeatherAPI;
 
 import controller.AnimationEngine;
 import controller.DayMouseListener;
+import controller.WeatherAnimationMotionListener;
 import controller.WeatherMouseListener;
 import enums.Weather;
 import java.util.Date;
@@ -72,7 +73,7 @@ public class DayCard extends JPanel{
         eng.setPanel(this);
         
         this.addMouseListener(new WeatherMouseListener(engine));
-        
+        this.addMouseMotionListener(new WeatherAnimationMotionListener(this));
         setBackground(new Color(51,51,51));
         
         //attempt to get weather information
