@@ -6,6 +6,8 @@ package controller;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
+
+import application.CalendarApp;
 import model.CalculateDate;
 
 import view.Calendar;
@@ -134,7 +136,8 @@ public class DayMouseListener extends MouseAdapter {
             if (e.getClickCount() == 1) {
                
                 getxpoint( x, y);
-                date = DrawDay.dateposition[d][week];                
+                date = DrawDay.dateposition[d][week];        
+                CalendarApp.getFrame().getEventPanel().getModel().dateFilterTable(date);
             }
             if (e.getClickCount()==2)
             {
