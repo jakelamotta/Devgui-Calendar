@@ -50,8 +50,7 @@ public class DrawDay implements Drawable {
         if(copydate.format(calculatedate.gettime()).equals(copydate.format(date))&&DayMouseListener.i==1){
            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.30f));
       g2.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
-      g2.fillRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);     
-            
+      g2.fillRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
         }
         
         

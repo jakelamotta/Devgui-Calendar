@@ -71,7 +71,7 @@ public class CalendarAnimation extends Animation{
         }
         
         //Sets a border around those days that has a event on them
-        if(hasEvent && !highlighted){
+        if(hasEvent/* && !highlighted*/){
             g2.setColor(new Color(255,255,204));
             g2.drawRoundRect((d-1) * 45 + 86, (week-1)* 45 + 86, 40, 40,10,10);
         }
@@ -101,7 +101,8 @@ public class CalendarAnimation extends Animation{
      * Sets the boolean hasevent for the given day. 
      */
     private void setHasEvent(){
-        Event e;
+    	hasEvent = CalendarApp.getFrame().getEventPanel().getModel().hasEvent(calculatedate.gettime2());
+        /*Event e;
         for (int i=0;i<model.getRowCount();i++){
             e = model.getRow(i);
             if(InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getDate() == calculatedate.gettime2().getDate() &&
@@ -109,7 +110,7 @@ public class CalendarAnimation extends Animation{
                     InputUtilities.convertStringToDate(e.getEventDueDate()).getTime().getYear() == calculatedate.gettime2().getYear()){
                     this.hasEvent = true;
             }
-        }
+        }*/
     }
     
     /**
@@ -137,7 +138,7 @@ public class CalendarAnimation extends Animation{
         }
         else{
             if(!fadein){
-                CalendarApp.getFrame().getEventPanel().getModel().showUnfilteredTable();
+                //CalendarApp.getFrame().getEventPanel().getModel().showUnfilteredTable();
             }
         }
     }

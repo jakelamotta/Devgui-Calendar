@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -27,6 +29,8 @@ public class TableModel extends AbstractTableModel {
     								"Delete"};
     @ElementList
     private ArrayList<Event> data;
+
+	private ArrayList<Event> tempData;
     private boolean filtered;
     
 	
@@ -38,8 +42,22 @@ public class TableModel extends AbstractTableModel {
     public TableModel() {
     	xmlh = new XMLHandler();
 		xmlh.readXML(this, XMLHandler.XML_ITEMS);
+		tempData = new ArrayList<Event>();
 		if (data == null) {
 			data = new ArrayList<Event>();
+		}
+		else{
+			for(int i=0; i<getRowCount(); i++){
+	    		
+	    		Event t = new Event(data.get(i).getEventName(),
+	    					data.get(i).getEventDueDate(),
+	    					data.get(i).getEventCategory(),
+	    					data.get(i).getEventPriority(),  
+	 					    "Edit", 
+	 					    "Delete");
+	    			
+	    		tempData.add(t);
+	    	}
 		}
 		filtered = false;
     }
@@ -274,5 +292,21 @@ public class TableModel extends AbstractTableModel {
 	
 	public Event getRow(int index){
 		return data.get(index);
+	}
+	
+	@SuppressWarnings("deprecation")
+	public boolean hasEvent(Date d) {
+		boolean hasEvent = false;
+		for(int i=0; i<tempData.size(); i++){
+			GregorianCalendar gre = InputUtilities.convertStringToDate(tempData.get(i).getEventDueDate());
+			//System.out.println(d + " : " + gre.get(GregorianCalendar.DAY_OF_MONTH) + "-" + gre.get(GregorianCalendar.MONTH) + "-" + gre.get(GregorianCalendar.YEAR) );
+    		if(gre.getTime().getDate() == d.getDate() &&
+    				gre.getTime().getMonth() == d.getMonth() &&
+    						gre.getTime().getYear() == d.getYear()){
+
+    			hasEvent = true;
+    		}
+    	}
+		return hasEvent;
 	}
 }
