@@ -14,6 +14,7 @@ import model.TableModel;
 /**
  * A calendaranimation class of the type animation
  * @author Kristian
+ * @author Deha
  */
 public class CalendarAnimation extends Animation{
     

@@ -11,6 +11,7 @@ import view.DrawMouseEventImpt;
  * Mouse adapater for the "show important"-button, defines actions for clicking
  * on that.
  * @author Kristian
+ * @author Deha
  */
 public class ImportantMouseListener extends MouseAdapter{
 

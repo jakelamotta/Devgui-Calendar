@@ -5,10 +5,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import view.EventGUI;
-
 import application.CalendarApp;
 
+/**
+ * 
+ * @author Deha
+ *
+ */
 public class FilterAction extends AbstractAction {
 	
 	public FilterAction(String name) {

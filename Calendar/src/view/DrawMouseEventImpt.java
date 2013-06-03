@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 /**
  * Draw for mouse moving over "Important" buttons.
  * @author Qi
+ * @author Deha
  */
 public class DrawMouseEventImpt implements Drawable {
     
