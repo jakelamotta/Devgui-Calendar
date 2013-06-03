@@ -27,7 +27,7 @@ public class Glasspane extends JComponent implements Runnable {
        private ArrayList<BufferedImage> imgarrow =new ArrayList();
     public Glasspane() throws IOException
 { this.imgarrow.add(ImageIO.read(this.getClass().getResource("arrow.png")));
-  
+  this.imgarrow.add(ImageIO.read(this.getClass().getResource("arrow.png")));
  
     thread.start(); 
 
@@ -40,9 +40,11 @@ public class Glasspane extends JComponent implements Runnable {
       //g2.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
       //g2.fillRect(0,0,1200 ,840);
       if(i==0)
-      g2.drawImage(this.imgarrow.get(0),243,323,30,30,null);
+      {g2.drawImage(this.imgarrow.get(0),243,323,30,30,null);
+       g2.drawImage(this.imgarrow.get(0),780,0,30,30,null);}
       else
-      g2.drawImage(this.imgarrow.get(0),243,343,30,30,null);   
+      {g2.drawImage(this.imgarrow.get(1),243,343,30,30,null);
+       g2.drawImage(this.imgarrow.get(1),780,20,30,30,null);}
     }
     public void run() {
         while(true){
