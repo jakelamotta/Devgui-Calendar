@@ -2,13 +2,14 @@ package controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 /**
  * Mouselistener for the weahter animation, you can toggle the animation on
  * and off by clicking on it
  * @author Kristian
  */
-public class WeatherMouseListener extends MouseAdapter{
+public class WeatherMouseListener extends MouseAdapter implements MouseMotionListener{
 
     private AnimationEngine animationengine;
     
@@ -39,5 +40,11 @@ public class WeatherMouseListener extends MouseAdapter{
         if(e.getButton() == MouseEvent.BUTTON1 && getXY(e.getX(),e.getY())){
             this.animationengine.setShowAnimation();
         }
+    }
+    
+    @Override
+    public void mouseMoved(MouseEvent e){
+        System.out.println("test");
+        
     }
 }

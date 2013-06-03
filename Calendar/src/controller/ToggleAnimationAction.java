@@ -12,11 +12,13 @@ public class ToggleAnimationAction extends AbstractAction {
 
     private AnimationEngine engine;
     private boolean toggled;
+    private final String description = "Toggle the weather animation on and off";
     
     public ToggleAnimationAction(AnimationEngine dayCardEngine) {
         super("Enable animation");
         engine = dayCardEngine;
         toggled = true;
+        putValue(SHORT_DESCRIPTION, description);
     }
     
     @Override
