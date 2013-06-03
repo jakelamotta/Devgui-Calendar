@@ -138,7 +138,7 @@ public class CalendarAnimation extends Animation{
         }
         else{
             if(!fadein){
-                //CalendarApp.getFrame().getEventPanel().getModel().showUnfilteredTable();
+                CalendarApp.getFrame().getEventPanel().getModel().showUnfilteredTable();
             }
         }
     }
