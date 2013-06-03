@@ -113,7 +113,7 @@ public class EventGUI extends JFrame
 		
 		priority = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
                 priority.setBackground(Color.darkGray);
-		priority.setMinorTickSpacing(25);
+		priority.setMinorTickSpacing(20);
 		priority.setPaintTicks(true);
 		priority.addChangeListener(new ChangeListener() {
 			@Override
