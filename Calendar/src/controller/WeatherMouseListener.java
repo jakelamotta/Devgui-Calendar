@@ -42,7 +42,7 @@ public class WeatherMouseListener extends MouseAdapter implements MouseMotionLis
         }
         //Turns of the tooltip for the animation
         else if(e.getButton() == MouseEvent.BUTTON3 && getXY(e.getX(),e.getY())){
-            WeatherAnimationMotionListener.enabled = false;
+            WeatherAnimationMotionListener.enabled = WeatherAnimationMotionListener.enabled != true;
         }
     }
 }
