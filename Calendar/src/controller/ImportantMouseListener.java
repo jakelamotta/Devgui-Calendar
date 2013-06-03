@@ -53,7 +53,7 @@ public class ImportantMouseListener extends MouseAdapter{
                 enabled = true;
             }
             else{
-                CalendarApp.getFrame().getEventPanel().getModel().priorityFilterTable(100);
+                CalendarApp.getFrame().getEventPanel().getModel().showUnfilteredTable();
                 CalendarAnimation.fadein = false;
                 DrawButtons.setBtnTextShow();
                 DrawMouseEventImpt.setBtnTextShow();

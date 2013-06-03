@@ -136,12 +136,6 @@ public class CalendarAnimation extends Animation{
             colorCodes[1] = colorCodes[1]+1;
             colorCodes[2] = colorCodes[2]+3;
         }
-        else{
-            if(!fadein){
-                CalendarApp.getFrame().getEventPanel().getModel().showUnfilteredTable();
-                fadein = true;
-            }
-        }
     }
     
     /**********************************************************
