@@ -134,7 +134,7 @@ public class DayMouseListener extends MouseAdapter {
             if (e.getClickCount() == 1) {
                
                 getxpoint( x, y);
-                
+                date = DrawDay.dateposition[d][week];                
             }
             if (e.getClickCount()==2)
             {
