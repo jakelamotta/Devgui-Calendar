@@ -71,12 +71,17 @@ public class WeatherAnimation extends Animation {
      */
     public void paintSun(Graphics g, int i) {
                 
-        g.drawImage(this.imgSuns.get(i),250,20,30,30,null);
+        g.drawImage(this.imgSuns.get(i),250,20,150,150,null);
         
         //Update choice of images (switching between 0 and 1, animation shifts 
         //between two pictures to create a shining sun
         if(showAnimation){
-            pic = (pic-1)*(pic-1);
+            if(pic == 2){
+                pic = 0;
+            }
+            else{
+                pic += 1;
+            }
         }
     }
 
@@ -128,8 +133,9 @@ public class WeatherAnimation extends Animation {
             this.imgRains.add(ImageIO.read(this.getClass().getResource("rainpng2.png")));
             this.imgRains.add(ImageIO.read(this.getClass().getResource("rainpng3.png")));
             
-            this.imgSuns.add(ImageIO.read(this.getClass().getResource("sun.jpg")));
-            this.imgSuns.add(ImageIO.read(this.getClass().getResource("sun2.jpg")));
+            this.imgSuns.add(ImageIO.read(this.getClass().getResource("sun.png")));
+            this.imgSuns.add(ImageIO.read(this.getClass().getResource("sun2.png")));
+            this.imgSuns.add(ImageIO.read(this.getClass().getResource("sun3.png")));
             
             this.imgClouds.add(ImageIO.read(this.getClass().getResource("clody.png")));
         } catch (IOException ex) {

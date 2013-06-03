@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 public class WeatherAnimationMotionListener extends MouseMotionAdapter {
     
     private JPanel panel;
+    protected static boolean enabled = true;
     
     public WeatherAnimationMotionListener(JPanel p){
         panel=p;
@@ -29,7 +30,7 @@ public class WeatherAnimationMotionListener extends MouseMotionAdapter {
      * @return 
      */
     public boolean getXY(int x, int y){
-        if(249<x && x<401 && 19<y && y<171){
+        if(249<x && x<401 && 19<y && y<141){
             return true;
         }
         else{
@@ -40,8 +41,13 @@ public class WeatherAnimationMotionListener extends MouseMotionAdapter {
     @Override
     public void mouseMoved(MouseEvent e){
         panel.setToolTipText(null);
-        if(getXY(e.getX(),e.getY())){
-           panel.setToolTipText("Click on the weather animation to toggle it on and off");
+        if(getXY(e.getX(),e.getY())){           
+           if(enabled){
+               panel.setToolTipText("Click on the weather animation to toggle it on and off. To disable tooltip, rightclick");
+           }
+           else{
+               panel.setToolTipText(null);
+           }
         }
         
         
