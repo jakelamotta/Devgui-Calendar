@@ -117,7 +117,7 @@ public class DayCard extends JPanel{
         Font Gweather=new Font("Century Gothic",Font.PLAIN,30);
         temp.setFont(Gweather);
         temp.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
-        temp.drawString("°C", 110, 100);
+        temp.drawString("C", 110, 100);
         Font Fweather=new Font("Century Gothic",Font.PLAIN,26);
         temp.setFont(Fweather);
         temp.setColor(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
@@ -126,19 +126,22 @@ public class DayCard extends JPanel{
         ((WeatherAnimation)this.engine.getAnimationAtIndex(0)).drawWeatherAnimation(temp,this.current);
         
         try{
+            temp.setColor(Color.lightGray);
+            Font Hweather=new Font("Century Gothic",Font.PLAIN,20);
+            temp.setFont(Hweather);
             day = InputUtilities.convertStringToDate(DayMouseListener.getDate());
             
             if(!InputUtilities.isSpecficDay(day, 0)){
-                temp.drawString(day.getTime().toString(), 50, 200);
-            }
+                temp.drawString(day.getTime().toString(), 50, 250);
+            } 
             else{
                 GregorianCalendar tempDate = new GregorianCalendar();
-                temp.drawString(tempDate.getTime().toString(), 50, 200);
+                temp.drawString(tempDate.getTime().toString(), 50, 250);
             }
         }
         catch(NullPointerException e){
             GregorianCalendar tempDate = new GregorianCalendar();
-            temp.drawString(tempDate.getTime().toString(), 50, 200);
+            temp.drawString(tempDate.getTime().toString(), 50, 250);
         }
         
         

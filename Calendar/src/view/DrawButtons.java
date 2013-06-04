@@ -5,6 +5,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  * Draw two buttons for prev and next month.
@@ -16,6 +21,7 @@ import java.awt.Graphics2D;
 public class DrawButtons implements Drawable {
 	
        private static String btnText = "Show important!";
+    private Image image;
     
        public void drawString(Graphics g) {
     	   Graphics2D g2 = (Graphics2D) g.create();   
@@ -52,6 +58,9 @@ public class DrawButtons implements Drawable {
         g.setFont(Dbutton);
         g.drawString(btnText,411, 35);
            
+        // Help button
+       //  final JButton help = new JButton("?");
+         //   help.setIcon(new ImageIcon(this.getClass().getResource("bullet_info.jpg")));
     }
        
        

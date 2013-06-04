@@ -45,30 +45,36 @@ if((378.5-22.5<x)&&(x<378.5+22.5)){
      public void getypoint(float y){
 if((98.5-22.5<y)&&(y<98.5+22.5)){
                  week=1;Calendar.Selected2.clear();
+                  Calendar.MovedPrevNext.clear();
  addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((143.5-22.5<y)&&(y<143.5+22.5)){
-                 week=2;Calendar.Selected2.clear(); 
+                 week=2;Calendar.Selected2.clear();
+                  Calendar.MovedPrevNext.clear();
  addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((188.5-22.5<y)&&(y<188.5+22.5)){
                  week=3;
                  Calendar.Selected2.clear();
+                  Calendar.MovedPrevNext.clear();
  addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((233.5-22.5<y)&&(y<233.5+22.5)){
                  week=4;
                  Calendar.Selected2.clear();
+                  Calendar.MovedPrevNext.clear();
  addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((278.5-22.5<y)&&(y<278.5+22.5)){
                  week=5;
                  Calendar.Selected2.clear();
+                  Calendar.MovedPrevNext.clear();
  addDrawableForselected2(new DrawDayforselected2(d,week));
 }
 if((323.5-22.5<y)&&(y<323.5+22.5)){
                  week=6;
                  Calendar.Selected2.clear();
+                  Calendar.MovedPrevNext.clear();
  addDrawableForselected2(new DrawDayforselected2(d,week));}
 
 
