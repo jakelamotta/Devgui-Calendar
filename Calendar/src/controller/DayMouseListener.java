@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * click listener for left Panel
  */
 package controller;
 
@@ -18,7 +17,7 @@ import view.EventGUI;
 
 /**
  *
- * @author bigbigguoguo
+ * @author guo
  */
 public class DayMouseListener extends MouseAdapter {
     

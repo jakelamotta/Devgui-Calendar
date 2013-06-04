@@ -20,7 +20,11 @@ import controller.ImportantMouseListener;
 import controller.MouseListenerImpt;
 import controller.MouseListenerPrevNext;
 import controller.MouseListenerToday;
-
+/**
+ * Draw for the left Panel
+ * @author Guo
+ * @author kristian
+ */
  
   
 public class Calendar extends JPanel implements Runnable {
@@ -77,15 +81,10 @@ public class Calendar extends JPanel implements Runnable {
       
    Graphics2D temp = (Graphics2D) g.create();
     ((Graphics2D) temp).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-    //temp.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));
-    
+  
     temp.fillRect(0, 0, getWidth(), getHeight());
     
-    //g.setColor(Color.red);
-    //g.drawString(month.format(date), 34, 36);
-    //g.setColor(Color.white);
-    //g.drawString(year.format(date), 235, 36);
-  
+   
     addDrawable(new DrawButtons());
     addDrawable(new DrawYear());  
     addDrawable(new DrawMonth());
@@ -96,12 +95,12 @@ public class Calendar extends JPanel implements Runnable {
         for (int d = 1; d < 8; d++) {
         	addDrawableForDay(new DrawDay(d,week));
                 addDrawableForAnimation(new CalendarAnimation(d,week,this.engine));
-                //Listener L=new Listener(d,week);
+               
         }
         }
     
 
-     // temp.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));
+   
     for (Drawable d: Calendars) {
         d.drawString(temp);
     }
@@ -129,20 +128,7 @@ public class Calendar extends JPanel implements Runnable {
     Calendars.clear();
     DrawForDay.clear();
     drawAnimation.clear();
-   // Calendar today = Calendar.getInstance();
-    //today.setTime(date);
-    //Calendar cal = Calendar.getInstance();
-    //cal.setTime(date);
-    //cal.set(Calendar.DATE, 1);
-    //cal.add(Calendar.DATE, -cal.get(Calendar.DAY_OF_WEEK) + 1);
-    //for (int week = 0; week < 6; week++) {
-      //for (int d = 0; d < 7; d++) {
-        //Color col = Color.red;
-          //g.drawString(day.format(cal.getTime()), d * 30 + 46 + 4,
-            //  week * 29 + 81 + 20);
-       // cal.add(Calendar.DATE, +1);
-      //}
-    //}
+  
     temp.dispose();
   }
   public void run() {

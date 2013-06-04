@@ -18,6 +18,8 @@ import controller.DeleteInTableAction;
 import controller.EditInTableAction;
 import controller.ProgRenderer;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
 * The event panel of the view. 
@@ -31,7 +33,8 @@ public class EventPanel extends JPanel {
 	private static final long serialVersionUID = 1411392940572978940L;
 	private TableModel model; 
 	private final JTable table;
-	
+	int Row;
+        int Column;
 	
 	Action del = new DeleteInTableAction();
 	Action edit = new EditInTableAction();
@@ -47,16 +50,18 @@ public class EventPanel extends JPanel {
                 table = new JTable(model);
                 table.setAutoCreateRowSorter(true);
                 table.setRowHeight(40);
+                
 		/**
                 * Set the view of the table.
                 * /Qi
                 */
+          
              table.setForeground(Color.lightGray); 
              table.setSelectionBackground(Color.getHSBColor((float)0.5,(float) 0.5,(float) 0.5));
              table.setSelectionForeground(Color.WHITE);
              table.setBackground(new Color(44, 44, 44));
              table.setGridColor(Color.lightGray);	
-             
+             table.addMouseListener(new tablelistener());
 		new ButtonColumn(table, edit, 4);
 		
 		new ButtonColumn(table, del, 5);
@@ -107,6 +112,26 @@ public class EventPanel extends JPanel {
 	public TableModel getModel() {
 		return model;
 	}
-		
-}
+	/**
+	 * Add Listener to table
+         * GUO
+	 */	
+  public class tablelistener extends MouseAdapter {
+  
+       public void mouseClicked(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            Row =table.getSelectedRow();
+      	    	 Column=table.getSelectedColumn();
+                 
+                 
+            if (e.getClickCount() == 2) {
+           new EventGUI(table.getModel().getValueAt(Row,0).toString(),
+                        table.getModel().getValueAt(Row,1).toString(), 
+                        table.getModel().getValueAt(Row,2).toString(),0,Row);
+            }
+        }
+   
+   }
 
+  }
+}

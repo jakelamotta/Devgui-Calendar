@@ -28,8 +28,7 @@ public class DrawMonth implements Drawable {
             
             today.add(Calendar.MONTH, CalculateDate.dayaccount*1);
             
-            //cal.add(Calendar.DATE, +dayaccount);dayaccount++; 
-            //return cal.getTime();
+            
         }
     public void drawString(Graphics g) {
         Font Amonth=new Font("Century Gothic",Font.PLAIN,45);

@@ -57,9 +57,7 @@ public class DrawDay implements Drawable {
         g2.setColor(Color.darkGray);
         g2.fillRoundRect((d-1) * 45 + 86, (week-1) * 45 + 86, 40, 40,10,10);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN,0.05f));
-        
-        //calculatedate.upgradeCalendar();
-    //}
+      
           Font Bday=new Font("Century Gothic",Font.PLAIN,12);
         g.setColor(Color.white); 
         g.setFont(Bday);

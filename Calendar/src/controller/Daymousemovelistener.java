@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Motion Panel for listener
  */
 package controller;
 
@@ -13,7 +12,7 @@ import view.Drawable;
 
 /**
  *
- * @author bigbigguoguo
+ * @author guo
  */
 public class Daymousemovelistener extends MouseMotionAdapter {
     
