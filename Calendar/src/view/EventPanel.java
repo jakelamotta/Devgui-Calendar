@@ -123,11 +123,12 @@ public class EventPanel extends JPanel {
             Row =table.getSelectedRow();
       	    	 Column=table.getSelectedColumn();
                  
-                 
+                 int i=Integer.parseInt(table.getModel().getValueAt(Row,3).toString());
             if (e.getClickCount() == 2) {
            new EventGUI(table.getModel().getValueAt(Row,0).toString(),
                         table.getModel().getValueAt(Row,1).toString(), 
-                        table.getModel().getValueAt(Row,2).toString(),0,Row);
+                        table.getModel().getValueAt(Row,2).toString(),
+                  i,Row);
             }
         }
    

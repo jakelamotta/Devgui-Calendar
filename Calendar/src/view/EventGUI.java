@@ -28,7 +28,7 @@ import controller.EditEventAction;
 /**
  * The GUI that appears when the Add event button is pressed.
  * @author Deha
- *
+ * @author Guo
  */
 public class EventGUI extends JFrame
 {
