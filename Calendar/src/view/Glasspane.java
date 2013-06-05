@@ -44,6 +44,7 @@ public class Glasspane extends JComponent implements Runnable {
       g2.fillRoundRect(100,290,350,40,20,20);//add event
       g2.fillRoundRect(730,200,320,40,20,20);//weather
       g2.fillRoundRect(560,35,300,30,20,20); //show important
+      g2.fillRoundRect(380,480,300,30,20,20);
       
       //"help" texts
       g2.setColor(Color.lightGray);
@@ -54,17 +55,20 @@ public class Glasspane extends JComponent implements Runnable {
       Font HHelp = new Font("Lucida Handwriting",Font.PLAIN,14);
       g2.setFont(HHelp);
       g2.drawString("To see all events of high priority",580,55);
+      g2.drawString("Double click an item to edit it",400,500);
       
       //arrows
       if(i==0)
       {g2.drawImage(this.imgarrow1.get(0),243,323,30,30,null);
        g2.drawImage(this.imgarrow2.get(0),820,170,30,30,null);
        g2.drawImage(this.imgarrow3.get(0),530,30,30,30,null);
+       g2.drawImage(this.imgarrow3.get(0),360,480,30,30,null);
       }
       else
       {g2.drawImage(this.imgarrow1.get(0),243,343,30,30,null);
        g2.drawImage(this.imgarrow2.get(0),820,150,30,30,null);
        g2.drawImage(this.imgarrow3.get(0),510,30,30,30,null);
+       g2.drawImage(this.imgarrow3.get(0),340,480,30,30,null);
       }
     }
     public void run() {
